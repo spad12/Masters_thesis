@@ -1,0 +1,199 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[12pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\geometry{margin=1.0in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+\usepackage{hyperref}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Report on the Feasibility of Implementing PIC Codes on a GPU}
+\author{Joshua Payne}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+
+\maketitle{}
+
+\section{Introduction}
+
+The goal of this project was to determine the feasibility of implementing particle-in-cell or PIC codes on a graphical processing unit (GPU). In order to determine this feasibility, two key factors were investigated. The first factor is the amount of speed up that the GPU implementation could offer over the CPU implementation. The second factor is the level of optimization required to achieve that speed up. These factors were explored by implementing a very basic PIC code on a GPU, and determining how the GPU was handling the data. \newline
+
+\section{Optimization}
+
+A critical component in determining the feasibility of a GPU PIC code is determining the level of optimization needed for a substantial speed up. The level of optimization determines the difficulty of writing the implementation. If the optimization required for meaningful speed up is too great, then the GPU implementation is not worth the time and effort that would be required to meet that optimization. This project determined that the optimization needed for a substantial speed up is not great, but does require an understanding of GPU memory access patterns, and basic GPU optimization techniques. \newline
+
+
+
+The PIC code that was implemented on the GPU basically consists of 5 steps:
+
+\begin{enumerate}
+\item Read the particle data
+\item Read the Potential data for that particle
+\item Move the particle
+\item Write the new particle data back to the particle list
+\item Update the density array
+\end{enumerate}
+
+In order to determine the best way to optimize the code, each step of the algorithm was profiled at each step of the optimization. This profiling was done by commenting every step except for one. The code was then run using 4.2 million particles on a 32x32x32 grid. The execution time was recorded using NVIDIA's Compute Visual Profiler. The results of the profiling at each optimization step can be seen in table \ref{etimetable}. The rest of this section will discuss what changes were made at each optimization step and the reasoning behind those changes. 
+
+\noindent \begin{table}[h]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
+\hline
+Component & Un-Optimized (ms) & Sorted (ms) & Sorted+Shared (ms) \\ \hline
+Particle data read, move, and write & 375 & 375 & 468 \\ \hline
+Potential Grid Read & 467 & 342 & 285 \\ \hline
+Density Update & 1.143e4 & 1.004e4 & 542 \\ \hline
+Total & 1.227e4 & 1.077e4 & 1295 \\ \hline
+\end{tabular}
+\caption{Execution times for the key steps of the move kernel at three different optimizations.}
+\label{etimetable} 
+\end{table}
+
+The simplest way to implement a PIC code on a GPU is to launch a fully functional move thread for each particle. A fully functional move thread means that every thread will perform all of the steps of the algorithm. This brute force method will net a speedup of about 10-20, but is very naive in its approach. The optimization of this implementation begins with identifying which steps contribute the most, and if those steps can be reduced. \newline
+
+As shown by table \ref{etimetable}, the largest contribution to the run time of this implementation is the density array update. The time spent on the density array update constituted about 93\% of the total time spent on the move kernel. When implementing the move algorithm in parallel, there will be multiple threads attempting to update the density array simultaneously. Problems arise when one thread overwrites or ignores the density array update of another thread. In order to ensure that all updates are done correctly, the updates must be done atomically. CUDA has a set of atomic functions that will allow one thread at a time to update a location in memory. While one thread is acting atomically on a memory location, all other attempts to access that location by other threads are suspended until the atomic operation is finished. If atomic functions are numerous, then the code can become serial, significantly reducing any speed up that would otherwise be gained. Therefore, it is very important that these atomic operations be avoided and if possible replaced by another method for updating the density array. The solution to this problem will be discussed later in this section. \newline
+
+Assuming that the execution time of the density array update can be made comparable to the other steps, what then is the largest contributer to execution time. The potential data is not sequential, which means that reads of the potential are not coalesced. This means that, although reads can transfer data in 128-byte chunks, it will still take up to 4 reads to pull in all of the data. For large grids each read will pull in the two data points that have only different x-positions. Reading the 4 data points off of the potential for every particle should result in $4N$ random accesses to global memory. For the particle data, the GPU will coalesce the read requests of each thread in a half warp, 16 threads, into 128-byte chunks because the half-warp is accessing sequential particle data in memory. This means that roughly speaking there will be 1 read for each component for 16 particles at a time. The total number of memory accesses to particle data will be as follows;
+
+\begin{itemize}
+\item 3 reads for the cell indicies nx, ny, nz.
+\item 3 reads for the particles position, x, y, z.
+\item 3 reads for the particles velocity $v_x$, $v_y$, $v_z$.
+\item 3 writes for the particle position.
+\item 3 writes for the new cell indicies nx, ny, nz. 
+\item 1 write for the new cell index.
+\end{itemize}
+
+So 16 accesses total for every 16 particles results in approximately $N$ total global memory accesses. This means that the contribution from the potential reads for each particle will be greater than the contribution from reading the particle data. This general conclusion is supported by the run time data for the unoptimized kernel in table \ref{etimetable}. \newline
+
+Figuring out how to reduce the number of potential grid reads is rather simple. There will be multiple particles residing in a single cell, all accessing the same potential data. Why then does each particle have to access this data separately? Is there some way that the potential grid read would only have to be done once for all of the particles that reside at that location? One subset of the GPU memory hierarchy, shared memory, is located on chip, and has extremely low latency, and can be read by all threads in a block. Therefore, if each block represented particles that all resided at the same grid location, then the potential data would only have to be read into shared memory once. This means that instead of $8N$ accesses to global memory, there would only need to be $4N/n_{threads per block}$ accesses. This would require that the particle list be sorted by grid location. \newline
+
+In addition to greatly reducing the number of potential grid reads, sorting the particle list leads to a way to reduce the execution time of the density update. There are only two ways to ensure that the density update is done correctly, atomic operations, or parallel reduction. The parallel reduction method of updating the density array works by having every $i^{th}$ thread sum the contributions of itself, and the contribution of the thread $i$ indexes away. Where $i$ is an integer from 1 to N/2, and increments by a factor of 2 for every reduction step. A visualization of an interleaved parallel reduction can be seen in figure \ref{fig:reductionf}. The result is that parallel reduction takes $O(log(N_{per cell}))$ steps as opposed to atomic operations which will take $O(N_{per cell})$ steps. If the reduction is done in shared memory, then the total number of accesses to global memory becomes $4N_{per cell}/n_{threads per block}$ parallel, instead of $4N_{per cell}$ sequential.\newline
+
+\begin{figure}
+
+\centering
+\includegraphics[width=5in]{figures/reduction-fig.pdf}
+\caption{Parallel Reduction with interleaved addressing.\textsuperscript{\cite{reduction}}}
+\label{fig:reductionf}
+\end{figure}
+
+A sorted particle list allows for several ways to drastically reduce the execution time of the move kernel, but introduces its own complications, namely, how is the particle list sorted? For the purposes of this study, an open source GPU radix sort\textsuperscript{\cite{radixSort}} was found to be sufficient to sort the particle list quickly enough that the overall speed up was still decent. The radix sort was used to sort the particle list at every time step, and as a result contributed a significant amount to the total run time. This brute force approach is far from optimal, but optimizing the particle sorting was determined to be beyond the scope of this project. \newline
+
+\section{Performance}
+The first performance measurements were done in a system parameters scan, which involved varying the particle count and the grid size. The number of particles ranged from 1024 to 4.2 million. Two grid sizes were used for these scans, an 8x8x8 grid, and a 16x16x16 grid. The hardware utilized was 1 NVIDIA GTX 470 video card. The GTX 470 has 1280MB global memory and 448 cuda cores. The computer's CPU was an intel i7 930 with a clock speed of 2.8 GHz. The results of these scans can be seen in figures 2 and 3. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=5in]{figures/runtime8.pdf}
+\label{reduction}
+\caption{System Scan on an 8x8x8 grid.}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=5in]{figures/runtime16.pdf}
+\label{reduction}
+\caption{System Scan on an 16x16x16 grid.}
+\end{figure}
+
+The cpu comparison was run on the same hardware with 4.2 million particles on a 32x32x32 grid. The results can be seen in table \ref{cpucompare}. The completely unoptimized method was 25 times faster than the CPU implementation. The first level of optimization involved using the brute force method, but on a sorted particle list. Including the sorting time, this implementation was 20 times faster than the CPU implementation. The second level of optimization makes use of shared memory for the grid data and for updating the density array. This implementation was 50 times faster than the CPU implementation, including the sorting time, and the time for several support kernels. 
+
+\begin{table}
+\centering
+\begin{tabular}{| p{4cm} | p{4cm} |}
+\hline
+Method & CPU Time (ms) \\ \hline
+Unoptimized & 9790 \\ \hline
+Sorted & 12834 \\ \hline
+Sorted \& Shared & 5101 \\ \hline
+CPU & 263670 \\ \hline
+\end{tabular}
+\caption{CPU and GPU run time comparisons.}
+\label{cpucompare}
+\end{table}
+
+
+\section{Conclusion}
+Even with reasonable optimization, the basic PIC code saw significant speed up through the GPU port. Further speed up could be attained by optimizing the sorting process. As discussed in this report a high performance PIC code could be written with fairly minimal optimization. The next steps would be to optimize the particle list sorting process, and implement a fully developed PIC code, such as SCEPTIC, on the GPU. 
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{12}
+\bibitem{reduction}
+    Mark Harris,
+    Optimizing Parallel Reduction in CUDA,
+    \url{http://developer.download.nvidia.com/compute/cuda/1_1/Website/projects/reduction/doc/reduction.pdf}
+
+\bibitem{radixSort}
+	Satish, N., Harris, M., and Garland, M.
+	 ``Designing Efficient Sorting Algorithms for Manycore GPUs''.
+	In Proceedings of IEEE International Parallel \& Distributed Processing Symposium 2009 (IPDPS 2009).
+\end{thebibliography}
+
+
+
+
+
+
+
+\end{document}
