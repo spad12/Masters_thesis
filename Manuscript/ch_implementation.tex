@@ -1,0 +1,53 @@
+%% This is an example first chapter.  You should put chapter/appendix that you
+%% write into a separate file, and add a line \include{yourfilename} to
+%% main.tex, where `yourfilename.tex' is the name of the chapter/appendix file.
+%% You can process specific files by typing their names in at the 
+%% \files=
+%% prompt when you run the file main.tex through LaTeX.
+\chapter{Implementation}
+
+	\section{Constraining Grid Dimensions}
+		\subsection{Constraints}
+There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the block subdomain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$.
+		
+\begin{equation}
+\frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
+\end{equation} 
+
+Where $n_{virtual}$ is the number of blocks that the grid is divided into in any dimension. In order to fully satisfy the constraints for a simple z-order curve, $n_{virtual}$ must be a power of 2.
+
+The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the chargeassign stage of the code. Given that each block has the maximum number of threads, 512, and each thread requires roughly 25 registers, then the maximum number of threadblocks that can exist simultaneously on a single SM is 2. This means that each block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three block dimensions can be is 18. For the sake of simplicity this sets $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. 
+
+A third, loose constraint can be set in order to force a minimum nuber of threadblocks for the charge-assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough threadblocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread-blocks. For a GTX 580 with 16 SMs 32 thread-blocks are required to fill all of the processors.  
+		\subsection{Holding to the constraints}
+
+	\section{Particle List Transpose}
+As previously mentioned the particle list structure on the GPU is different than the structure on the CPU. On the GPU particles are stored in a structure of arrays, while on the CPU they are stored in a 6x$n$ array. This means that in order to copy a particle list generated on the CPU to the GPU, or vice versa, the particle list must be transposed. The two main places in the code where this matters is when the particle list is initially populated at the start of the code, and when copying a list of pre-calculated reinjection particles from the CPU to the GPU at every time step during the advancing phase.
+
+The particle list transpose was implemented on the CPU in two different ways depending on the compiler used and the available libraries. A GPU based particle list transpose is significantly faster than a CPU based transpose. However, the GPU has a very limited amount of DRAM compared to the CPU, and it is preferable to use as much of the available GPU memory as possible for the main particle list. In any case transposing the entire particle list only occurs once, but a smaller transpose is performed every time step for reinjected particles. This means that while a faster transpose is preferable, it represents so little of the total computation time that it is not worth developing a complicated in place GPU transpose.  
+
+	\section{Charge Assign}
+	As previously mentioned, the charge assign is one of the most difficult funcitons to parallize. The niave approach of applying a thread to every particle and atomically adding each particles contribution to an array in global memory is very slow. Grouping the particles spatially allows the majority of the atomic operations to be done in the context of shared memory which is much faster than global memory. The resulting algorithm resembles basic domain decompositon where each thread-block represents a seperate sub-domain. The actual charge deposition method in this shceme is very similar to the niave approach, with a key difference being that all the threads in the thread block are operating on shared memory. Once all particles in the subdomain have contributed to grid in shared memory it takes only a small number of global memory accesses to write the contributions of a large number of particles to the main array. 
+
+	\subsection{Domain Decomposition}
+
+	\subsection{Particle Bins}
+	\subsection{Particle Push}
+		- Atomic writes to shared memory
+		- Block atomic writes to global memory
+
+	\section{Particle List Sort}
+
+
+	\section{Poisson Solve}
+
+	\section{Particle List Advance}
+
+		\subsection{Checking Domain Boundaries}
+		\subsection{Diagnostic Outputs}
+		\subsection{Handling Reinjections}
+
+
+
+
+
