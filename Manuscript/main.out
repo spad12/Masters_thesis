@@ -3,6 +3,7 @@
 \BOOKMARK [2][-]{subsection.1.1.1}{GPUs vs CPUs}{section.1.1}
 \BOOKMARK [1][-]{section.1.2}{Multiple Levels of Parallelism}{chapter.1}
 \BOOKMARK [2][-]{subsection.1.2.1}{Parallelization Opportunities in PIC Codes}{section.1.2}
+\BOOKMARK [2][-]{subsection.1.2.2}{Current Status of GPU PIC codes}{section.1.2}
 \BOOKMARK [1][-]{section.1.3}{Overview of sceptic3D}{chapter.1}
 \BOOKMARK [0][-]{chapter.2}{Sceptic3D}{}
 \BOOKMARK [1][-]{section.2.1}{Basic Code Structure}{chapter.2}
@@ -43,6 +44,9 @@
 \BOOKMARK [2][-]{subsection.4.3.2}{Particle Bins}{section.4.3}
 \BOOKMARK [2][-]{subsection.4.3.3}{Particle Push}{section.4.3}
 \BOOKMARK [1][-]{section.4.4}{Particle List Sort}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.4.1}{Populating Key/Value Pairs}{section.4.4}
+\BOOKMARK [2][-]{subsection.4.4.2}{Sorting Key/Value Pairs}{section.4.4}
+\BOOKMARK [2][-]{subsection.4.4.3}{Payload Move}{section.4.4}
 \BOOKMARK [1][-]{section.4.5}{Poisson Solve}{chapter.4}
 \BOOKMARK [1][-]{section.4.6}{Particle List Advance}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.6.1}{Checking Domain Boundaries}{section.4.6}
@@ -62,4 +66,4 @@
 \BOOKMARK [0][-]{chapter.6}{Conclusion}{}
 \BOOKMARK [0][-]{appendix.A}{Tables}{}
 \BOOKMARK [0][-]{appendix.B}{Figures}{}
-\BOOKMARK [0][-]{section*.9}{Bibliography}{}
+\BOOKMARK [0][-]{section*.10}{Bibliography}{}

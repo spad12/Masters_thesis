@@ -1,15 +1,27 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1-1}{\ignorespaces Flow schematic for the PIC method. Need to make figure}}{16}{figure.1.1}
-\contentsline {figure}{\numberline {1-2}{\ignorespaces Performance comparison of GPUs vs CPUs.}}{18}{figure.1.2}
-\contentsline {figure}{\numberline {1-3}{\ignorespaces Multiple levels of parallelism. (1) Cluster of systems communicating through a LAN. (2) Multiple GPUs per system communicating through system DRAM. (3) Multiple streaming multiprocessors per GPU execute thread-blocks and communicate through GPU global memory. (4) Multiple cuda cores per multiprocessor execute thread-warps and communicate through on chip shared memory. }}{20}{figure.1.3}
-\contentsline {figure}{\numberline {1-4}{\ignorespaces Flow schematic for the PIC method with parallelizable steps highlighted. Need to make figure}}{21}{figure.1.4}
+\contentsline {figure}{\numberline {1-1}{\ignorespaces Flow schematic for the PIC method. Need to make figure}}{18}{figure.1.1}
+\contentsline {figure}{\numberline {1-2}{\ignorespaces Performance comparison of GPUs vs CPUs.}}{20}{figure.1.2}
+\contentsline {figure}{\numberline {1-3}{\ignorespaces Multiple levels of parallelism. (1) Cluster of systems communicating through a LAN. (2) Multiple GPUs per system communicating through system DRAM. (3) Multiple streaming multiprocessors per GPU execute thread-blocks and communicate through GPU global memory. (4) Multiple cuda cores per multiprocessor execute thread-warps and communicate through on chip shared memory. }}{22}{figure.1.3}
+\contentsline {figure}{\numberline {1-4}{\ignorespaces Flow schematic for the PIC method with parallelizable steps highlighted. Need to make figure}}{23}{figure.1.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2-1}{\ignorespaces Flow schematic for the PIC method with sceptic subroutine names Need to make figure}}{24}{figure.2.1}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2-1}{\ignorespaces Flow schematic for the PIC method with sceptic subroutine names Need to make figure}}{26}{figure.2.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4-1}{\ignorespaces Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure}}{32}{figure.4.1}
+\contentsline {figure}{\numberline {4-2}{\ignorespaces Thrust Sort Setup and Call}}{36}{figure.4.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5-1}{\ignorespaces Number of Particles Scan on a 128x64x64 grid}}{40}{figure.5.1}
+\contentsline {figure}{\numberline {5-2}{\ignorespaces Number of Particles Scan on a 64x32x32 grid}}{41}{figure.5.2}
+\contentsline {figure}{\numberline {5-3}{\ignorespaces Speedup factor Number of Particles Scan on a 128x64x64 grid}}{42}{figure.5.3}
+\contentsline {figure}{\numberline {5-4}{\ignorespaces Gridsize Scan with 8 million ptcls}}{43}{figure.5.4}
+\contentsline {figure}{\numberline {5-5}{\ignorespaces Gridsize Scan with 8 million ptcls}}{44}{figure.5.5}
+\contentsline {figure}{\numberline {5-6}{\ignorespaces Gridsize Scan with 16 million ptcls}}{45}{figure.5.6}
+\contentsline {figure}{\numberline {5-7}{\ignorespaces Gridsize Scan with 16 million ptcls}}{46}{figure.5.7}
+\contentsline {figure}{\numberline {5-8}{\ignorespaces Gridsize Scan with 34 million ptcls}}{47}{figure.5.8}
+\contentsline {figure}{\numberline {5-9}{\ignorespaces Gridsize Scan with 34 million ptcls}}{48}{figure.5.9}
+\contentsline {figure}{\numberline {5-10}{\ignorespaces Sub Domain Size scan}}{49}{figure.5.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B-1}{\ignorespaces Armadillo slaying lawyer.}}{38}{figure.B.1}
-\contentsline {figure}{\numberline {B-2}{\ignorespaces Armadillo eradicating national debt.}}{39}{figure.B.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B-1}{\ignorespaces Armadillo slaying lawyer.}}{56}{figure.B.1}
+\contentsline {figure}{\numberline {B-2}{\ignorespaces Armadillo eradicating national debt.}}{57}{figure.B.2}

@@ -75,6 +75,8 @@ The key to developing efficient PIC algorithms that utilize GPUs lies in balanci
 \label{fig:multiparallel}
 \end{figure}
 
+The point hear is that multiple domain decompositions must be performed in order to fully utilize the capabilities of this system. The coarse decomposition is very similar to that used for MPI systems, but the fine decomposition can be very different due to the significanlty higher memory bandwidth and smaller cache of GPUs. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\subsection{Parallelization Opportunities in PIC Codes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,6 +88,14 @@ The key to developing efficient PIC algorithms that utilize GPUs lies in balanci
 \caption{Flow schematic for the PIC method with parallelizable steps highlighted. Need to make figure}
 \label{fig:pic_flowchart_parallel}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\subsection{Current Status of GPU PIC codes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+						Some work on efficient GPU based PIC codes has already been done. This past work will be briefly introduced here and discused in depth in chapter \ref{ch:design}. Burau et al developed a fully relativistic PIC code for a gpu cluster. 
+			
+	
 
 	
 	\section{Overview of sceptic3D}

@@ -24,4 +24,9 @@ IH~Hutchinson.
   length}.
 \newblock {\em Plasma physics and controlled fusion}, 1477, 2003.
 
+\bibitem{NVIDIACorporation2011a}
+{NVIDIA Corporation}.
+\newblock {Thrust Quick Start Guide}.
+\newblock Technical Report January, 2011.
+
 \end{thebibliography}

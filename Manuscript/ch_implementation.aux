@@ -1,24 +1,43 @@
 \relax 
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementation}{27}{chapter.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementation}{29}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Constraining Grid Dimensions}{27}{section.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Constraints}{27}{subsection.4.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Holding to the constraints}{28}{subsection.4.1.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Particle List Transpose}{28}{section.4.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Charge Assign}{29}{section.4.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Domain Decomposition}{29}{subsection.4.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Particle Bins}{29}{subsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Particle Push}{29}{subsection.4.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Particle List Sort}{29}{section.4.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Poisson Solve}{29}{section.4.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Particle List Advance}{29}{section.4.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Checking Domain Boundaries}{29}{subsection.4.6.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Diagnostic Outputs}{29}{subsection.4.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Handling Reinjections}{29}{subsection.4.6.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Constraining Grid Dimensions}{29}{section.4.1}}
+\newlabel{sec:grid_constraincts}{{4.1}{29}{Constraining Grid Dimensions\relax }{section.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Constraints}{29}{subsection.4.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Holding to the constraints}{30}{subsection.4.1.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Particle List Transpose}{30}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Charge Assign}{31}{section.4.3}}
+\newlabel{sec:charge_assign}{{4.3}{31}{Charge Assign\relax }{section.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Domain Decomposition}{31}{subsection.4.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4-1}{\ignorespaces Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure}}{32}{figure.4.1}}
+\newlabel{fig:domain_decomp}{{4-1}{32}{Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure\relax }{figure.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Particle Bins}{32}{subsection.4.3.2}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4.1}{\ignorespaces ParticleBin Bookmark Calculation}}{33}{algorithm.4.1}}
+\newlabel{alg:count_bins}{{4.1}{33}{Particle Bins\relax }{algorithm.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Particle Push}{33}{subsection.4.3.3}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4.2}{\ignorespaces GPU Charge Assign}}{34}{algorithm.4.2}}
+\newlabel{alg:gpu_c2mesh}{{4.2}{34}{Particle Push\relax }{algorithm.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Particle List Sort}{35}{section.4.4}}
+\newlabel{sec:plist_sort}{{4.4}{35}{Particle List Sort\relax }{section.4.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4.3}{\ignorespaces Particle List Sort Overview}}{35}{algorithm.4.3}}
+\newlabel{alg:sort_overview}{{4.3}{35}{Particle List Sort\relax }{algorithm.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Populating Key/Value Pairs}{35}{subsection.4.4.1}}
+\citation{NVIDIACorporation2011a}
+\@writefile{lof}{\contentsline {figure}{\numberline {4-2}{\ignorespaces Thrust Sort Setup and Call}}{36}{figure.4.2}}
+\newlabel{fig:thrust_sort}{{4-2}{36}{Thrust Sort Setup and Call\relax }{figure.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Sorting Key/Value Pairs}{36}{subsection.4.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Payload Move}{36}{subsection.4.4.3}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4.4}{\ignorespaces GPU Payload Move}}{37}{algorithm.4.4}}
+\newlabel{alg:payload_move}{{4.4}{37}{Payload Move\relax }{algorithm.4.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Poisson Solve}{37}{section.4.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Particle List Advance}{37}{section.4.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Checking Domain Boundaries}{38}{subsection.4.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Diagnostic Outputs}{38}{subsection.4.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Handling Reinjections}{38}{subsection.4.6.3}}
 \@setckpt{ch_implementation}{
-\setcounter{page}{30}
-\setcounter{equation}{1}
+\setcounter{page}{39}
+\setcounter{equation}{4}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -32,9 +51,10 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{0}
+\setcounter{figure}{2}
 \setcounter{table}{0}
 \setcounter{savepage}{3}
+\setcounter{parentequation}{0}
 \setcounter{KVtest}{0}
 \setcounter{subfigure}{0}
 \setcounter{subfigure@save}{0}
@@ -44,8 +64,12 @@
 \setcounter{lotdepth}{1}
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
+\setcounter{ALC@line}{7}
+\setcounter{ALC@rem}{7}
+\setcounter{ALC@depth}{0}
+\setcounter{float@type}{16}
+\setcounter{algorithm}{4}
 \setcounter{lstlisting}{0}
-\setcounter{lstnumber}{1}
-\setcounter{parentequation}{0}
+\setcounter{lstnumber}{8}
 \setcounter{section@level}{2}
 }
