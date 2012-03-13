@@ -207,13 +207,54 @@ ib_r = \frac{i_r}{nb_r} \mathrm{;}\hspace{0.5in} ib_{\theta} = \frac{i_{\theta}}
 
 	\section{Particle List Advance}
 	
-Moving the particles on the grid is fairly straightforward. The process starts with determining the acceleration of the particle. This is calculated by interpolating the potential, $\phi$, from the spherical mesh. The new position of the particle is simply $\vec{x}' = \vec{x}+\vec{v}\Delta t+\frac{1}{2}\vec{a}\Delta t^2$. 
+Moving the particles on the grid is fairly straightforward. The process starts with determining the acceleration of the particle. This is calculated by interpolating the potential, $\phi$, from the spherical mesh using the same methods as the cpu code. The new position of the particle is simply $\vec{x}' = \vec{x}+\vec{v}\Delta t+\frac{1}{2}\vec{a}\Delta t^2$. A more detailed description of the basics of the particle advance can be found in reference \ref{Patacchini2007} section 3.1.2.
 		
-Implementing the particle advance on the GPU involved several interesting issues. Quickly determining whether a particle has crossed one of the domain boundaries, contributing to diagnostic outputs, and handling reinjections were the main issues. 
+While the implementation of the basic physics of the particle advance remains the same, there were several interesting issues. Quickly determining whether a particle has crossed one of the domain boundaries, contributing to diagnostic outputs, and handling reinjections were the main issues. 
 
 		\subsection{Checking Domain Boundaries}
+In order to correctly contribute to the diagnostic outputs, the location where a particle left the domain must be known. This means that the process or checking whether or not a particle has left the grid must also calculate the position of the particle when it crossed the boundary. This is handled differently for the inner and outer boundaries. 
+
+The outer boundary is fairly straightforward. A particle has left the domain if the radial position of the particle $r$ is greater than the maximum radius of the domain $r_{max}$. The 
+
 		\subsection{Diagnostic Outputs}
 		\subsection{Handling Reinjections}
+Once it has been determined that particles have left the grid, new particles must be reinjected to replace them. In the serial version of the code this is handled by simply calling a reinjection subroutine that determines the new particle's position and velocity. Once the new position and velocity has been found the particle is moved for the remainder of the time step, and be replaced by a new particle if the reinjected particle leaves the domain.  
+
+Performing reinjections in this manner on the GPU would introduce very large divergences in warp execution as well as very uncoalesced memory accesses. Eliminating the warp divergences requires that all of the threads in a warp be operating on reinjected particles. Reducing the uncoalesced memory accesses would require that all of the reinjected particles be adjacent in memory. Since we already have an object with methods that can move a list of particles and handle reinjections, all we really need is some method by which we can efficiently and reversibly ``pop" a subset of the particles in the main list to a secondary list. From there we can perform the particle advance on the secondary list, and place the results back in the empty particle slots in the main list. The resulting advancing algorithm is as follows:
+
+\begin{algorithm}
+	\caption{Particle Advancing Algorithm}
+	\label{alg:advancing}
+	\begin{algorithmic}
+		\STATE // Update The particle positions and check domain boundaries
+		\STATE $\textbf{GPU\_Advance}(particles,mesh,Exit\_Flags)$
+		\STATE
+		\STATE \textbf{Prefix\_Scan}(Exit\_Flags)
+		\STATE
+		\STATE nptcls\_reinject = Exit\_Flags[nptcls-1]
+		\STATE
+		\IF{nptcls\_reinject $>$ 0}
+			\STATE
+			\STATE reinjected\_particles.allocate(nptcls\_reinject)
+			\STATE
+			\STATE \textbf{Stream\_Compact}(particles $\subset$ exited $\rightarrow$ reinjected\_particles)
+			\STATE
+			\STATE // Recursivley call the Advance on the reinjected particles
+			\STATE reinjected\_particles.advance()
+			\STATE
+			\STATE \textbf{Stream\_Expand}(reinjected\_particles $\rightarrow$ exited $\supset$ particles)
+		\ENDIF
+		\STATE
+		\STATE return
+	\end{algorithmic}
+\end{algorithm}
+
+Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. 
+
+Stream compaction is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all proceding elements yields a unique number that can be used as an index in a new array. 
+
+On top of this, there are several different methods for calculating the positions and velocities of reinjected particles, and reproducing each of those methods on the GPU would require a large amount of effort for very little gain. 
+
 
 
 

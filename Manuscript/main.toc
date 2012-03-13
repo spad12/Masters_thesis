@@ -19,12 +19,12 @@
 \contentsline {section}{\numberline {3.1}Particle List Structure}{27}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Other Codes}{27}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}In house tests}{27}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Charge Assign}{27}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Naive Atomic Approach}{27}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Other Codes}{27}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Particle List Sort}{27}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Costs and Benefits}{27}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Other Codes}{27}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.2}Charge Assign}{28}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Naive Atomic Approach}{28}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Other Codes}{28}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Particle List Sort}{28}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Costs and Benefits}{28}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Other Codes}{28}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}In house tests}{28}{subsection.3.3.3}
 \contentsline {section}{\numberline {3.4}Particle Advancing}{28}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Assumptions}{28}{subsection.3.4.1}
@@ -52,20 +52,16 @@
 \contentsline {subsection}{\numberline {4.6.1}Checking Domain Boundaries}{38}{subsection.4.6.1}
 \contentsline {subsection}{\numberline {4.6.2}Diagnostic Outputs}{38}{subsection.4.6.2}
 \contentsline {subsection}{\numberline {4.6.3}Handling Reinjections}{38}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Performance}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}Test Setup}{39}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Parameter Space Explored}{39}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Machine Parameters}{39}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Memory Bandwidth Comparison}{39}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}Particle list size scan}{39}{section.5.2}
-\contentsline {section}{\numberline {5.3}Grid Size scan}{50}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Absolue Size}{50}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Ratio of Surface Area to Volume}{50}{subsection.5.3.2}
-\contentsline {subsubsection}{Global Domain Ratio}{50}{section*.7}
-\contentsline {subsubsection}{Threadblock Sub-Domain Ratio}{50}{section*.8}
-\contentsline {section}{\numberline {5.4}Kernel Parameters Scan}{50}{section.5.4}
-\contentsline {section}{\numberline {5.5}Discussion}{50}{section.5.5}
-\contentsline {chapter}{\numberline {6}Conclusion}{51}{chapter.6}
-\contentsline {chapter}{\numberline {A}Tables}{53}{appendix.A}
-\contentsline {chapter}{\numberline {B}Figures}{55}{appendix.B}
-\contentsline {chapter}{Bibliography}{59}{section*.10}
+\contentsline {chapter}{\numberline {5}Performance}{41}{chapter.5}
+\contentsline {section}{\numberline {5.1}Particle list size scan}{43}{section.5.1}
+\contentsline {section}{\numberline {5.2}Grid Size scan}{44}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Absolue Size}{44}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Ratio of Surface Area to Volume}{44}{subsection.5.2.2}
+\contentsline {subsubsection}{Global Domain Ratio}{44}{section*.7}
+\contentsline {subsubsection}{Threadblock Sub-Domain Ratio}{44}{section*.8}
+\contentsline {section}{\numberline {5.3}Kernel Parameters Scan}{44}{section.5.3}
+\contentsline {section}{\numberline {5.4}Discussion}{44}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion}{53}{chapter.6}
+\contentsline {chapter}{\numberline {A}Tables}{55}{appendix.A}
+\contentsline {chapter}{\numberline {B}Figures}{57}{appendix.B}
+\contentsline {chapter}{Bibliography}{61}{section*.10}

@@ -10,18 +10,18 @@
 \contentsline {figure}{\numberline {4-1}{\ignorespaces Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure}}{32}{figure.4.1}
 \contentsline {figure}{\numberline {4-2}{\ignorespaces Thrust Sort Setup and Call}}{36}{figure.4.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces Number of Particles Scan on a 128x64x64 grid}}{40}{figure.5.1}
-\contentsline {figure}{\numberline {5-2}{\ignorespaces Number of Particles Scan on a 64x32x32 grid}}{41}{figure.5.2}
-\contentsline {figure}{\numberline {5-3}{\ignorespaces Speedup factor Number of Particles Scan on a 128x64x64 grid}}{42}{figure.5.3}
-\contentsline {figure}{\numberline {5-4}{\ignorespaces Gridsize Scan with 8 million ptcls}}{43}{figure.5.4}
-\contentsline {figure}{\numberline {5-5}{\ignorespaces Gridsize Scan with 8 million ptcls}}{44}{figure.5.5}
-\contentsline {figure}{\numberline {5-6}{\ignorespaces Gridsize Scan with 16 million ptcls}}{45}{figure.5.6}
-\contentsline {figure}{\numberline {5-7}{\ignorespaces Gridsize Scan with 16 million ptcls}}{46}{figure.5.7}
-\contentsline {figure}{\numberline {5-8}{\ignorespaces Gridsize Scan with 34 million ptcls}}{47}{figure.5.8}
-\contentsline {figure}{\numberline {5-9}{\ignorespaces Gridsize Scan with 34 million ptcls}}{48}{figure.5.9}
-\contentsline {figure}{\numberline {5-10}{\ignorespaces Sub Domain Size scan}}{49}{figure.5.10}
+\contentsline {figure}{\numberline {5-1}{\ignorespaces Number of Particles Scan on a 128x64x64 grid}}{43}{figure.5.1}
+\contentsline {figure}{\numberline {5-2}{\ignorespaces Number of Particles Scan on a 64x32x32 grid}}{44}{figure.5.2}
+\contentsline {figure}{\numberline {5-3}{\ignorespaces Speedup factor Number of Particles Scan on a 128x64x64 grid}}{45}{figure.5.3}
+\contentsline {figure}{\numberline {5-4}{\ignorespaces Gridsize Scan with 8 million ptcls, and $8^3$ bins}}{46}{figure.5.4}
+\contentsline {figure}{\numberline {5-5}{\ignorespaces Gridsize Scan with 8 million ptcls, and $16^3$ bins}}{47}{figure.5.5}
+\contentsline {figure}{\numberline {5-6}{\ignorespaces Gridsize Scan with 16 million ptcls, and $8^3$ bins}}{48}{figure.5.6}
+\contentsline {figure}{\numberline {5-7}{\ignorespaces Gridsize Scan with 16 million ptcls, and $16^3$ bins}}{49}{figure.5.7}
+\contentsline {figure}{\numberline {5-8}{\ignorespaces Gridsize Scan with 34 million ptcls, and $8^3$ bins. Note how when the contribution from the poisson solve is removed there is a clear minimum at about $10^5$ elements. }}{50}{figure.5.8}
+\contentsline {figure}{\numberline {5-9}{\ignorespaces Gridsize Scan with 34 million ptcls, and $16^3$ bins}}{51}{figure.5.9}
+\contentsline {figure}{\numberline {5-10}{\ignorespaces Sub Domain Size scan, also known as bin size, note the minimum in the total - psolve run time.}}{52}{figure.5.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B-1}{\ignorespaces Armadillo slaying lawyer.}}{56}{figure.B.1}
-\contentsline {figure}{\numberline {B-2}{\ignorespaces Armadillo eradicating national debt.}}{57}{figure.B.2}
+\contentsline {figure}{\numberline {B-1}{\ignorespaces Armadillo slaying lawyer.}}{58}{figure.B.1}
+\contentsline {figure}{\numberline {B-2}{\ignorespaces Armadillo eradicating national debt.}}{59}{figure.B.2}
