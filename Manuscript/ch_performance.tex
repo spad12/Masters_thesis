@@ -76,73 +76,88 @@ The following tests were performed to explore the dependence of sceptic3Dgpu's r
 \label{fig:nptclsize_scan_speedup}
 \end{figure}
 
+In the case of the 128x64x64 grid the poisson solve is by far the most expensive computation for all ranges of particles. For a smaller grid, 64x32x32, the poisson solve dominates for fewer than 15 million particles, but drops below the particle advance and particle sort for more than 15 million particles. Perhaps the most interesting behavior is best observed in the speedup factor, figure \ref{fig:nptclsize_scan_speedup}, which shows a very steep rise in the speedup factor below 10 million particles. This behavior indicates that anything fewer than 10 million particles will not saturate the gpu. This behavior can also be seen in the figures \ref{fig:nptclsize_scan128x64x64} and \ref{fig:nptclsize_scan64x32x32} by the fact that the particle advance, charge assign, and total time converge to linear behavior at large numbers of particles. 
+
+A second interesting characteristic is the fact that the speedup factor curves do not fully flatten out between 10 million particles and 30 million particles. This is due in part to some small cpu costs within these routines, namely host-device transfers of data that does not scale with the number of particles. For the GTX 470 with 1280 MB of memory 17 million particles is about the limit for a single gpu. Looking at figure \ref{fig:nptclsize_scan_speedup} it is not unreasonable to conclude that with an even larger performance boost can be attained simply by increasing the amount of available device memory. \newpage
 
 	
-	\section{Grid Size scan}
-		\subsection{Absolue Size}
-\begin{figure}[h]
+\section{Grid Size scan}
+So far the results indicate that the GPU is very good at moving the particles and writing the density array. In fact the GPU is so good at this that it is wasteful to not run as many particles on the gpu as physically possible. This brings us to the second main parameter of interest, the grid size. Generally speaking we would expect to see three of the subroutines display scaling with gridsize, but through different mechanisms. The poisson solve should scale roughly linearly with the number of grid elements, while more subtle scalings are dominant for the charge assign and particle advancing routines. 
+
+	\subsection{Absolue Size}
+	In order to get a reasonable idea of how sceptic3Dgpu scales with grid size three sweeps of the grid size parameter were performed using 8, 16, and 34 million particles. There are two separate plots for each particle number due to the fact that for large grid sizes the number of bins must be increased in order to account for shared memory size restrictions. Since some of the scalings for the particle advance and charge exchange depend primarily on the number of elements per bin and not the absolute grid size plotting the results for $8^3$ bins and $16^3$ bins would be misleading.
+
+The primary routine of interest here is the poisson solve, which takes roughly $\sqrt[3]{G}$ iterations of operations that are roughly $\mathcal{O}(G)$, where G is the total number of grid elements. This scaling can be seen clearly in figures \ref{fig:grid_scan8ptcls8bins} through \ref{fig:grid_scan34ptcls16bins}. However, much like the number of particles scaling of the particle advance and charge assign, there is a region in which the GPU poisson solver is not saturated and beats the normal scaling. Once the GPU is saturated the poisson solve behaves as expected, scaling roughly linearly with the total number of grid elements. 
+
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan8ptcls8bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 8 million ptcls, and $8^3$ bins}
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan8ptcls8bins}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan8ptcls16bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 8 million ptcls, and $16^3$ bins}
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan8ptcls16bins}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan16ptcls8bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 16 million ptcls, and $8^3$ bins}
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan16ptcls8bins}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan16ptcls16bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 16 million ptcls, and $16^3$ bins}
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan16ptcls16bins}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan34ptcls8bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 34 million ptcls, and $8^3$ bins. Note how when the contribution from the poisson solve is removed there is a clear minimum at about $10^5$ elements. }
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan34ptcls8bins}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan34ptcls16bins.pdf}
 \end{center}
 \caption{Gridsize Scan with 34 million ptcls, and $16^3$ bins}
-\label{fig:nptclsize_scan128x64x64}
+\label{fig:grid_scan34ptcls16bins}
 \end{figure}
 
+The more subtle scalings of the particle advance and charge assign can be seen in figures \ref{fig:grid_scan8ptcls8bins} through \ref{fig:grid_scan34ptcls16bins} in the cases where there are only $8^3$ bins, but do not continue their trends for $16^3$ bins. This behavior is due to the fact that these are not scalings with the absolute grid size, but rather scalings with sub-domain size.
 
-		\subsection{Ratio of Surface Area to Volume}
-\begin{figure}[h]
+Another point of interest is the scaling of the particle sort, note that it only scales with the number of particles and is completely independent of grid size. One might expect to find some small scaling based on the distance that particles have to be moved during the sort stage, or that with fewer sub-domains the radix sort would have fewer digits to process, but this is not the case. This means that some improvement can be made to the sort, namely using the number of bins as the upper limit on the bits for the radix sort to process. Hopefully this kind of feature will be available in future releases of the thrust library.
+
+
+
+\subsection{Threadblock Sub-Domain Size}
+In chapter 4 we discussed the scaling of both the particle advance and the charge assign subroutines with grid size. Smaller grids should lead to more atomic conflicts in the charge assign and thus longer run time. On the other hand, for the particle advance smaller grids mean that a larger fraction of the grid can be stored in cache, which leads to fewer global memory accesses. Taking these two effects together, we should see a clear minimum in the data. Figure \ref{fig:subdomain_size_scan} shows the time per step of each routine vs the size of the sub-domain. 
+
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=6in]{performance/gridshape_scan.pdf}
 \end{center}
-\caption{Sub Domain Size scan, also known as bin size, note the minimum in the total - psolve run time.}
+\caption{Sub Domain Size scan, also known as bin size, for 34 million particles. Note the minimum in the total - psolve run time.}
 \label{fig:subdomain_size_scan}
 \end{figure}
 
-			\subsubsection{Global Domain Ratio}
-			\subsubsection{Threadblock Sub-Domain Ratio}
+
 
 	\section{Kernel Parameters Scan}
 
-	\section{Discussion}
+

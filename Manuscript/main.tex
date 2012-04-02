@@ -26,8 +26,8 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 
-% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
-
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\setlength{\parindent}{1cm}
 %%% PACKAGES
 \usepackage{booktabs} % for much better looking tables
 \usepackage{array} % for better arrays (eg matrices) in maths
@@ -38,6 +38,8 @@
 \usepackage{hyperref}
 \usepackage{algorithmic}
 \usepackage[chapter]{algorithm}
+
+\usepackage{float}
 
 
 
@@ -91,6 +93,12 @@
 %\usepackage{sectsty}
 %\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
 % (This matches ConTeXt defaults)
+%\renewcommand{\thesection}{\thesection}{\vspace{-1pt}}
+%\usepackage[compact]{titlesec}
+%\titlespacing{\section}{0pt}{*0}{*-1}
+%\titlespacing{\subsection}{0pt}{*0}{*-1}
+%\titlespacing{\subsubsection}{0pt}{*0}{*-1}
+
 
 %%% ToC (table of contents) APPEARANCE
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC

@@ -16,24 +16,24 @@
 \BOOKMARK [2][-]{subsection.2.3.2}{Supporting Routines}{section.2.3}
 \BOOKMARK [2][-]{subsection.2.3.3}{Challenges to overcome}{section.2.3}
 \BOOKMARK [0][-]{chapter.3}{Design Options}{}
-\BOOKMARK [1][-]{section.3.1}{Particle List Structure}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.1.1}{Other Codes}{section.3.1}
-\BOOKMARK [2][-]{subsection.3.1.2}{In house tests}{section.3.1}
+\BOOKMARK [1][-]{section.3.1}{GPUPIC Sandbox and the big questions}{chapter.3}
 \BOOKMARK [1][-]{section.3.2}{Charge Assign}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.2.1}{Naive Atomic Approach}{section.3.2}
-\BOOKMARK [2][-]{subsection.3.2.2}{Other Codes}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.1}{Other Codes}{section.3.2}
 \BOOKMARK [1][-]{section.3.3}{Particle List Sort}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.3.1}{Costs and Benefits}{section.3.3}
 \BOOKMARK [2][-]{subsection.3.3.2}{Other Codes}{section.3.3}
 \BOOKMARK [2][-]{subsection.3.3.3}{In house tests}{section.3.3}
-\BOOKMARK [1][-]{section.3.4}{Particle Advancing}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.4.1}{Assumptions}{section.3.4}
-\BOOKMARK [2][-]{subsection.3.4.2}{Other Codes}{section.3.4}
-\BOOKMARK [2][-]{subsection.3.4.3}{Reinjections and Diagnostics}{section.3.4}
-\BOOKMARK [1][-]{section.3.5}{Poisson Solve}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.5.1}{Desired Performance}{section.3.5}
-\BOOKMARK [2][-]{subsection.3.5.2}{Performance vs Implementation Difficulty}{section.3.5}
-\BOOKMARK [1][-]{section.3.6}{Grid Dimension Constraints and Handling}{chapter.3}
+\BOOKMARK [1][-]{section.3.4}{Particle List Structure}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.4.1}{Other Codes}{section.3.4}
+\BOOKMARK [2][-]{subsection.3.4.2}{In house tests}{section.3.4}
+\BOOKMARK [1][-]{section.3.5}{Particle Advancing}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.5.1}{Assumptions}{section.3.5}
+\BOOKMARK [2][-]{subsection.3.5.2}{Other Codes}{section.3.5}
+\BOOKMARK [2][-]{subsection.3.5.3}{Reinjections and Diagnostics}{section.3.5}
+\BOOKMARK [1][-]{section.3.6}{Poisson Solve}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.6.1}{Desired Performance}{section.3.6}
+\BOOKMARK [2][-]{subsection.3.6.2}{Performance vs Implementation Difficulty}{section.3.6}
+\BOOKMARK [1][-]{section.3.7}{Grid Dimension Constraints and Handling}{chapter.3}
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}
 \BOOKMARK [1][-]{section.4.1}{Constraining Grid Dimensions}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.1.1}{Constraints}{section.4.1}
@@ -56,10 +56,9 @@
 \BOOKMARK [1][-]{section.5.1}{Particle list size scan}{chapter.5}
 \BOOKMARK [1][-]{section.5.2}{Grid Size scan}{chapter.5}
 \BOOKMARK [2][-]{subsection.5.2.1}{Absolue Size}{section.5.2}
-\BOOKMARK [2][-]{subsection.5.2.2}{Ratio of Surface Area to Volume}{section.5.2}
+\BOOKMARK [2][-]{subsection.5.2.2}{Threadblock Sub-Domain Size}{section.5.2}
 \BOOKMARK [1][-]{section.5.3}{Kernel Parameters Scan}{chapter.5}
-\BOOKMARK [1][-]{section.5.4}{Discussion}{chapter.5}
 \BOOKMARK [0][-]{chapter.6}{Conclusion}{}
 \BOOKMARK [0][-]{appendix.A}{Tables}{}
 \BOOKMARK [0][-]{appendix.B}{Figures}{}
-\BOOKMARK [0][-]{section*.10}{Bibliography}{}
+\BOOKMARK [0][-]{section*.8}{Bibliography}{}

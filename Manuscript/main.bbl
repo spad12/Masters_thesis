@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{Abreu2011}
+Paulo Abreu, Ricardo~a. Fonseca, Jo\~{a}o~M. Pereira, and Lu\'{\i}s~O. Silva.
+\newblock {PIC Codes in New Processors: A Full Relativisitic PIC Code in
+  CUDA-Enabled Hardware With Direct Visualization}.
+\newblock {\em IEEE Transactions on Plasma Science}, 39(2):675--685, 2011.
+
 \bibitem{Hutchinson2005}
 I~H Hutchinson.
 \newblock {Ion collection by a sphere in a flowing plasma: 3. Floating
@@ -28,5 +34,12 @@ IH~Hutchinson.
 {NVIDIA Corporation}.
 \newblock {Thrust Quick Start Guide}.
 \newblock Technical Report January, 2011.
+
+\bibitem{Stantchev2008}
+G~Stantchev, W~Dorland, and N~Gumerov.
+\newblock {Fast parallel Particle-To-Grid interpolation for plasma PIC
+  simulations on the GPU☆}.
+\newblock {\em Journal of Parallel and Distributed Computing},
+  68(10):1339--1349, October 2008.
 
 \end{thebibliography}
