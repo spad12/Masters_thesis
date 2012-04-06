@@ -1,10 +1,24 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Abreu2011}
 Paulo Abreu, Ricardo~a. Fonseca, Jo\~{a}o~M. Pereira, and Lu\'{\i}s~O. Silva.
 \newblock {PIC Codes in New Processors: A Full Relativisitic PIC Code in
   CUDA-Enabled Hardware With Direct Visualization}.
 \newblock {\em IEEE Transactions on Plasma Science}, 39(2):675--685, 2011.
+
+\bibitem{Burau2010}
+Heiko Burau, Ren\'{e}e Widera, Wolfgang H\"{o}nig, Guido Juckeland, Alexander
+  Debus, Thomas Kluge, Ulrich Schramm, Tomas~E Cowan, Roland Sauerbrey, and
+  Michael Bussmann.
+\newblock {PIConGPU : A Fully Relativistic Particle-in-Cell Code for a GPU
+  Cluster}.
+\newblock {\em October}, 38(10):2831--2839, 2010.
+
+\bibitem{Decyk2011}
+Viktor~K. Decyk and Tajendra~V. Singh.
+\newblock {Adaptable Particle-in-Cell algorithms for graphical processing
+  units}.
+\newblock {\em Computer Physics Communications}, 182(3):641--648, March 2011.
 
 \bibitem{Hutchinson2005}
 I~H Hutchinson.
@@ -30,10 +44,23 @@ IH~Hutchinson.
   length}.
 \newblock {\em Plasma physics and controlled fusion}, 1477, 2003.
 
+\bibitem{Kong2011}
+Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
+\newblock {Particle-in-cell simulations with charge-conserving current
+  deposition on graphic processing units}.
+\newblock {\em Journal of Computational Physics}, 230(4):1676--1685, February
+  2011.
+
 \bibitem{NVIDIACorporation2011a}
 {NVIDIA Corporation}.
 \newblock {Thrust Quick Start Guide}.
 \newblock Technical Report January, 2011.
+
+\bibitem{Satish2009}
+Nadathur Satish, Mark Harris, and Michael Garland.
+\newblock {Designing efficient sorting algorithms for manycore GPUs}.
+\newblock {\em 2009 IEEE International Symposium on Parallel \& Distributed
+  Processing}, (May):1--10, May 2009.
 
 \bibitem{Stantchev2008}
 G~Stantchev, W~Dorland, and N~Gumerov.

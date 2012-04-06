@@ -102,10 +102,21 @@ There are two different ways to approach the charge assign, one in which informa
 	\label{alg:particle_push}
 \end{algorithm}
 
-As pointed out by \cite{Stantchev2008} each method has its advantages and disadvantages. 
+As pointed out by \cite{Stantchev2008} each method has its advantages and disadvantages. For an algorithm consisting of N particles and k grid vertices the advantages and disadvantages are as follows:
 
+The particle pull method
+\begin{itemize}
+\item requires $\mathcal{O}(2^dN + k)$ read write operations
+\item $\mathcal{P}(v_s)$ is expensive to retrieve dynamically unless particles are organized
+\end{itemize}
 
-Looking back at table \ref{tab:GPUPIC_basetime} we notice that the charge assign step constitutes about 93\% of the total runtime.  Unfortunately this poor performance is a result of serialization caused by the atomic updates. Additionaly, since the grid is far too large to fit in shared memory these updates must be performed on global memory, which has much higher latency and lower bandwidth. When a thread attempts to update a value in memory and finds that it is locked it must then repeat the process until it succeeds. Every failed update represents an additional slow global memory access that is essentially wasted. 
+The particle push method
+\begin{itemize}
+\item requires $\mathcal{O}((2^d+1)N)$ read/write operations
+\item $\mathcal{V}(p_i)$ is easily computed dynamically from the particles coordinates
+\end{itemize}
+
+The charge assign that we implemented in the sandbox PIC code is a particle push to an array in global memory. In that implementation we used atomic opperations to prevent memory collisions. Looking back at table \ref{tab:GPUPIC_basetime} we notice that the charge assign step constitutes about 93\% of the total runtime.  Unfortunately this poor performance is a result of serialization caused by the atomic updates. Additionaly, since the grid is far too large to fit in shared memory these updates must be performed on global memory, which has much higher latency and lower bandwidth. When a thread attempts to update a value in memory and finds that it is locked it must then repeat the process until it succeeds. Every failed update represents an additional slow global memory access that is essentially wasted. 
 
 \begin{figure}
 \begin{center}
@@ -115,7 +126,7 @@ Looking back at table \ref{tab:GPUPIC_basetime} we notice that the charge assign
 \label{fig:pic_flowchart_parallel}
 \end{figure}
 
-The technique applied for MPI codes is parallel reduction. Each thread deals with a subset of the particle list and tallies up the contributions of that list to some array in memory private to a single thread. Once every thread has recorded the contributions from their subset of the particle list a parallel reduction is performed in order to quickly sum up the contributions from all threads. The problem with directly applying this solution to the GPU is that when a thread reads in a particle the thread must be able to account for every possible location that the particle can contribute to. With a completely random particle list any given particle can contribute to any element of the grid. However, say a thread knows that every particle that it reads in will only contribute to one element of the grid. This thread now only has to keep track of a single value, since it knows that every particle it sees will only contribute to this value. When it comes time for all of the threads to contribute to the final result each thread provides the full answer for a single element. This method significantly reduces the memory requirements of each thread but imposes the constraint that a thread is given only particles that exist within its domain. We will worry about this additional constraint later. 
+The technique applied for MPI codes is parallel reduction. Each thread deals with a subset of the particle list and tallies up the contributions of that list to some array in memory private to a single thread. Once every thread has recorded the contributions from their subset of the particle list a parallel reduction is performed in order to quickly sum up the contributions from all threads. The problem with directly applying this solution to the GPU is that when a thread reads in a particle the thread must be able to account for every possible location that the particle can contribute to. With a completely random particle list any given particle can contribute to any element of the grid. However, say a thread knows that every particle that it reads in will only contribute to one element of the grid. This thread now only has to keep track of a single value, since it knows that every particle it sees will only contribute to this value. When it comes time for all of the threads to contribute to the final result each thread provides the full answer for a single element. This is essentially the particle pull method described in algorithm \ref{alg:particle_pull} without the need to to retrieve $\mathcal{P}(v_s)$ dynamically. One of the main benefits to this method is that it significantly reduces the memory requirements of each thread but imposes the constraint that a thread is given only particles that exist within its domain. We will worry about this additional constraint later. 
 
 \begin{figure}
 \begin{center}
@@ -135,7 +146,7 @@ Now consider this, the MPI code works well for a few randomly ordered sets of ma
 \label{fig:pic_flowchart_parallel}
 \end{figure}
 
-We can take this methodology even further on the GPU by recognizing that we can parallelize the single element summations using reductions. Taking this to the limit of one thread per particle on the GPU we end up with each thread block, or several blocks, is responsible for a subset of the particle list. All of the particles in the block's list will contribute to the same element. The threads within each block read in their particles contribution to that element into shared memory. With all of the data in shared memory a very fast parallel reduction can be performed. 
+We can take this methodology even further on the GPU by recognizing that we can parallelize the single element summations using reductions. Taking this to the limit of one thread per particle on the GPU we end up with each thread block, or several blocks, is responsible for a subset of the particle list. All of the particles in the block's list will contribute to the same element. The threads within each block read in their particles contribution to that element into shared memory. With all of the data in shared memory a very fast parallel reduction can be performed.
 
 \begin{figure}
 \begin{center}
@@ -145,7 +156,7 @@ We can take this methodology even further on the GPU by recognizing that we can 
 \label{fig:pic_flowchart_parallel}
 \end{figure}
 
-We implemented this technique in the sandbox PIC code and compared the runtime of the reduction method to the atomic version. The results of this comparison can be seen in table \ref{tab:GPUPIC_comparison}.
+We implemented this technique in the sandbox PIC code and compared the runtime of the reduction particle-pull to the atomic particle-push. The results of this comparison can be seen in table \ref{tab:GPUPIC_comparison}.
 
 \noindent \begin{table}
 \begin{tabular}{| p{4.0cm} | p{3.5cm} | p{3.5cm} |}
@@ -162,15 +173,21 @@ Total & 1.227e4 & 3600 \\ \hline
 \end{table}
 As you can see from the table, the charge assign is on the order of 20x faster using the reduction technique, although this speedup is somewhat offset by the sorting requirement. Sorting the particles also benefits reading the potential during the advancing step. This speedup is a result of increased cache hits due to all threads within the same thread block accessing the same addresses in the potential array. 
 
-Although we have successfully reduced the cost of the charge assign we have introduced an additional cost of a sorting step. In the case of the sandbox code the sort step accounts for roughly 70\% of the runtime. Fortunately several other projects have figured out that there are ways reduce the sorting costs while maintaining some of the performance achieved by utilizing a sorted particle list. 
+Although we have successfully reduced the cost of the charge assign we have introduced an additional cost of a sorting step\footnote{It should be noted that the sort used here is an older version of the radix sort, newer versions, such as the thrust implementation are much faster}. In the case of the sandbox code the sort step accounts for roughly 70\% of the runtime. Fortunately several other projects have figured out that there are ways reduce the sorting costs while maintaining some of the performance achieved by utilizing a sorted particle list. 
 
  
 		\subsection{Other Codes}
-There are several papers which point out that sorting by cell at every time step is not entirely necessary. It is possible to minimize the sorting requirement by expanding the sorting bins to include multiple cells, or rather, by dividing the simulation space into slabs composed of multiple cells. The advantage to this technique is sorting is only required between slabs, but not within the slabs.\cite{Abreu2011} 
+There are several papers which point out that sorting by cell at every time step is not entirely necessary for the particle-pull method. It is possible to minimize the sorting requirement by expanding the sorting bins to include multiple cells, or rather, by dividing the simulation space into slabs composed of multiple cells. The advantage to this technique is sorting is only required between slabs, but not within the slabs.\cite{Abreu2011} 
 
-This slab method, as described by Abreu et al, is used on a one thread per slab basis. One thread for each slab loops over all of the particles that belong to that slab, contributing to an array that is the same size as the slab. Once a thread completes its particle loop it writes the portion of the array that it is responsible for to the main array, using atomic operations for guard cells.\cite{Abreu2011} 
+This slab method, as described by Abreu et al, is used on a one thread per slab basis. One thread for each slab loops over all of the particles that belong to that slab, contributing to an array that is the same size as the slab. Once a thread completes its particle loop it writes the portion of the array that it is responsible for to the main array, using atomic operations for guard cells.\cite{Abreu2011} Similar approaches are used by Stantchev et al and Kong et al.\cite{Stantchev2008}\cite{Kong2011}
 
-A similar approach is employed by Stantchev et al \cite{Stantchev2008}. 
+Unfortunately it is difficult to apply the reduction version of the particle push to the slab method. The reason this is difficult boils down to limited shared memory. Consider a slab with $nv_{slab}$ vertices. In order for the reduction to work we need to have $nv_{slab} * \mathrm{nthreads}$ floats to store the results of each thread. For a typical NVIDIA GPU with 49k shared memory per streaming multiprocessor and 128 threads per block, we are limited to a slab of about 96 vertices per slab. This amounts to 9 cells per slab for a 3D grid, or about 3 fewer steps for a radix sort.
+
+The approaches used by Kong and Stantchev is a sort of hybridization of the push and pull algorithms. Here the grid is domain decomposed into sub-domains and each sub-domain assigned to a thread-block. Each thread-block has an array representing the distribution function for that sub-domain allocated in shared memory. Particles are ordered in the particle list according to what sub-domain they reside in. Within each sub-domain the charge assign is performed like a particle push. Threads loop through a subset of the particles, check which vertices that particle is updating, and update the distribution function at those vertices. 
+
+In order to avoid memory collisions both Kong and Stantchev use a technique similar to atomic operations. The technique that they used is called thread-tagging and is no longer needed due to the addition of atomic operations for shared memory.\cite{Stantchev2008}\cite{Kong2011} This approach has several advantages over the reduction technique, the primary reasons being lower order sorting keys and slightly easier implementation. The disadvantage of this approach is that because it relies on atomic operations there is no guarantee that the results are deterministic since the order of the atomic operations is undefined. 
+
+
 
 
 
@@ -179,6 +196,68 @@ A similar approach is employed by Stantchev et al \cite{Stantchev2008}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Particle List Sort}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		In the previous section we discussed what is required for an efficient charge assign on the GPU. In order to massively parallelize the charge assign and avoid memory collisions the particle data must be organized. Unfortunately this means introducing a new step in the PIC method, a sort step. Looking back at table \ref{tab:GPUPIC_comparison} we can see that this sort step is now the dominant cost by a large margin\footnote{Please note that these results are for the radix sort outlined in the NVIDIA GPU computing SDK version 3.1, developed by N. Satish et al.\cite{Satish2009}}. Operating with one step consuming 64\% of the total run time is unacceptable, we need to figure out a better way of keeping the particle data organized than this radix sort. Fortunately this problem has been explored in great detail by just about everyone else who has developed a GPU PIC implementation. 
+
+Particle sorting for GPU PIC codes basically comes in four flavors:
+\begin{itemize}
+\item Partial sort using message passing. \cite{Kong2011}\cite{Decyk2011}
+\item In-place particle Quicksort. \cite{Stantchev2008}
+\item Linked list reordering \cite{Burau2010}
+\item Full Radix Sort-by-key and reorder. \cite{Abreu2011}
+\end{itemize}
+Each of these methods have their own advantages and disadvantages. For the purposes of this code we are looking for a method that is fast for a broad range of applications and does not depend too greatly on the specifics of the problem.
+
+
+
+	\subsection{Message Passing}
+	Going back a section to the charge assign we concluded that sorting by cell is unnecessary. Instead we are ordering the particles according to a group of cells called bins. For most cases the dimensions of the bin will be greater than the average distance that a particle will travel in a given time step. There are cases in which the particle path length will be smaller than the size of a cell, however this is much more likely if the domain in question is several cells wide. The benefit of considering this case is that only a small fraction of the particles will leave the domain during a given time step, and thus only a small number of particles need to be moved from one domain to the next. Most of the particles will remain in their respective domains and therefore do not need to be sorted. Instead of a full particle sort we want a method that will partially sort the particle list, only handling the particles that changed domains. 
+
+	One partial sorting method is similar in principle to message passing. The particle list is divided up into sections according to domain. Whenever a particle leaves its current domain it is flagged. Flagged particles are then moved to different sections of the particle list through some kind of buffer. There are currently two approaches to this. The approach taken by Kong et al, illustrated in figure \ref{fig:kong_sort} is based on integrating the buffer into the particle list. The particle list is structured such that each sub-domain's section of the particle list is divided into two regions, a data region and a buffer region. Using this particle list structure as a foundation, the rest of the sorting algorithm proceeds as follows\cite{Kong2011}:
+
+\begin{enumerate}
+\singlespace
+\item Sub-domains, referred to by Kong as clusters, that are adjacent horizontally are grouped into pairs called bi-clusters. This first step is odd cells on the left, even cells on the right. 
+\item Particles that are moving from the left cluster to the right are copied from the left cluster into the buffer section of the right cluster. 
+\item Step 2 is then repeated for particles moving from the right cluster to the left. 
+\item Repeat steps 1 to 3 for bi-clusters for even cells on the left and odd cells on the right. 
+\item Perform steps 1 to 4 for vertically oriented bi-clusters. 
+\end{enumerate}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=3in]{design/kong_sort.png}
+\end{center}
+\caption{Kong particle sort. (a) Bi-cluster of cells. (b) Data structure of the bi-cluster particle array. (c.1) Particle 3 and 5 move to the right. Particle 3 is moved first to slot 12 which frees up slot 3. Slot 3, now empty, copies the last particle in the data region, which is particle 5. Particle 5 is also moving to the right so slot 3 copies it to slot 13 and replaces the contents of slot 3 with particle 4. Image taken from \cite{Kong2011}.}
+\label{fig:kong_sort}
+\end{figure}
+
+	In cases where the number of particles in a cluster is greater than the number of slots in that cluster a global data reorder must be performed. This reorder is only performed when a particle to slot ratio exceeds a certain limit. When a cluster exceeds this threshold the code increases the buffer for this cluster by reducing the buffer of other clusters. This operation is carried out through a sequence of calls to $cudaMemcpy()$ where a section of data from end of a cluster is copied to the end of the buffer of the previous cluster. The start index of the adjusted cluster is then shifted by the amount of memory copied. \cite{Kong2011} 
+
+  The second approach used by Decyk et al breaks the relocating particles into two groups, those moving within a thread group and one for all the rest. The buffer for the second group is stored in a different array from the main particle list.
+
+All of the flagged particles are condensed and written to some kind of buffer using stream compaction. Once all particles that are being relocated have been transferred to the buffer and all threads have been synchronized particles in the buffer array are broadcast to the empty slots in the primary array. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=5in]{design/sort_compare.pdf}
+\end{center}
+\caption{Comparison of Stantchev Sort and the thrust radix sort.}
+\label{fig:stantchev_sort_compare}
+\end{figure}
+
 		\subsection{Costs and Benefits}
 		\subsection{Other Codes}
 		*Stantchev Particle Binning

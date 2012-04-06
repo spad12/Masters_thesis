@@ -20,9 +20,10 @@
 \BOOKMARK [1][-]{section.3.2}{Charge Assign}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.2.1}{Other Codes}{section.3.2}
 \BOOKMARK [1][-]{section.3.3}{Particle List Sort}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.3.1}{Costs and Benefits}{section.3.3}
-\BOOKMARK [2][-]{subsection.3.3.2}{Other Codes}{section.3.3}
-\BOOKMARK [2][-]{subsection.3.3.3}{In house tests}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.1}{Message Passing}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.2}{Costs and Benefits}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.3}{Other Codes}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.4}{In house tests}{section.3.3}
 \BOOKMARK [1][-]{section.3.4}{Particle List Structure}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.4.1}{Other Codes}{section.3.4}
 \BOOKMARK [2][-]{subsection.3.4.2}{In house tests}{section.3.4}
@@ -36,8 +37,7 @@
 \BOOKMARK [1][-]{section.3.7}{Grid Dimension Constraints and Handling}{chapter.3}
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}
 \BOOKMARK [1][-]{section.4.1}{Constraining Grid Dimensions}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.1.1}{Constraints}{section.4.1}
-\BOOKMARK [2][-]{subsection.4.1.2}{Holding to the constraints}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.1}{Holding to the constraints}{section.4.1}
 \BOOKMARK [1][-]{section.4.2}{Particle List Transpose}{chapter.4}
 \BOOKMARK [1][-]{section.4.3}{Charge Assign}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.3.1}{Domain Decomposition}{section.4.3}
@@ -59,6 +59,4 @@
 \BOOKMARK [2][-]{subsection.5.2.2}{Threadblock Sub-Domain Size}{section.5.2}
 \BOOKMARK [1][-]{section.5.3}{Kernel Parameters Scan}{chapter.5}
 \BOOKMARK [0][-]{chapter.6}{Conclusion}{}
-\BOOKMARK [0][-]{appendix.A}{Tables}{}
-\BOOKMARK [0][-]{appendix.B}{Figures}{}
 \BOOKMARK [0][-]{section*.8}{Bibliography}{}

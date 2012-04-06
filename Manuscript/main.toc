@@ -18,47 +18,45 @@
 \contentsline {chapter}{\numberline {3}Design Options}{29}{chapter.3}
 \contentsline {section}{\numberline {3.1}GPUPIC Sandbox and the big questions}{30}{section.3.1}
 \contentsline {section}{\numberline {3.2}Charge Assign}{32}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Other Codes}{36}{subsection.3.2.1}
-\contentsline {section}{\numberline {3.3}Particle List Sort}{37}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Costs and Benefits}{37}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Other Codes}{37}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}In house tests}{37}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Particle List Structure}{37}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Other Codes}{37}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}In house tests}{37}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Particle Advancing}{38}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Assumptions}{38}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Other Codes}{38}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Reinjections and Diagnostics}{38}{subsection.3.5.3}
-\contentsline {section}{\numberline {3.6}Poisson Solve}{38}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Desired Performance}{38}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Performance vs Implementation Difficulty}{38}{subsection.3.6.2}
-\contentsline {section}{\numberline {3.7}Grid Dimension Constraints and Handling}{38}{section.3.7}
-\contentsline {chapter}{\numberline {4}Implementation}{39}{chapter.4}
-\contentsline {section}{\numberline {4.1}Constraining Grid Dimensions}{39}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Constraints}{39}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Holding to the constraints}{40}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Particle List Transpose}{40}{section.4.2}
-\contentsline {section}{\numberline {4.3}Charge Assign}{41}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Domain Decomposition}{41}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Particle Bins}{42}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Particle Push}{43}{subsection.4.3.3}
-\contentsline {section}{\numberline {4.4}Particle List Sort}{45}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Populating Key/Value Pairs}{46}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Sorting Key/Value Pairs}{46}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Payload Move}{47}{subsection.4.4.3}
-\contentsline {section}{\numberline {4.5}Poisson Solve}{48}{section.4.5}
-\contentsline {section}{\numberline {4.6}Particle List Advance}{48}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Checking Domain Boundaries}{48}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Diagnostic Outputs}{49}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Handling Reinjections}{49}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Performance}{51}{chapter.5}
-\contentsline {section}{\numberline {5.1}Particle list size scan}{53}{section.5.1}
-\contentsline {section}{\numberline {5.2}Grid Size scan}{56}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Absolue Size}{56}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Threadblock Sub-Domain Size}{63}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}Kernel Parameters Scan}{64}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusion}{65}{chapter.6}
-\contentsline {chapter}{\numberline {A}Tables}{67}{appendix.A}
-\contentsline {chapter}{\numberline {B}Figures}{69}{appendix.B}
+\contentsline {subsection}{\numberline {3.2.1}Other Codes}{37}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Particle List Sort}{38}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Message Passing}{39}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Costs and Benefits}{42}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Other Codes}{42}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}In house tests}{42}{subsection.3.3.4}
+\contentsline {section}{\numberline {3.4}Particle List Structure}{42}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Other Codes}{42}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}In house tests}{42}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Particle Advancing}{43}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Assumptions}{43}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Other Codes}{43}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Reinjections and Diagnostics}{43}{subsection.3.5.3}
+\contentsline {section}{\numberline {3.6}Poisson Solve}{43}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Desired Performance}{43}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Performance vs Implementation Difficulty}{43}{subsection.3.6.2}
+\contentsline {section}{\numberline {3.7}Grid Dimension Constraints and Handling}{43}{section.3.7}
+\contentsline {chapter}{\numberline {4}Implementation}{45}{chapter.4}
+\contentsline {section}{\numberline {4.1}Constraining Grid Dimensions}{45}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Holding to the constraints}{46}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Particle List Transpose}{46}{section.4.2}
+\contentsline {section}{\numberline {4.3}Charge Assign}{47}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Domain Decomposition}{47}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Particle Bins}{48}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Particle Push}{49}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Particle List Sort}{51}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Populating Key/Value Pairs}{52}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Sorting Key/Value Pairs}{52}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Payload Move}{52}{subsection.4.4.3}
+\contentsline {section}{\numberline {4.5}Poisson Solve}{54}{section.4.5}
+\contentsline {section}{\numberline {4.6}Particle List Advance}{54}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Checking Domain Boundaries}{54}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Diagnostic Outputs}{55}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Handling Reinjections}{55}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Performance}{57}{chapter.5}
+\contentsline {section}{\numberline {5.1}Particle list size scan}{59}{section.5.1}
+\contentsline {section}{\numberline {5.2}Grid Size scan}{62}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Absolue Size}{62}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Threadblock Sub-Domain Size}{69}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Kernel Parameters Scan}{70}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusion}{71}{chapter.6}
 \contentsline {chapter}{Bibliography}{73}{section*.8}
