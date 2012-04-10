@@ -209,7 +209,7 @@ Each of these methods have their own advantages and disadvantages. For the purpo
 
 
 
-	\subsection{Message Passing}
+	\subsection{Message Passing Sort}
 	Going back a section to the charge assign we concluded that sorting by cell is unnecessary. Instead we are ordering the particles according to a group of cells called bins. For most cases the dimensions of the bin will be greater than the average distance that a particle will travel in a given time step. There are cases in which the particle path length will be smaller than the size of a cell, however this is much more likely if the domain in question is several cells wide. The benefit of considering this case is that only a small fraction of the particles will leave the domain during a given time step, and thus only a small number of particles need to be moved from one domain to the next. Most of the particles will remain in their respective domains and therefore do not need to be sorted. Instead of a full particle sort we want a method that will partially sort the particle list, only handling the particles that changed domains. 
 
 	One partial sorting method is similar in principle to message passing. The particle list is divided up into sections according to domain. Whenever a particle leaves its current domain it is flagged. Flagged particles are then moved to different sections of the particle list through some kind of buffer. There are currently two approaches to this. The approach taken by Kong et al, illustrated in figure \ref{fig:kong_sort} is based on integrating the buffer into the particle list. The particle list is structured such that each sub-domain's section of the particle list is divided into two regions, a data region and a buffer region. Using this particle list structure as a foundation, the rest of the sorting algorithm proceeds as follows\cite{Kong2011}:
@@ -232,19 +232,83 @@ Each of these methods have their own advantages and disadvantages. For the purpo
 \label{fig:kong_sort}
 \end{figure}
 
-	In cases where the number of particles in a cluster is greater than the number of slots in that cluster a global data reorder must be performed. This reorder is only performed when a particle to slot ratio exceeds a certain limit. When a cluster exceeds this threshold the code increases the buffer for this cluster by reducing the buffer of other clusters. This operation is carried out through a sequence of calls to $cudaMemcpy()$ where a section of data from end of a cluster is copied to the end of the buffer of the previous cluster. The start index of the adjusted cluster is then shifted by the amount of memory copied. \cite{Kong2011} 
+	In cases where the number of particles in a cluster is greater than the number of slots in that cluster a global data reorder must be performed. This reorder is only performed when a particle to slot ratio exceeds a certain limit. When a cluster exceeds this threshold the code increases the buffer for this cluster by reducing the buffer of other clusters. This operation is carried out through a sequence of calls to $cudaMemcpy()$ where a section of data from end of a cluster is copied to the end of the buffer of the previous cluster. The start index of the adjusted cluster is then shifted by the amount of memory copied. \cite{Kong2011}
 
-  The second approach used by Decyk et al breaks the relocating particles into two groups, those moving within a thread group and one for all the rest. The buffer for the second group is stored in a different array from the main particle list.
+	This method works well if we assume that a particle will move at most one cluster in any direction in a single time step. If a particle moves more two clusters, then the sort must be performed twice, one for each step that the particle moves. In the worst case scenario, where a particle can move from one cluster to any other of n clusters, it may take up to $n$ sort steps to put every particle in its proper cluster. Another downside to this method is that it requires extra memory for the buffer. If the buffer is to small then global reorders will be performed more often. If the buffer section is too large then precious memory is wasted. 
 
-All of the flagged particles are condensed and written to some kind of buffer using stream compaction. Once all particles that are being relocated have been transferred to the buffer and all threads have been synchronized particles in the buffer array are broadcast to the empty slots in the primary array. 
+	\subsection{In Place Particle-Quicksort}
+	The second sort method, developed by George Stantchev et al, eliminates the need for a buffer array, and is applicable to cases in which particles can move any number of clusters. This sort, like the Kong sort, is an ``incomplete'' which reorders only those particles that have changed position. For this sort the particle list is divided up into ``bins" representing groups of cells to which particles in that bin belong. A separate array keeps track of the indicies, called ``bookmarks" of the first and last particle of each bin. The actually sorting is based on moving particles within their respective bins and manipulating the bookmarks such that in the end all particles are where they belong. The algorithm consists of two steps, a defragmentation step and a rebracketing step. 
+	
+	After the particle advance some of the particles will have moved to bins with a higher bin index, and some to bins with a lower. Since the particle list is laid out continiously in linear memory higher bins will be to the right, and lower bins to the left of the current bin. The purpose of the defragmentation step is to organize the particles within a bin into three subsets based on the direction that they are traveling, left, right, or staying. Let $P = [p_{i_1}.... p_{i_n}]$ represent a particle bin that maps to a group of cells $C$ with memory index $j$. The cell cluster that each particle resides in is denoted by $I(p)$. As shown in algorithm \ref{alg:defrag} the defragmentation is performed through two loops over all elements in $P$
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\STATE // Loop over particle bins
+		\FORALL{particle bin $P_l$}
+			\STATE $t_{min} \leftarrow$ lowest cell in the cluster associated with $P_l$
+			\STATE $t_{max} \leftarrow$ highest cell in the cluster associated with $P_l$
+			\STATE $\alpha \leftarrow$ lowest particle index of  $P_l$
+			\STATE $\omega \leftarrow$ highest particle index of $P_l$
+			\STATE // Forward Swapping pass 
+			\FORALL{$p_i \in P_l in ascending order$}
+				\IF{$I(p_i) < t_{min}$}
+					\STATE swap$(p_i, p_{\alpha})$
+					\STATE $\alpha \leftarrow \alpha + 1$
+				\ENDIF			
+			\ENDFOR
+			\STATE Backward swapping pass
+			\FORALL{$p_i \in P_l in descending order$}
+				\IF{$I(p_i) > t_{max}$}
+					\STATE swap$(p_i, p_{\omega})$
+					\STATE $\omega \leftarrow \omega - 1$
+				\ENDIF			
+			\ENDFOR
+			\STATE // Now $\alpha$ and $\omega$ are the new temporary bookmarks indicating the boundaries between migrating and non-migrating particles in bin $P_l$
+		\ENDFOR
+	\end{algorithmic}
+	\caption{Particle defragmentation. From Stantchev et al. \cite{Stantchev2008}}
+	\label{alg:defrag}
+\end{algorithm}
 
 
+ Once the defragmentation step is complete the subset of the particles that are migrating must be moved to their new homes and the particle bin bookmarks updated. This step, called particle rebracketing and shown in algorithm \ref{alg:rebracket}, is performed first for all odd $l$ and then for all even $l$. Each rebracketing step starts by taking two adjacent particle bins, $P_l$ and $P_{l+1}$. Particle $p_{\omega_l}$ in bin $P_{l}$ is swapped with particle $p_{\alpha_{l+1}}$ in bin $P_{l+1}$. After the swap $\alpha_{l+1}$ is decreased by 1 and $\omega_l$ is increased by 1. This is repeated until $I(p_{\omega_l}) = I(P_l)$. The final bookmark $l$, the final particle in bin $P_l$, is given by the original values of $\alpha_{l+1}$ and $\omega_l$, $l = \alpha_{l+1}^0 - l + \omega_l^0$. The process is then repeated for all even values of $l$.
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\STATE // Odd Particle bins
+		\FORALL{particle bin $P_l$ where $l$ is odd}
+			\STATE $\alpha \leftarrow \alpha_{l+1}^0$
+			\STATE $\omega \leftarrow \omega_l^0$
+			\WHILE{$I(p_{\omega+1}) \ne I(P_l)$}
+				\STATE swap$(p_\omega,p_\alpha)$
+				\STATE $\alpha \leftarrow \alpha - 1$ 
+				\STATE $\omega \leftarrow \omega + 1$ 		
+			\ENDWHILE
+			\STATE // Last particle $l$ in bin $P_l$ is set to:
+			\STATE $l \leftarrow \alpha_{l+1}^0 - l + \omega_l^0$
+		\ENDFOR
+		\STATE // Repeat for even bins
+	\end{algorithmic}
+	\caption{Particle defragmentation. From Stantchev et al. \cite{Stantchev2008}}
+	\label{alg:rebracket}
+\end{algorithm}
+
+	So far the method presented only works for particles moving only one bin to the left or right, but this can be expanded to include all possible magnitudes of particle movement. This is accomplished through hierarchical binning. The idea here is to create a binary tree of bins. At the first level of the tree the domain is divided into two bins, particles are sorted into the two bins using the defragmentation and rebracketing techniques described above. Once this is done each bins in the domain is cut in half and the process is repeated until the desired number of bins is reached. Traversing the entire tree takes $\mathcal{O}(N \mathrm{log} C)$ with $C$ being the total number of bins and $N$ the total number of particles. \cite{Stantchev2008}
+
+Now when this technique is implemented in CUDA each bin is assigned to a single thread block for the defragmentation stage and two bins are assigned to each thread-block for the rebracketing stage.  Unfortunately this means that at the first level of the hierarchal binning the GPU is severely underpopulated. In cases where particle behavior is reasonably well defined we can use clever geometries for the binning tree such that the first level has multiple bins. An example of this would be dividing up a three dimensional grid into slabs and assuming that particles can only transverse one slab in a time step. One reorder pass is performed for the slab level, followed by a hierarchical method for sorting within the slab. 
+
+This method is rather promising, it is applicable to a large variety of cases, and can be made significantly faster if assumptions about the system are integrated into the sort. A second benefit to this method is that it does not require a buffer, so more memory for particles. The downside to this algorithm is that it is very difficult to implement on the GPU and is rather poor in the general case. 
 
 
+	\subsection{Linked List Ordering}
+	A third method of maintaining particle order, used by Heiko Burau et al is based on never moving the particle data from its original position in memory. Instead, each cell contains a pointer to the last particle in its local linked list, and each particle contains a pointer to its predecessor in its cell's linked list. When a particle changes cells it is deleted from the old cell's linked list and appended to the new cell's linked list. Particle list insertions and deletions are handled by atomic memory operations. \cite{Burau2010}
 
+	There is one major issue with this approach, namely, the reordered access pattern can severely reduce performance due to un-coalesced memory accesses. Burau notes that this does in fact occur with the current deposition routine being the most affected routine. Unfortunately it is dificult to perform a meaningful comparison between this approach and other approaches with the information in the paper ``PIConGPU: A Fully Relativistic Particle-in-Cell Code for a GPU Cluster". \cite{Burau2010}
 
+	\subsection{Full Sort using Sort from Thrust Library}
+	The final and most general option is performing a full sort using the radix sort provided with the Thrust library.\cite{NVIDIACorporation2011a} The organization of the particle list is similar to the message passing and QuickSort methods, that is, particles are grouped into bins that represent clusters of cells. Particles are sorted by populating an array containing the bin indicies of all of the particles along with an array containing the indicies of all the particles in the particle list. The binID / particleID arrays are used in the thrust sort\_by\_key$()$ function. Once the particle indicies have been sorted, a kernel is launched in which each thread reads in a particle ID and then uses that ID to copy particle data from the original list into the new sorted list. 
 
-
+	With the newer versions of the thrust sort this method can be very fast, as well as simple to implement. This method is also very general and applicable to all PIC codes as it is completely independent of the physics of the problem at hand. On the other hand, the generality of this method can be a down side as there is no way to improve this routine based on the physics of the system. The Kong and Stantchev sorts can perform better than the full sort in the cases where the maximum distance that particles will travel in a given time step is known to be small. If this is true then then the Kong and Stantchev sorts will take fewer iterations. In cases where particle movement is completely un-definded then the thrust sort wins out. A comparison of the thrust sort and the Stantchev sort can be seen in figure \ref{fig:stantchev_sort_compare}. 
 
 
 
@@ -258,19 +322,41 @@ All of the flagged particles are condensed and written to some kind of buffer us
 \label{fig:stantchev_sort_compare}
 \end{figure}
 
-		\subsection{Costs and Benefits}
-		\subsection{Other Codes}
-		*Stantchev Particle Binning
-		*Kong Particle Passing
-		*Linked Particle List
-		\subsection{In house tests}
+The data shown in figure \ref{fig:stantchev_sort_compare} was generated using a simple code that populates a partially ordered particle list and then sorts this list. The amount of data for each particle is similar to that of sceptic3D, six floats for position and velocity, and one integer to keep track of bin index. The ``grid" is represented by a series of bins, there is no need to represent individual cells for this comparison. The partially ordering is achieved by looping over the particle list and assigning each particle $p_i$ to bin $\mathrm{floor}(\frac{N_{part}}{G} i)$. Where $N_{part}$ is the total number of particles, $G$ is the size of the grid, and $i$ is the particle index. The ``partial" part of the ordering is achieved by drawing a random number for each particle, if this number is less than $R$, then a second random number is drawn to determine if the particle is being placed in the previous or next bin. The boundary conditions are periodic such that particles in bin 0 that are being placed in a lower bin end up in bin $G-1$ and particle in bin $G-1$ that are being shifted up will end up in bin 0. The number $R$ can be adjusted in order to adjust the fraction of particles that are moving. For the data shown in figure \ref{fig:stantchev_sort_compare} $R = 0.2$, $N_{part} = 2^{24}$, and G ranges from $2^1$ to $2^{12}$. 
+
+Overall the thurst sort has the benefits of being easy to implement, very general, and is part of an externally maintained library that will be updated as GPU hardware changes. Fortunately the thrust sort is also much faster than the radix sort from the NVIDIA GPU Computing SDK 3.1. The performance of the thrust sort is fast enough that it is no longer the dominant cost. The downside to this sort is that it also requires allocation of buffer memory. The amount of memory required for this buffer array can be reduced by using separate arrays for each element of the particle list, which will be discussed in more detail in the next section. For now the thrust sorts benefits of simplicity and ``fast enough" make it the winner of the particle sort competition. 
+
+\subsection{Spatial Indexing}
+
+One way that the sort performance can be improved is through the use of space filling curves, such as a Z-order curve for cell-cluster indexing. Utilizing a space filling curve for the cluster indexing preserves the spatial ordering of the clusters in their layout in memory. This aids the sort by reducing the distance that particles must move in memory whenever they change clusters. We will use a z-order curve to index the cell clusters, since it is fairly simple to implement and will provide some performance boost to the code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Particle List Structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Another major design question is what kind of data structure should be used for the particle list. In the serial version of sceptic3D the particle data is laid out in a 6xN array of reals in fortran. In C this layout corresponds to an array of six element structures. The array of structures formant performs well on the CPU since only one particle is being operated on at a time, this means that data from only a single particle will be required at a given time. On the GPU things are a bit different. When a data access is performed on the GPU a group of 32 threads, a warp, executes memory requests for the same element, but from 32 different particles. If these addresses are not sequential then the request will be divided up into as many 128 byte cache-line transactions as it takes to fulfill the requests from all 32 threads. In kernels where all six elements will be used soon after one another, such as in the move kernel, this is not a big issue. When the request for the first element is read from global memory, the data for the other 5 elements will also be retrieved from global memory. For the most part cache hits are almost as fast as registers, so subsequent requests for the other 5 elements will result in fast cache hits. Unfortunately this is not true of kernels in which only a subset of the elements is required, such as when calculating the particle bin index of each particle with relies only on the particles position. \cite{NVIDIACorporation2011}
+
+\begin{figure}
+\begin{lstlisting}[frame=single]
+class XPchunk // Array of Structures
+{
+public:
+	float x,y,z,vx,vy,vz;
+};
+
+class XParray // Structure of Arrays
+{
+public:
+	float* x,y,z,vx,vy,vz;
+};
+\end{lstlisting}
+\caption{Array of Structures and Structure of Arrays}
+\end{figure}   
 	
-		\subsection{Other Codes}
-		\subsection{In house tests}
+	The alternative is to use a structure of arrays, which corresponds to the transpose of the particle list structure in the fortran version of sceptic3D. The main benefit of a structure of arrays is that reading in a single element of the particle list for 32 particles corresponds to a 128 byte transfer, the size of the cache line transaction. None of the bandwidth is wasted. This only takes 6 reads to global memory, no reads to cache. Reading in the elements of the array of structures results in at least 6 reads to global memory for the first element, followed by 5 reads from cache in the best case scenario. In order to test this we ran our toy GPU PIC code with both an array of structures (AoS) and a structure of arrays (SoA). The results of this test are shown in table \ref{tab:struct_compare}. 
+	
+
+
 \noindent \begin{table}[h]
 \begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
 \hline
@@ -284,13 +370,54 @@ Total CPU run time & 2491 & 3284 & 1.31x \\ \hline
 \label{tab:struct_compare} 
 \end{table}
 
+An additional benefit to using the the structure of arrays is the smaller buffer required for the particle sort. Using a structure of arrays we only need a 1xN array of floats to sort each element of the particle list into. We would need a 6xN floats for sorting the array of structures. This approach scales well with more complicated particles that must keep track of more information. For sceptic3D we have a total of 6 floats for spatial and velocity components, one 32-bit integer for the particle index, one float to keep of previous time step for reinjections, and a 16-bit integer for the binID. Using a structure of arrays the memory requirements imposed by the sorting step only increase the memory required per particle by 12\%. The standalone buffer array can also be useful for other uses, such as stream compactions and reductions of diagnostic outputs. 
+
+The main downside of the structure of arrays approach is that a transpose is required for particle data transfers between the fortran sceptic3D code and the GPU code. Performing this transpose on the GPU would require a large amount of memory, which would reduce the total number of particles that could be run. Performing it on the CPU will be more costly computationally, but will provide better performance overall.  
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Particle Advancing}
-		\subsection{Assumptions}
-		\subsection{Other Codes}
-		\subsection{Reinjections and Diagnostics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Implementing sceptic3D's particle advance on the GPU is fairly straightforward, and for the most part is identical to the CPU implementation. The primary design challenge here is dealing with reinjections.
 
-	\section{Poisson Solve}
-		\subsection{Desired Performance}
-		\subsection{Performance vs Implementation Difficulty}
+The sceptic3D particle advance algorithm is as follows:
 
-	\section{Grid Dimension Constraints and Handling}
+\begin{algorithm}
+	\begin{algorithmic}
+		\FORALL{$p_i \in$ particles}
+		\STATE $p_i \leftarrow \mathrm{move}(p_i,\Delta t)$
+		\WHILE{$p_i\rightarrow \mathbf{x} \notin \mathrm{Domain}$}
+			\STATE $\Delta t_{prev} \leftarrow \Delta t - \frac{\|\mathbf{\mathrm{exit}} - \mathbf{x}_i^0\|}{\|\mathbf{v}_i\|}$
+			\STATE $p_i \leftarrow \mathrm{Reinject}()$
+			\STATE $p_i \leftarrow \mathrm{move}(p_i,\Delta t_{prev})$
+		\ENDWHILE	
+		\ENDFOR
+	\end{algorithmic}
+	\caption{Sceptic3D Particle Advancing}
+	\label{alg:padvnc}
+\end{algorithm}
+
+Reinjections on the CPU are performed whenever a particle leaves the computational domain. When this event occurs, the code first determines the exact point during the timestep that the particle left the grid. From there a new particle is reinjected by calculating a new position and velocity as described in \cite{Patacchini2007}. The new particle is then advanced the remainder of the times step, performing a second reinjection if the new particle also leaves the domain. 
+
+Unfortunately this method does not work well on the GPU. If this same algorithm were to be used on the GPU it would result in a large amount of warp divergence. Calculating new random positions and velocities is also expensive. Ideally we would have all of the particles be moved, and then operate on the subset of particles that need to be reinjected. In CUDA this is done by compacting the particle stream down to a list that contains only particles that are undergoing reinjection. This compacted particle list is still a particle list, and can be advanced in the same manner as the main list.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Constraining Grid Dimensions}
+	\label{sec:grid_constraincts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the block subdomain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$.
+		
+\begin{equation}
+\frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
+\end{equation} 
+
+Where $n_{virtual}$ is the number of blocks that the grid is divided into in any dimension. In order to fully satisfy the constraints for a simple z-order curve, $n_{virtual}$ must be a power of 2.
+
+The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the chargeassign stage of the code. Given that each block has the maximum number of threads, 512, and each thread requires roughly 25 registers, then the maximum number of threadblocks that can exist simultaneously on a single SM is 2. This means that each block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three block dimensions can be is 18. For the sake of simplicity this sets $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. 
+
+A third, loose constraint can be set in order to force a minimum nuber of threadblocks for the charge-assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough threadblocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread-blocks. For a GTX 580 with 16 SMs 32 thread-blocks are required to fill all of the processors.  
+
+
+

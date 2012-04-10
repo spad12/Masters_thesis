@@ -20,6 +20,13 @@ Viktor~K. Decyk and Tajendra~V. Singh.
   units}.
 \newblock {\em Computer Physics Communications}, 182(3):641--648, March 2011.
 
+\bibitem{Harris2007}
+Mark (NVIDIA~Corporation) Harris, Davis) {Sengupta, Shubhabrata (University of
+  California}, and Davis) {Owens, John D. (University of California}.
+\newblock {Parallel Prefix Sum (Scan) with CUDA}.
+\newblock In Hubert Nguyen, editor, {\em GPU Gems 3}, chapter~39.
+  Addison-Wesley Professional, 2007.
+
 \bibitem{Hutchinson2005}
 I~H Hutchinson.
 \newblock {Ion collection by a sphere in a flowing plasma: 3. Floating
@@ -51,10 +58,21 @@ Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
 \newblock {\em Journal of Computational Physics}, 230(4):1676--1685, February
   2011.
 
+\bibitem{NVIDIACorporation2011}
+{NVIDIA Corporation}.
+\newblock {NVIDIA CUDA C Programming Guide Version 4.1}.
+\newblock Technical report, NVIDIA, 2011.
+
 \bibitem{NVIDIACorporation2011a}
 {NVIDIA Corporation}.
 \newblock {Thrust Quick Start Guide}.
 \newblock Technical Report January, 2011.
+
+\bibitem{Patacchini2007}
+L.~Patacchini.
+\newblock {\em {Collisionless Ion Collection by a Sphere in a Weakly Magnetized
+  Plasma by Leonardo Patacchini}}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 2007.
 
 \bibitem{Satish2009}
 Nadathur Satish, Mark Harris, and Michael Garland.

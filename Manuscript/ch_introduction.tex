@@ -94,32 +94,13 @@ The point hear is that multiple domain decompositions must be performed in order
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 						Some work on efficient GPU based PIC codes has already been done. This past work will be briefly introduced here and discused in depth in chapter \ref{ch:design}. Burau et al developed a fully relativistic PIC code for a gpu cluster. 
-			
-	
-
-	
-	\section{Overview of sceptic3D}
-
-
-
-
-
-
-
-
-
-
+		
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\chapter{Sceptic3D}
+	\section{Sceptic3D}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Now that Sceptic3D is three dimensional hybrid PIC code specifically designed to solve the problem of ion flow past a negativley biased sphere in a uniform magnetic field. The current version of the code was derivied from the 2D/3v code SCEPTIC which was originally written by Hutchinson \cite{Hutchinson2002,Hutchinson2003,Hutchinson2005,Hutchinson2006}.
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\section{Basic Code Structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{center}
 \includegraphics[width=4in]{introduction/not_finished.pdf}
@@ -127,6 +108,13 @@ Now that Sceptic3D is three dimensional hybrid PIC code specifically designed to
 \caption{Flow schematic for the PIC method with sceptic subroutine names Need to make figure}
 \label{fig:pic_flowchart_sceptic}
 \end{figure}
+
+	\subsection{CPU Code Profiling}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{Basic Code Structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 		
 		\subsection{Charge Assign Details}
 		
@@ -135,7 +123,7 @@ Now that Sceptic3D is three dimensional hybrid PIC code specifically designed to
 		\subsection{Particle Advancing Details}
 		
 
-		\section{CPU Code Profiling}
+		
 
 	\section{Overview of sceptic3Dgpu Goals}
 

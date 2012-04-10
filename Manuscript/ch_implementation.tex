@@ -6,19 +6,7 @@
 %% prompt when you run the file main.tex through LaTeX.
 \chapter{Implementation}
 
-	\section{Constraining Grid Dimensions}
-	\label{sec:grid_constraincts}
-There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the block subdomain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$.
-		
-\begin{equation}
-\frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
-\end{equation} 
 
-Where $n_{virtual}$ is the number of blocks that the grid is divided into in any dimension. In order to fully satisfy the constraints for a simple z-order curve, $n_{virtual}$ must be a power of 2.
-
-The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the chargeassign stage of the code. Given that each block has the maximum number of threads, 512, and each thread requires roughly 25 registers, then the maximum number of threadblocks that can exist simultaneously on a single SM is 2. This means that each block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three block dimensions can be is 18. For the sake of simplicity this sets $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. 
-
-A third, loose constraint can be set in order to force a minimum nuber of threadblocks for the charge-assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough threadblocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread-blocks. For a GTX 580 with 16 SMs 32 thread-blocks are required to fill all of the processors.  
 		\subsection{Holding to the constraints}
 
 	\section{Particle List Transpose}
@@ -250,11 +238,17 @@ Performing reinjections in this manner on the GPU would introduce very large div
 
 Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. 
 
-Stream compaction is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all proceding elements yields a unique number that can be used as an index in a new array. 
+\begin{figure}
+\begin{center}
+\includegraphics[width=4in]{implementation/stream_compact.jpg}
+\end{center}
+\caption{Stream Compaction from GPU Gems 3 \cite{Harris2007}}
+\label{fig:stream_compact}
+\end{figure}
 
-On top of this, there are several different methods for calculating the positions and velocities of reinjected particles, and reproducing each of those methods on the GPU would require a large amount of effort for very little gain. 
+Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. 
 
-
+The new positions and velocities for reinjected particles are taken from a precalculate pool of new particles. This pool is approximately 1/10\textsuperscript{th} the size of the main particle list, and is repopulated prior to every advance step. Prior to the first advance step the entire pool is populated, but subsequent steps only refill slots that have been used in reinjections. This ``pool" method was chosen over implementing the reinjection calculations on the GPU for reasons of code maintenance. There are currently several different reinjection schemes that sceptic3D can call. Maintaining versions of those routines in both fortran and CUDA would be more cumbersome than the small benefit that calculating them on the GPU would provide. 
 
 
 
