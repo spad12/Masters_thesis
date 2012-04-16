@@ -1,10 +1,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at three different optimizations.}}{27}{table.2.1}
-\contentsline {table}{\numberline {2.2}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at two different optimizations.}}{32}{table.2.2}
-\contentsline {table}{\numberline {2.3}{\ignorespaces Execution times of main steps for Array of Structures and Structure of Arrays. Count Particles and Data Reorder are steps used for a sorted particle list. Count Particles counts the number of particles in each sub-domain. Data Reorder reorders the particle list data after the binindex / particle ID pair have been sorted by the radix sort.}}{44}{table.2.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{62}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{62}{table.4.2}
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at three different optimizations.}}{77}{table.A.1}
+\contentsline {table}{\numberline {A.2}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at two different optimizations.}}{78}{table.A.2}
+\contentsline {table}{\numberline {A.3}{\ignorespaces Execution times of main steps for Array of Structures and Structure of Arrays. Count Particles and Data Reorder are steps used for a sorted particle list. Count Particles counts the number of particles in each sub-domain. Data Reorder reorders the particle list data after the binindex / particle ID pair have been sorted by the radix sort.}}{78}{table.A.3}
+\contentsline {table}{\numberline {A.4}{\ignorespaces CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{78}{table.A.4}
+\contentsline {table}{\numberline {A.5}{\ignorespaces CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{79}{table.A.5}

@@ -1,0 +1,84 @@
+% Turing Machine
+% Author: Sebastian Sardina
+%\documentclass[a4paper,10pt]{article}
+%\documentclass{standalone}
+
+%\begin{document}
+\begin{tikzpicture}
+\tikzstyle{every path}=[very thick]
+
+\edef\sizetape{1.0cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+\tikzstyle{tmtape1}=[draw,fill=Gray,minimum size=\sizetape]
+\tikzstyle{tmhead}=[arrow box,draw,minimum size=.5cm,arrow box
+arrows={east:.25cm, west:0.25cm}]
+
+\tikzstyle directed=[postaction={decorate,decoration={markings,
+    mark=at position .65 with {\arrow[arrowstyle]{stealth}}}}]
+
+\tikzstyle arrowstyle=[scale=1]
+
+\tikzstyle{cfill1}=[fill=Purple]
+\tikzstyle{cfill2}=[fill=SkyBlue]
+\tikzstyle{cfill3}=[fill=Maroon]
+\tikzstyle{cfill4}=[fill=Emerald]
+
+%% Draw TM tape
+\begin{scope}[start chain=1 going right,node distance=-0.15mm]
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape1] (input) {};
+    \node [on chain=1,tmtape1,cfill1] (i0) {i};
+    \node [on chain=1,tmtape1,cfill1] (i1) {i+1};
+    \node [on chain=1,tmtape1,cfill2] (i2) {i+2};
+    \node [on chain=1,tmtape1,cfill3] (i3) {i+3};
+    \node [on chain=1,tmtape1,cfill4] (i4) {i+4};
+    \node [on chain=1,tmtape1,cfill4] (i5) {i+5};
+    \node [on chain=1,tmtape1] {};
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {\textbf{Particle stream}};
+
+\end{scope}
+\begin{scope}
+[shift={(1.25cm,-3cm)},start chain=1 going right,node distance=-0.15mm]
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape] (input) {};
+    \node [on chain=1,tmtape,cfill1] (j1) {j};
+	 \node [on chain=1,tmtape,cfill2] (j2) {j+1};
+	 \node [on chain=1,tmtape,cfill3] (j3) {j+2};
+	 \node [on chain=1,tmtape,cfill4] (j4) {j+3};
+    \node [on chain=1,tmtape] {};
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {\textbf{Density Array}};
+	
+
+		
+
+	%\draw[directed,dashed,red] (i0) -- (j1);	
+	%\draw[directed,dashed,red] (i1) -- (j1);	
+	%\draw[directed,dashed] (i2) -- (j2);
+	%\draw[directed,dashed] (i3) -- (j3);	
+	%\draw[directed,dashed,red] (i4) -- (j4);
+	%\draw[directed,dashed,red] (i5) -- (j4);	
+	\path[dashed,red] (i0) edge [directed,out=-90, in=90] (j1);	
+	\path[dashed,red] (i1) edge [directed,out=-90, in=90] (j1);	
+	\path[dashed] (i2) edge [directed,out=-90, in=90] (j2);
+	\path[dashed] (i3) edge [directed,out=-90, in=90] (j3);	
+	\path[dashed,red] (i4) edge [directed,out=-90, in=90] (j4);
+	\path[dashed,red] (i5) edge [directed,out=-90, in=90] (j4);	
+	%\draw[color=red] (j4)	circle (0.7cm);
+	%\draw[color=red] (j1)	circle (0.7cm);
+
+	\path ++(j1)++(90:0.6cm) coordinate (c1);
+	\path ++(j4)++(90:0.6cm) coordinate (c2);
+	\path ++(j4)++(4cm,1.25cm) node [red] {\textbf{Memory Conflicts}};
+	\path ++(j4)++(2cm,1.25cm) coordinate (c4);
+	\path ++(j4)++(1.5cm,1.25cm) coordinate (c3);
+
+	\draw[->,color=red] (c1) -- (c3) -- (c4);
+	\draw[->,color=red] (c2) -- (c3) -- (c4);
+\end{scope}
+
+
+\end{tikzpicture}
+%\end{document}
+

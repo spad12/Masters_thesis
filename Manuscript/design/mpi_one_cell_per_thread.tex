@@ -1,0 +1,116 @@
+% Turing Machine
+% Author: Sebastian Sardina
+%\documentclass[a4paper,10pt]{article}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{tikz}
+%\usetikzlibrary{chains,fit,shapes}
+%\begin{document}
+
+\noindent
+\begin{tikzpicture}
+		\tikzstyle{every path}=[very thick]
+
+		\edef\sizetape{1.0cm}
+		\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+		\tikzstyle{tmtape1}=[draw,minimum size=0.4cm]
+		\tikzstyle{tmhead}=[arrow box,draw,minimum size=0.4cm,arrow box
+		arrows={east:.25cm}]
+
+		\tikzstyle{cfill1}=[fill=Purple]
+		\tikzstyle{cfill2}=[fill=SkyBlue]
+		\tikzstyle{cfill3}=[fill=Maroon]
+		\tikzstyle{cfill4}=[fill=Emerald]
+
+\node [shift={(-1.0cm,-2cm)}]
+	{
+		\begin{tikzpicture}[remember picture]
+
+
+
+					\begin{scope}[start chain=2 going below,start chain=1 going right,node distance=-0.15mm] at (current page.north west)
+						 \node [on chain=2,yshift=0.5cm] {Particle Stream};
+						 \node [on chain=1,tmtape1,draw=none,xshift=-5cm] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill1] (input) {};
+						 \node [on chain=1,tmtape1,cfill4] (i0) {};
+						 \node [on chain=1,tmtape1,cfill3] (i3) {};
+						 \node [on chain=1,tmtape1,cfill2] (i4) {};
+						 \node [on chain=1,tmtape1,cfill1] (i5) {};
+						 \node [on chain=1,tmtape1,cfill4] {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill3] (i6) {};
+						 \node [on chain=1,tmtape1,cfill2] (i7) {};
+						 \node [on chain=1,tmtape1,cfill1] (i8) {};
+						 \node [on chain=1,tmtape1,cfill3] (i9) {};
+						 \node [on chain=1,tmtape1,cfill4] (i11) {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill4] (i11) {};
+						 \node [on chain=1,tmtape1,cfill3] (i12) {};
+						 \node [on chain=1,tmtape1,cfill2] (i13) {};
+						 \node [on chain=1,tmtape1,cfill4] (i16) {};
+						 \node [on chain=1,tmtape1,cfill1] (i17) {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 
+					\end{scope}
+
+		\node [tmhead,yshift=-0.45cm] at (input.south) (head1) {$T_1$};
+		\node [tmhead,yshift=-0.45cm] at (i6.south) (head2) {$T_2$};
+		\node [tmhead,yshift=-0.45cm] at (i11.south) (head3) {$T_3$};
+
+		
+
+		\node [xshift=-3cm,yshift=-5cm] (a1)
+			{\begin{tikzpicture}[remember picture]
+			\begin{scope}[start chain=1 going right,start chain=3 going down,start chain=2 going right,node distance=-1.0mm]
+
+				 \node [on chain=1,tmtape,cfill1] (j1) {j};
+				 \node [on chain=1,tmtape,cfill2] (j2) {j+1};
+				 \node [on chain=2,tmtape,cfill3,yshift=-.985cm] at (j1) (j3) {j+2};
+				 \node [on chain=2,tmtape,cfill4] (j4) {j+3};
+				 \node [on chain=3,yshift=-0.75cm,xshift=-0.5cm] at (j4) {Array 1};  
+
+			\end{scope}
+			\end{tikzpicture}
+			};
+
+		\node [shift={(3cm,0cm)}] at (a1) (a2)
+			{\begin{tikzpicture}[remember picture]
+			\begin{scope}[start chain=1 going right,start chain=3 going down,start chain=2 going right,node distance=-1.0mm]
+   
+				 \node [on chain=1,tmtape,cfill1] (j5) {j};
+				 \node [on chain=1,tmtape,cfill2] (j6) {j+1};
+				 \node [on chain=2,tmtape,cfill3,yshift=-.985cm] at (j5) (j7) {j+2};
+				 \node [on chain=2,tmtape,cfill4] (j8) {j+3};
+				 \node [on chain=3,yshift=-0.75cm,xshift=-0.5cm] at (j8) {Array 2};  
+
+			\end{scope}
+			\end{tikzpicture}
+			};
+
+		\node [shift={(3cm,0cm)}] at (a2)
+			{\begin{tikzpicture}[remember picture]
+			\begin{scope}[start chain=1 going right,start chain=2 going right,start chain=3 going down,node distance=-1.0mm]
+
+				   
+				 \node [on chain=1,tmtape,cfill1] (j9) {j};
+				 \node [on chain=1,tmtape,cfill2] (j10) {j+1};
+				 \node [on chain=2,tmtape,cfill3,yshift=-.985cm] at (j9) (j11) {j+2};
+				 \node [on chain=2,tmtape,cfill4] (j12) {j+3};
+				 \node [on chain=3,yshift=-0.75cm,xshift=-0.5cm] at (j12) {Array 3};  
+
+			\end{scope}
+			\end{tikzpicture}
+			};
+
+
+
+
+
+			\path[->] (head1) edge [bend right] (j1);	
+			\path[->] (head2) edge [out=-90, in=180] (j7);
+			\path[->] (head3) edge [out=-90, in=45] (j12);	
+
+			\end{tikzpicture}
+	};
+\end{tikzpicture}
+%\end{document}
+

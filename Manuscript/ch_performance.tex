@@ -12,47 +12,34 @@
 %		\subsection{Memory Bandwidth Comparison}
 
 Typical total\footnote[1]{Total run time includes MPI reduces and various other subroutines that were not ported to the GPU} speedups on this setup are on the order of 40x. A detailed breakdown of the run times per particle per time step and the speedup achieved by the GPU can be seen in table \ref{tab:speedup}. This run was performed on 2 GPUs with 17 million particles per GPU and a grid size of $64^3$.
-\noindent \begin{table}[h]
-\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
-\hline
-Component & CPU (ns) & GPU (ns) & Speedup \\ \hline
-Sort & 0 & 1.428 & - \\ \hline
-Charge Assign & 150.265 & 0.577 & 260x \\ \hline
-Charge Assign \& Sort & 150.265 & 2.005 & 75x \\ \hline
-Poisson Solve & 40.347 & 3.045 & 13x \\ \hline
-Particle Advance & 188.177 & 2.475 & 76x \\ \hline
-Total\footnote[1] & 380.635 & 8.695 & 44x \\ \hline
-\end{tabular}
-\caption{CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
-\label{tab:speedup} 
-\end{table}
+
+\noindent \begin{figure}
+\begin{center}
+\includegraphics[width=6in]{performance/architecture_compare.pdf}
+\end{center}
+\caption{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
+\label{tab:speedup2} 
+\end{figure} 
+
+\noindent \begin{figure}
+\begin{center}
+\includegraphics[width=6in]{performance/architecture_speedup_compare.pdf}
+\end{center}
+\caption{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
+\label{tab:speedup2} 
+\end{figure} 
+
+
 
 The initial results indicate that a very high speedup was achieved for the charge assign and particle advance routines. It should also be noted that ordering the particle data allows for an incredibly fast charge assign. After accounting for the time that it takes to sort the particle list, the speedup is a more modest 75x. In other codes the primary concern has been how to quickly and efficiently keep the particle list sorted. The results in table \ref{tab:speedup} indicate, that with the latest thrust sort, that speeding up the particle list sort is no longer a major issue. The sort step could be improved by taking into account problem specific properties of a given pic code, but considering the ease of implementation and generality of the thrust sort, it is unlikely that developing an optimized problem-specific sorting routine would really be worth it. 
 
 We also compared the performance between single and double gpu cards, as well as performance on different CPU architectures. Table \ref{tab:speedup2} shows the run times for the CPU and GPU on a machine with 2x  Intel(R) Xeon(R) CPU E5420 @ 2.50GHz and 1x NVIDIA GeForce GTX 590. The GTX 590 is a double GPU card with 2 x 512 processing cores clocked at 630 MHz, and 2x 1.5 GB ram. 
 
-\noindent \begin{table}[h]
-\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
-\hline
-Component & CPU (ns) & GPU (ns) & Speedup \\ \hline
-Sort & 0 & 1.272 & - \\ \hline
-Charge Assign & 312.210 & 0.802 & 389x \\ \hline
-Charge Assign \& Sort & 312.210 & 2.075 & 150x \\ \hline
-Poisson Solve & 637.349 & 5.393 & 118x \\ \hline
-Particle Advance & 391.335 & 2.325 & 168x \\ \hline
-Total\footnote[1] & 1352.461 & 12.958 & 104x \\ \hline
-\end{tabular}
-\caption{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
-\label{tab:speedup2} 
-\end{table} 
-
-
-
 	
 	\section{Particle list size scan}
 The following tests were performed to explore the dependence of sceptic3Dgpu's runtime on the total number of particles in the simulation for two standard grid sizes. Figure \ref{fig:nptclsize_scan128x64x64} was performed on a 128x64x64 grid, and figure \ref{fig:nptclsize_scan64x32x32} was performed on a 64x32x32 grid. Since the run times for the GPU and the CPU vary by such a large degree, a comparison between the two architectures is represented by the speedup factor, $\tau_{\mathrm{cpu}}/\tau_{\mathrm{gpu}}$. The speedup factor as a function of the total number of particles is shown in \ref{fig:nptclsize_scan_speedup}.
 
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/nptclsize_scan128x64x64ons8bins.pdf}
 \end{center}
@@ -60,7 +47,7 @@ The following tests were performed to explore the dependence of sceptic3Dgpu's r
 \label{fig:nptclsize_scan128x64x64}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/nptclsize_scan64x32x32ons8bins.pdf}
 \end{center}
@@ -68,7 +55,7 @@ The following tests were performed to explore the dependence of sceptic3Dgpu's r
 \label{fig:nptclsize_scan64x32x32}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/nptclspeedup_scan128x64x64ons8bins.pdf}
 \end{center}
@@ -78,7 +65,7 @@ The following tests were performed to explore the dependence of sceptic3Dgpu's r
 
 In the case of the 128x64x64 grid the poisson solve is by far the most expensive computation for all ranges of particles. For a smaller grid, 64x32x32, the poisson solve dominates for fewer than 15 million particles, but drops below the particle advance and particle sort for more than 15 million particles. Perhaps the most interesting behavior is best observed in the speedup factor, figure \ref{fig:nptclsize_scan_speedup}, which shows a very steep rise in the speedup factor below 10 million particles. This behavior indicates that anything fewer than 10 million particles will not saturate the gpu. This behavior can also be seen in the figures \ref{fig:nptclsize_scan128x64x64} and \ref{fig:nptclsize_scan64x32x32} by the fact that the particle advance, charge assign, and total time converge to linear behavior at large numbers of particles. 
 
-A second interesting characteristic is the fact that the speedup factor curves do not fully flatten out between 10 million particles and 30 million particles. This is due in part to some small cpu costs within these routines, namely host-device transfers of data that does not scale with the number of particles. For the GTX 470 with 1280 MB of memory 17 million particles is about the limit for a single gpu. Looking at figure \ref{fig:nptclsize_scan_speedup} it is not unreasonable to conclude that with an even larger performance boost can be attained simply by increasing the amount of available device memory. \newpage
+A second interesting characteristic is the fact that the speedup factor curves do not fully flatten out between 10 million particles and 30 million particles. This is due in part to some small cpu costs within these routines, namely host-device transfers of data that does not scale with the number of particles. For the GTX 470 with 1280 MB of memory 17 million particles is about the limit for a single gpu. Looking at figure \ref{fig:nptclsize_scan_speedup} it is not unreasonable to conclude that with an even larger performance boost can be attained simply by increasing the amount of available device memory.
 
 	
 \section{Grid Size scan}
@@ -87,27 +74,27 @@ So far the results indicate that the GPU is very good at moving the particles an
 	\subsection{Absolue Size}
 	In order to get a reasonable idea of how sceptic3Dgpu scales with grid size three sweeps of the grid size parameter were performed using 8, 16, and 34 million particles. There are two separate plots for each particle number due to the fact that for large grid sizes the number of bins must be increased in order to account for shared memory size restrictions. Since some of the scalings for the particle advance and charge exchange depend primarily on the number of elements per bin and not the absolute grid size plotting the results for $8^3$ bins and $16^3$ bins would be misleading.
 
-The primary routine of interest here is the poisson solve, which takes roughly $\sqrt[3]{G}$ iterations of operations that are roughly $\mathcal{O}(G)$, where G is the total number of grid elements. This scaling can be seen clearly in figures \ref{fig:grid_scan8ptcls8bins} through \ref{fig:grid_scan34ptcls16bins}. However, much like the number of particles scaling of the particle advance and charge assign, there is a region in which the GPU poisson solver is not saturated and beats the normal scaling. Once the GPU is saturated the poisson solve behaves as expected, scaling roughly linearly with the total number of grid elements. 
+The primary routine of interest here is the poisson solve, which takes roughly $\sqrt[3]{G}$ iterations of operations that are roughly $\mathcal{O}(G)$, where G is the total number of grid elements. This scaling can be seen clearly in figures \ref{fig:grid_scan16ptcls8bins} through \ref{fig:grid_scan34ptcls16bins}. However, much like the number of particles scaling of the particle advance and charge assign, there is a region in which the GPU poisson solver is not saturated and beats the normal scaling. Once the GPU is saturated the poisson solve behaves as expected, scaling roughly linearly with the total number of grid elements. 
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=6in]{performance/gridsize_scan8ptcls8bins.pdf}
-\end{center}
-\caption{Gridsize Scan with 8 million ptcls, and $8^3$ bins}
-\label{fig:grid_scan8ptcls8bins}
-\end{figure}
-
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=6in]{performance/gridsize_scan8ptcls16bins.pdf}
-\end{center}
-\caption{Gridsize Scan with 8 million ptcls, and $16^3$ bins}
-\label{fig:grid_scan8ptcls16bins}
-\end{figure}
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=6in]{performance/gridsize_scan8ptcls8bins.pdf}
+%\end{center}
+%\caption{Gridsize Scan with 8 million ptcls, and $8^3$ bins}
+%\label{fig:grid_scan8ptcls8bins}
+%\end{figure}
 
 
-\begin{figure}[H]
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=6in]{performance/gridsize_scan8ptcls16bins.pdf}
+%\end{center}
+%\caption{Gridsize Scan with 8 million ptcls, and $16^3$ bins}
+%\label{fig:grid_scan8ptcls16bins}
+%\end{figure}
+
+
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan16ptcls8bins.pdf}
 \end{center}
@@ -115,7 +102,7 @@ The primary routine of interest here is the poisson solve, which takes roughly $
 \label{fig:grid_scan16ptcls8bins}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan16ptcls16bins.pdf}
 \end{center}
@@ -123,7 +110,7 @@ The primary routine of interest here is the poisson solve, which takes roughly $
 \label{fig:grid_scan16ptcls16bins}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan34ptcls8bins.pdf}
 \end{center}
@@ -131,7 +118,7 @@ The primary routine of interest here is the poisson solve, which takes roughly $
 \label{fig:grid_scan34ptcls8bins}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/gridsize_scan34ptcls16bins.pdf}
 \end{center}
@@ -139,7 +126,15 @@ The primary routine of interest here is the poisson solve, which takes roughly $
 \label{fig:grid_scan34ptcls16bins}
 \end{figure}
 
-The more subtle scalings of the particle advance and charge assign can be seen in figures \ref{fig:grid_scan8ptcls8bins} through \ref{fig:grid_scan34ptcls16bins} in the cases where there are only $8^3$ bins, but do not continue their trends for $16^3$ bins. This behavior is due to the fact that these are not scalings with the absolute grid size, but rather scalings with sub-domain size.
+\begin{figure}
+\begin{center}
+\includegraphics[width=6in]{performance/gridsize_speedup_scan.pdf}
+\end{center}
+\caption{Gridsize Speedup Scan with 34 million ptcls, and $8^3$ bins}
+\label{fig:grid_scan34ptcls16bins}
+\end{figure}
+
+The more subtle scalings of the particle advance and charge assign can be seen in figures \ref{fig:grid_scan16ptcls8bins} through \ref{fig:grid_scan34ptcls16bins} in the cases where there are only $8^3$ bins, but do not continue their trends for $16^3$ bins. This behavior is due to the fact that these are not scalings with the absolute grid size, but rather scalings with sub-domain size.
 
 Another point of interest is the scaling of the particle sort, note that it only scales with the number of particles and is completely independent of grid size. One might expect to find some small scaling based on the distance that particles have to be moved during the sort stage, or that with fewer sub-domains the radix sort would have fewer digits to process, but this is not the case. This means that some improvement can be made to the sort, namely using the number of bins as the upper limit on the bits for the radix sort to process. Hopefully this kind of feature will be available in future releases of the thrust library.
 

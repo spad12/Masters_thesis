@@ -7,7 +7,7 @@
 \chapter{Implementation}
 
 
-		\subsection{Holding to the constraints}
+		%\section{Holding to Grid Constraints}
 
 	\section{Particle List Transpose}
 As previously mentioned the particle list structure on the GPU is different than the structure on the CPU. On the GPU particles are stored in a structure of arrays, while on the CPU they are stored in a 6x$n$ array. This means that in order to copy a particle list generated on the CPU to the GPU, or vice versa, the particle list must be transposed. The two main places in the code where this matters is when the particle list is initially populated at the start of the code, and when copying a list of pre-calculated reinjection particles from the CPU to the GPU at every time step during the advancing phase.
@@ -23,7 +23,7 @@ The particle list transpose was implemented on the CPU in two different ways dep
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\includegraphics[width=5in]{implementation/zorder_sceptic.pdf}
 \end{center}
 \caption{Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure}
 \label{fig:domain_decomp}
@@ -191,6 +191,11 @@ ib_r = \frac{i_r}{nb_r} \mathrm{;}\hspace{0.5in} ib_{\theta} = \frac{i_{\theta}}
 
 
 	\section{Poisson Solve}
+	When the particle advancing is accelerated by a factor of 70, the poisson solve becomes the major bottleneck. For sceptic3D leaving the poisson solve on the CPU resulted in only a factor of 10 speedup for the code. In order to achieve reasonable performance boost for the entire code we need to speed up the poisson solve by a factor of 20 or so. 
+
+
+
+The field solve used in the serial version of sceptic3D involves solving the problem $Ax=b$ where $b$, the charge density, is an array of $n_r\times n_{\phi} \times n_{psi}$, $A$ is the stiffness matrix of the Poisson solver and $x$ is the potential. The biconjugate gradient method is used to solve this system, and since this method is merely a series of matrix multiplications it is easily parallelized on the GPU.  
 
 	\section{Particle List Advance}
 	
@@ -199,11 +204,29 @@ Moving the particles on the grid is fairly straightforward. The process starts w
 While the implementation of the basic physics of the particle advance remains the same, there were several interesting issues. Quickly determining whether a particle has crossed one of the domain boundaries, contributing to diagnostic outputs, and handling reinjections were the main issues. 
 
 		\subsection{Checking Domain Boundaries}
-In order to correctly contribute to the diagnostic outputs, the location where a particle left the domain must be known. This means that the process or checking whether or not a particle has left the grid must also calculate the position of the particle when it crossed the boundary. This is handled differently for the inner and outer boundaries. 
+In order to correctly contribute to the diagnostic outputs, the location where a particle left the domain must be known. This means that the process or checking whether or not a particle has left the grid must also calculate the position of the particle when it crossed the boundary. Since the boundaries are both spheres, we can apply a very common ray tracing technique used to calculate a line-sphere intersection. 
 
-The outer boundary is fairly straightforward. A particle has left the domain if the radial position of the particle $r$ is greater than the maximum radius of the domain $r_{max}$. The 
+The line for a particle with initial position $\mathbf{p}_i$ and final position $\mathbf{p}_{i+1}$ is;
 
-		\subsection{Diagnostic Outputs}
+\begin{equation}
+ \mathbf{l} = \frac{\mathbf{p}_{i+1} - \mathbf{p}_{i}}{\|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|}
+\mathbf{x} = d\mathbf{l}
+\label{eqn:p_direction}
+\end{equation}
+
+Combining equation \ref{eqn:p_direction} to the equation of a sphere with radius $r$ centered at the origin, and expanding we get:
+
+\begin{equation}
+\begin{aligned}
+\|d\mathbf{l} - (-\mathbf{p}_i)) \|^2  &= r^2 \\
+d^2\mathbf{l}^2 + 2d(\mathbf{l}\cdot \mathbf{p}_i) + \mathbf{p}_i^2 &= r^2
+		\end{aligned}
+\end{equation}
+
+We can then use the quadratic equation to solve for $d$. There are a few qualifiers, namely, $(\mathbf{l}\cdot \mathbf{p}_i)^2 - \mathbf{p}_i^2 + r^2 \geq 0$. The distance to the nearest intersection is simply the smallest positive solution of $d$. A particle leaves the domain if $d^2 \le \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. If this condition is true, then the particle's new position $p_{i+1}$ is changed such that $d^2 = \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. The particle's position is changed in order to accommodate some of the diagnostic outputs discussed in section \ref{sec:diagnostic_outputs}. 
+
+
+
 		\subsection{Handling Reinjections}
 Once it has been determined that particles have left the grid, new particles must be reinjected to replace them. In the serial version of the code this is handled by simply calling a reinjection subroutine that determines the new particle's position and velocity. Once the new position and velocity has been found the particle is moved for the remainder of the time step, and be replaced by a new particle if the reinjected particle leaves the domain.  
 
@@ -249,6 +272,29 @@ Compacting some subset of a parent list is a fairly easy parallel operation call
 Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. 
 
 The new positions and velocities for reinjected particles are taken from a precalculate pool of new particles. This pool is approximately 1/10\textsuperscript{th} the size of the main particle list, and is repopulated prior to every advance step. Prior to the first advance step the entire pool is populated, but subsequent steps only refill slots that have been used in reinjections. This ``pool" method was chosen over implementing the reinjection calculations on the GPU for reasons of code maintenance. There are currently several different reinjection schemes that sceptic3D can call. Maintaining versions of those routines in both fortran and CUDA would be more cumbersome than the small benefit that calculating them on the GPU would provide. 
+
+		\subsection{Diagnostic Outputs}
+		\label{sec:diagnostic_outputs}
+	There are several outputs from the particle advancing routine that are required for the field solve. These outputs include;
+
+
+\begin{itemize}
+\singlespacing
+\parskip 0.0pt
+\item Total momentum transferred to the probe.
+\item Total momentum lost to particles leaving the system.
+\item Total momentum added to the system from reinjections.
+\item Total energy transferred to the probe. 
+\item Total number of particles lost to the probe. 
+\item Spatial distribution of energy transferred to the probe. 
+\item Spatial distribution of momentum transferred to the probe. 
+\item Spatial distribution of density transferred to the probe. 
+\end{itemize}
+
+
+	For the single value quantities, such as the quantities of total momentum, energy, and particle count are tallied using atomic operations in shared memory. 
+
+
 
 
 

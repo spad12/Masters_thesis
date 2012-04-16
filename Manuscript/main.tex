@@ -21,7 +21,7 @@
 \pagestyle{plain}
 
 \usepackage{graphicx} % support the \includegraphics command and options
-
+\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{setspace}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -39,13 +39,19 @@
 \usepackage{algorithmic}
 \usepackage[chapter]{algorithm}
 
+
 \usepackage{float}
+
+\usepackage{tikz}
+\usetikzlibrary{chains,fit,shapes}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{decorations.markings}
 
 
 
 \usepackage{wrapfig}
 \usepackage{listings}
-\usepackage{color}
+
  
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -127,7 +133,7 @@
 \include{ch_performance}
 \include{ch_conclusion}
 \appendix
-%\include{appa}
+\include{appa}
 %\include{appb}
 \include{biblio}
 \end{document}

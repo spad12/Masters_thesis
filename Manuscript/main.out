@@ -28,7 +28,6 @@
 \BOOKMARK [1][-]{section.2.5}{Particle Advancing}{chapter.2}
 \BOOKMARK [1][-]{section.2.6}{Constraining Grid Dimensions}{chapter.2}
 \BOOKMARK [0][-]{chapter.3}{Implementation}{}
-\BOOKMARK [1][-]{subsection.3.0.1}{Holding to the constraints}{chapter.3}
 \BOOKMARK [1][-]{section.3.1}{Particle List Transpose}{chapter.3}
 \BOOKMARK [1][-]{section.3.2}{Charge Assign}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.2.1}{Domain Decomposition}{section.3.2}
@@ -41,8 +40,8 @@
 \BOOKMARK [1][-]{section.3.4}{Poisson Solve}{chapter.3}
 \BOOKMARK [1][-]{section.3.5}{Particle List Advance}{chapter.3}
 \BOOKMARK [2][-]{subsection.3.5.1}{Checking Domain Boundaries}{section.3.5}
-\BOOKMARK [2][-]{subsection.3.5.2}{Diagnostic Outputs}{section.3.5}
-\BOOKMARK [2][-]{subsection.3.5.3}{Handling Reinjections}{section.3.5}
+\BOOKMARK [2][-]{subsection.3.5.2}{Handling Reinjections}{section.3.5}
+\BOOKMARK [2][-]{subsection.3.5.3}{Diagnostic Outputs}{section.3.5}
 \BOOKMARK [0][-]{chapter.4}{Performance}{}
 \BOOKMARK [1][-]{section.4.1}{Particle list size scan}{chapter.4}
 \BOOKMARK [1][-]{section.4.2}{Grid Size scan}{chapter.4}
@@ -50,4 +49,5 @@
 \BOOKMARK [2][-]{subsection.4.2.2}{Threadblock Sub-Domain Size}{section.4.2}
 \BOOKMARK [1][-]{section.4.3}{Kernel Parameters Scan}{chapter.4}
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}
+\BOOKMARK [0][-]{appendix.A}{Tables}{}
 \BOOKMARK [0][-]{section*.8}{Bibliography}{}

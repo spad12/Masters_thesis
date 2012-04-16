@@ -40,20 +40,16 @@ The first step in the development of sceptic3Dgpu was to create a very simple, g
 
 The first implementation of this code was very naive. The only real difference from a serial version was the density array update, which used atomic updates on global memory in order to prevent memory collisions between multiple threads. Other than that the code boiled down to unrolling the loop over all of the particles into one particle per thread. The runtime breakdown of this code for a $32^3$ grid and 4.2 million particles is shown in table \ref{tab:GPUPIC_basetime}.
 
+
+\begin{figure}
 \begin{center}
-\begin{table}
-\begin{tabular}{| p{4.0cm} | p{3.5cm} |}
-\hline
-Component & Runtime (ms) \\ \hline
-Particle data read, move, and write & 375 \\ \hline
-Potential Grid Read & 467 \\ \hline
-Charge Assign & 1.143e4  \\ \hline
-Total & 1.227e4  \\ \hline
-\end{tabular}
-\caption{Total Execution times for 100 iterations of the key steps of the move kernel at three different optimizations.}
-\label{tab:GPUPIC_basetime} 
-\end{table}
+\includegraphics[width=5in]{design/sandbox_run_histo.pdf}
 \end{center}
+\caption{Total Execution times for 100 iterations of the key steps of the move kernel at three different optimizations.}
+\label{fig:GPUPIC_basetime} 
+\end{figure}
+
+
 
 As you can see, the particle move and the potential read are very similar, but the charge assign is very slow. Determining how we can better adapt the charge assign to the GPU is our first major challenge. Several ways of dealling with the issue of the charge assign will be discussed in the following section. Some of the other issues that will be discussed in this chapter are:
 
@@ -120,7 +116,7 @@ The charge assign that we implemented in the sandbox PIC code is a particle push
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\input{design/atomic_memory_collisions.tex}
 \end{center}
 \caption{Atomic Memory collisions}
 \label{fig:pic_flowchart_parallel}
@@ -130,7 +126,7 @@ The technique applied for MPI codes is parallel reduction. Each thread deals wit
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\input{design/one_thread_per_cell.tex}
 \end{center}
 \caption{One thread per cell}
 \label{fig:pic_flowchart_parallel}
@@ -140,7 +136,7 @@ Now consider this, the MPI code works well for a few randomly ordered sets of ma
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\input{design/mpi_one_cell_per_thread.tex}
 \end{center}
 \caption{MPI and One thread per cell}
 \label{fig:pic_flowchart_parallel}
@@ -150,7 +146,7 @@ We can take this methodology even further on the GPU by recognizing that we can 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\includegraphics[width=5in]{introduction/not_finished.pdf}
 \end{center}
 \caption{Three levels of parallelism for the charge assign}
 \label{fig:pic_flowchart_parallel}
@@ -158,19 +154,17 @@ We can take this methodology even further on the GPU by recognizing that we can 
 
 We implemented this technique in the sandbox PIC code and compared the runtime of the reduction particle-pull to the atomic particle-push. The results of this comparison can be seen in table \ref{tab:GPUPIC_comparison}.
 
-\noindent \begin{table}
-\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{3.5cm} |}
-\hline
-Component & Atomic-Updates (ms) & Sorted+Reduction (ms) \\ \hline
-Particle data read, move, and write & 375 & 468 \\ \hline
-Potential Grid Read & 467 & 285 \\ \hline
-Charge Assign & 1.143e4 & 542 \\ \hline
-Particle List Sort & 0 & 2.305e3 \\ \hline
-Total & 1.227e4 & 3600 \\ \hline
-\end{tabular}
+\begin{figure}
+\begin{center}
+\includegraphics[width=5in]{design/atomic_vs_sorted.pdf}
+\end{center}
 \caption{Total Execution times for 100 iterations of the key steps of the move kernel at two different optimizations.}
-\label{tab:GPUPIC_comparison}
-\end{table}
+\label{fig:GPUPIC_comparison}
+\end{figure}
+
+
+
+
 As you can see from the table, the charge assign is on the order of 20x faster using the reduction technique, although this speedup is somewhat offset by the sorting requirement. Sorting the particles also benefits reading the potential during the advancing step. This speedup is a result of increased cache hits due to all threads within the same thread block accessing the same addresses in the potential array. 
 
 Although we have successfully reduced the cost of the charge assign we have introduced an additional cost of a sorting step\footnote{It should be noted that the sort used here is an older version of the radix sort, newer versions, such as the thrust implementation are much faster}. In the case of the sandbox code the sort step accounts for roughly 70\% of the runtime. Fortunately several other projects have figured out that there are ways reduce the sorting costs while maintaining some of the performance achieved by utilizing a sorted particle list. 
@@ -355,20 +349,15 @@ public:
 	
 	The alternative is to use a structure of arrays, which corresponds to the transpose of the particle list structure in the fortran version of sceptic3D. The main benefit of a structure of arrays is that reading in a single element of the particle list for 32 particles corresponds to a 128 byte transfer, the size of the cache line transaction. None of the bandwidth is wasted. This only takes 6 reads to global memory, no reads to cache. Reading in the elements of the array of structures results in at least 6 reads to global memory for the first element, followed by 5 reads from cache in the best case scenario. In order to test this we ran our toy GPU PIC code with both an array of structures (AoS) and a structure of arrays (SoA). The results of this test are shown in table \ref{tab:struct_compare}. 
 	
-
-
-\noindent \begin{table}[h]
-\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
-\hline
-Component & SoA (ms) & AoS (ms) & Speedup (SoA vs AoS) \\ \hline
-Particle data read, move, and write & 758 & 955 & 1.26x \\ \hline
-Count Particles & 32.7 & 109 & 3.35x \\ \hline
-Data Reorder & 346 & 480 & 1.38x \\ \hline
-Total CPU run time & 2491 & 3284 & 1.31x \\ \hline
-\end{tabular}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=5in]{design/soa_vs_aos.pdf}
+\end{center}
 \caption{Execution times of main steps for Array of Structures and Structure of Arrays. Count Particles and Data Reorder are steps used for a sorted particle list. Count Particles counts the number of particles in each sub-domain. Data Reorder reorders the particle list data after the binindex / particle ID pair have been sorted by the radix sort.}
 \label{tab:struct_compare} 
-\end{table}
+\end{figure}
+
+
 
 An additional benefit to using the the structure of arrays is the smaller buffer required for the particle sort. Using a structure of arrays we only need a 1xN array of floats to sort each element of the particle list into. We would need a 6xN floats for sorting the array of structures. This approach scales well with more complicated particles that must keep track of more information. For sceptic3D we have a total of 6 floats for spatial and velocity components, one 32-bit integer for the particle index, one float to keep of previous time step for reinjections, and a 16-bit integer for the binID. Using a structure of arrays the memory requirements imposed by the sorting step only increase the memory required per particle by 12\%. The standalone buffer array can also be useful for other uses, such as stream compactions and reductions of diagnostic outputs. 
 

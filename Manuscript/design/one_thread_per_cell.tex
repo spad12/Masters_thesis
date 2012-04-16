@@ -1,0 +1,79 @@
+% Turing Machine
+% Author: Sebastian Sardina
+%\documentclass[a4paper,10pt]{article}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{tikz}
+%\usetikzlibrary{chains,fit,shapes}
+%\begin{document}
+
+
+\begin{tikzpicture}\noindent
+
+\node [shift={(0cm,0cm)}]
+	{
+		\begin{tikzpicture}[remember picture]
+\tikzstyle{every path}=[very thick]
+
+\edef\sizetape{1.0cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+\tikzstyle{tmtape1}=[draw,minimum size=\sizetape]
+\tikzstyle{tmhead}=[arrow box,draw,minimum size=0.8cm,arrow box
+arrows={east:.25cm}]
+
+\tikzstyle{cfill1}=[fill=Purple]
+\tikzstyle{cfill2}=[fill=SkyBlue]
+\tikzstyle{cfill3}=[fill=Maroon]
+\tikzstyle{cfill4}=[fill=Emerald]
+
+
+
+%% Draw Density Array
+\begin{scope}[start chain=1 going right,node distance=-0.15mm]
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape,fill=Gray] (input) {};
+    \node [on chain=1,tmtape,cfill1] (j1) {j};
+	 \node [on chain=1,tmtape,cfill2] (j2) {j+1};
+	 \node [on chain=1,tmtape,cfill3] (j3) {j+2};
+	 \node [on chain=1,tmtape,cfill4] (j4) {j+3};
+    \node [on chain=1,tmtape,fill=Gray] {};
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {\textbf{Density Array}};
+
+
+\end{scope}
+
+\begin{scope}[shift={(-1cm,-4cm)},start chain=1 going right,node distance=-0.15mm]
+
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape1,cfill1] (input) {i};
+    \node [on chain=1,tmtape1,cfill1] (i0) {i+1};
+	 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape1,cfill2] (i1) {i+2};
+    \node [on chain=1,tmtape1,cfill2] (i2) {i+3};
+	 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape1,cfill3] (i3) {i+4};
+    \node [on chain=1,tmtape1,cfill3] (i4) {i+5};
+ 	 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape1,cfill4] (i5) {i+6};
+    \node [on chain=1,tmtape1,cfill4] {i+7};
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {\textbf{Particle stream}};
+	
+\end{scope}
+
+\node [tmhead,yshift=0.45cm] at (input.north) (head1) {$T_1$};
+\node [tmhead,yshift=0.45cm] at (i1.north) (head2) {$T_2$};
+\node [tmhead,yshift=0.45cm] at (i3.north) (head3) {$T_3$};
+\node [tmhead,yshift=0.45cm] at (i5.north) (head4) {$T_4$};
+		
+
+	\path[->] (head1) edge [out=90, in=-90] (j1);	
+	\path[->] (head2) edge [out=90, in=-90] (j2);
+	\path[->] (head3) edge [out=90, in=-90] (j3);	
+	\path[->] (head4) edge [out=90, in=-90] (j4);	
+
+	\end{tikzpicture}
+	};
+\end{tikzpicture}
+%\end{document}
+
