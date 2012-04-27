@@ -1,0 +1,134 @@
+%\documentclass[a4paper,10pt]{article}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows,positioning} 
+%\usetikzlibrary{chains,fit,shapes}
+
+
+
+%\begin{document}
+
+
+\noindent
+\begin{tikzpicture}[node distance=5cm,font=\footnotesize,auto]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=none, very thick,
+           text width=2.5cm,
+			  minimum width=2.6cm,
+           minimum height=1.5cm,
+			  },
+    % Define arrow style
+    pil/.style={
+           ->,
+           very thick,
+           shorten <=2pt,
+           shorten >=2pt,},
+    punkt2/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+			  minimum width=2.65cm,
+           minimum height=1.35cm,
+			  anchor=west},
+    punkt3/.style={
+           rectangle,
+           rounded corners=15pt,
+           draw=black,
+			  minimum width=3.2cm,
+           minimum height=2.0cm,
+			  }
+}
+
+	\noindent
+ 	\node[shift={(0cm,0cm)}] (dtcenter) at (0,0) {$\Delta t$};
+	\node[shift={(160:1cm)}] (circstart) at (dtcenter) {};
+	\draw[pil] (circstart) arc (160:-160:1cm);
+ %nodes
+
+ 	\node[punkt,shift={(-2.5cm,2.5cm)}] (padvnc2) at (dtcenter) {Integrate equations of motion\newline $\mathbf{F}_i \rightarrow \mathbf{v}_i' \rightarrow \mathbf{x}_i$};
+
+ 	\node[punkt,shift={(2.5cm,2.5cm)}] (ploss2) at (dtcenter) {Particle loss and re-injection};
+
+	\node[punkt,shift={(7.0cm,0)}] (collide2) at (dtcenter) {Monte Carlo collisions\newline $\mathbf{v}_i' \rightarrow \mathbf{v}_i$};
+
+	\node[punkt,shift={(2.5cm,-2.5)}] (c2mesh2) at (dtcenter) {Interpolate particles to mesh\newline $(\mathbf{x}_i,\mathbf{v}_i) \rightarrow \rho_j$};
+
+	\node[punkt,shift={(-2.5cm,-2.5)}] (psolve2) at (dtcenter) {Integrate field equations\newline $\rho_j \rightarrow \mathbf{E}_j$};
+
+	\node[punkt,shift={(-5.5cm,0)}] (mesh2p2) at (dtcenter) {Interpolate field to particles\newline $\mathbf{E}_j \rightarrow \mathbf{F}_i$};
+
+	\node[punkt2] (padvnc) at (padvnc2.west) {};
+	\node[punkt2] (ploss) at (ploss2.west) {};
+	\node[punkt2] (collide) at (collide2.west) {};
+	\node[punkt2] (c2mesh) at (c2mesh2.west) {};
+	\node[punkt2] (psolve) at (psolve2.west) {};
+	\node[punkt2] (mesh2p) at (mesh2p2.west) {};
+
+	\path (padvnc.east) edge[pil] (ploss.west);
+	\path (ploss.east) edge[very thick,dashed,out=-60, in=60,shorten <=2pt,shorten >=2pt,] node[auto] {(2)} (c2mesh.east);
+	\path (ploss.east) edge[pil,out=0, in=90] node[below] {(1)} (collide.north);
+	\path (collide.south) edge[pil,out=-90, in=0] (c2mesh.east);
+	\path (c2mesh.west) edge[pil] node[above] {Reduce $\rho_j$} (psolve.east) ;
+	\path (psolve.west) edge[pil,out=180,in=-90] node[auto] {Bcast $\mathbf{E}_j$} (mesh2p.south);
+	\path (mesh2p.north) edge[pil,out=90,in=180] (padvnc.west);
+
+	
+\begin{scope}[color=Emerald,very thick]
+\newcommand*{\pshiftmm}{(-2.0mm,-2.0mm)}
+\newcommand*{\pshiftpm}{(2.0mm,-2.0mm)}
+\newcommand*{\pshiftmp}{(-2.0mm,2.0mm)}
+\newcommand*{\pshiftpp}{(2.0mm,2.0mm)}
+
+	\coordinate[shift=\pshiftpm] (p1) at (mesh2p.south east) {};
+	\coordinate[shift=\pshiftpm] (p2) at (padvnc.south east) {};
+	\coordinate[shift=\pshiftmm] (p3) at (ploss.south west) {};
+
+	\coordinate[shift=\pshiftmm] (p4) at (collide.south west) {};
+	\coordinate[shift=\pshiftpm] (p5) at (collide.south east) {};
+	\coordinate[shift=\pshiftpp] (p6) at (collide.north east) {};
+
+	\coordinate[shift=\pshiftpp] (p7) at (ploss.north east) {};
+
+	\coordinate[shift=\pshiftmp] (p8) at (padvnc.north west) {};
+	\coordinate[shift=\pshiftmp] (p9) at (mesh2p.north west) {};
+	\coordinate[shift=\pshiftmm] (p10) at (mesh2p.south west) {};
+	\coordinate[shift=\pshiftmm] (p11) at (mesh2p.south west) {};
+
+	\coordinate[shift=\pshiftpp] (c1) at (mesh2p.north east) {};
+	\coordinate[shift=\pshiftmm] (c2) at (padvnc.south west) {};
+	\coordinate[shift=\pshiftpp] (c3) at (padvnc.south east) {};
+	\coordinate[shift=\pshiftpp] (c4) at (ploss.south west) {};
+	\coordinate[shift=\pshiftpm] (c5) at (ploss.south east) {};
+	\coordinate[shift=\pshiftmp] (c6) at (collide.north west) {};
+
+	\draw[rounded corners=10pt] (p11) -- (p1) .. controls (c1) and (c2) .. (p2) 
+											-- node[auto] {(A)} (p3) .. controls (c5) and (c6) .. (p4) 
+											-- (p5) 
+											--  (p6) [bend left=30] -- (p7) --
+											 (p8) [bend right=30] -- (p9) --
+											(p10) -- cycle;
+	\node[punkt3,color=Purple] (PP1) at (c2mesh.center) {};
+	\node[above,color=Purple] at (PP1.north) {(B)};
+	\node[punkt3,color=Maroon] (PP2) at (psolve.center) {};
+	\node[above,color=Maroon] at (PP2.north) {(C)};
+\end{scope}
+
+
+	
+
+\end{tikzpicture}
+
+
+%\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

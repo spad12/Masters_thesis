@@ -6,6 +6,12 @@ Paulo Abreu, Ricardo~a. Fonseca, Jo\~{a}o~M. Pereira, and Lu\'{\i}s~O. Silva.
   CUDA-Enabled Hardware With Direct Visualization}.
 \newblock {\em IEEE Transactions on Plasma Science}, 39(2):675--685, 2011.
 
+\bibitem{Aubert2009}
+Dominique Aubert, Mehdi Amini, and Romaric David.
+\newblock {A Particle-Mesh Integrator for Galactic Dynamics Powered by GPGPUs}.
+\newblock {\em Proceedings of the 9th International Conference on Computational
+  Science}, 55444:874--883, 2008.
+
 \bibitem{Burau2010}
 Heiko Burau, Ren\'{e}e Widera, Wolfgang H\"{o}nig, Guido Juckeland, Alexander
   Debus, Thomas Kluge, Ulrich Schramm, Tomas~E Cowan, Roland Sauerbrey, and
@@ -73,6 +79,12 @@ L.~Patacchini.
 \newblock {\em {Collisionless Ion Collection by a Sphere in a Weakly Magnetized
   Plasma by Leonardo Patacchini}}.
 \newblock PhD thesis, Massachusetts Institute of Technology, 2007.
+
+\bibitem{NumericalRecipes}
+William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.
+  Flannery.
+\newblock {\em {Numerical Recipes}}.
+\newblock Cambridge University Press, Cambridge, third edition, 2007.
 
 \bibitem{Satish2009}
 Nadathur Satish, Mark Harris, and Michael Garland.

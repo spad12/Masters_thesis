@@ -8,9 +8,9 @@ A plasma's behaviour is heavily influenced by the collective electric and magnet
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\input{introduction/pic_flowchart.tex}
 \end{center}
-\caption{Flow schematic for the PIC method. Need to make figure}
+\caption{Flow schematic for the PIC method.}
 \label{fig:pic_flowchart}
 \end{figure}
 
@@ -27,9 +27,9 @@ A plasma's behaviour is heavily influenced by the collective electric and magnet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\subsection{GPUs vs CPUs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The ideal computing system for a particle in cell code should have a large number of relatively simple processors with very low communication costs. Traditional CPUs are just the oposite of this. CPUs tend to have 4-8 complicated processors that are very good at performing large operations on small sets of data, but very slow when it comes to communicating between multiple processors. CPUs are designed to be able to actively switch tasks on the fly. This makes them very good at simultaneously running web-browser, decoding a video, and playing a video game. However, this flexiblity requires a large number of cycles to switch between tasks, and a large amount of cache to store partially completed tasks.
+	The ideal computing system for a particle in cell code should have a large number of relatively simple processors with very low communication costs. Traditional CPUs are just the opposite of this. CPUs tend to have 4-8 complicated processors that are very good at performing large operations on small sets of data, but very slow when it comes to communicating between multiple processors. CPUs are designed to be able to actively switch tasks on the fly. This makes them very good at simultaneously running web-browser, decoding a video, and playing a video game. However, this flexibility requires a large number of cycles to switch between tasks, and a large amount of cache to store partially completed tasks.
 
-Graphical processing units, or GPUs, forgoe the flexibility of CPUs in favor of more raw processing capability. Reducing the size of the cache and employing single instruction multiple data (SIMD) parallelism allows GPU manufactures to combine hundreds of processors on a single chip. In order to supply enough data to keep hundreds of processors GPUs also have a very large data channel between the processors and DRAM. All of these features are chosen to create a math processor that excels at tasks where each processor operates on data that is invisible to the other processors. These features give GPUs a significant raw floating point performance advantage over CPUs as seen in figure \ref{fig:gpu_vs_cpu}. 
+Graphical processing units, or GPUs, forgo the flexibility of CPUs in favor of more raw processing capability. Reducing the size of the cache and employing single instruction multiple data (SIMD) parallelism allows GPU manufactures to combine hundreds of processors on a single chip. In order to supply enough data to keep hundreds of processors GPUs also have a very large data channel between the processors and DRAM. All of these features are chosen to create a math processor that excels at tasks where each processor operates on data that is invisible to the other processors. These features give GPUs a significant raw floating point performance advantage over CPUs as seen in figure \ref{fig:gpu_vs_cpu}. 
 
 
 \begin{figure}
@@ -65,7 +65,7 @@ The key to developing efficient PIC algorithms that utilize GPUs lies in balanci
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Multiple Levels of Parallelism}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Currently most parallelization is done by dividing up a task between a bunch of threads on different CPUs, and using an interface such as MPI to allow those threads to communicate. This network of threads has a master node, usually node 0, which orchestrates the communication between the other nodes. This is analgous to how a single CPU-GPU system operates. The CPU is the ``Master'' and serves as a communication hub for groups of execution threads on the GPU called thread blocks. Each thread block is itself a cluster of threads that can communicate through a memory space aptly named ``shared memory''.
+	Currently most parallelization is done by dividing up a task between a bunch of threads on different CPUs, and using an interface such as MPI to allow those threads to communicate. This network of threads has a master node, usually node 0, which orchestrates the communication between the other nodes. This is analogous to how a single CPU-GPU system operates. The CPU is the ``Master'' and serves as a communication hub for groups of execution threads on the GPU called thread blocks. Each thread block is itself a cluster of threads that can communicate through a memory space aptly named ``shared memory''.
 
 \begin{figure}
 \begin{center}
@@ -75,7 +75,7 @@ The key to developing efficient PIC algorithms that utilize GPUs lies in balanci
 \label{fig:multiparallel}
 \end{figure}
 
-The point hear is that multiple domain decompositions must be performed in order to fully utilize the capabilities of this system. The coarse decomposition is very similar to that used for MPI systems, but the fine decomposition can be very different due to the significanlty higher memory bandwidth and smaller cache of GPUs. 
+The point hear is that multiple domain decompositions must be performed in order to fully utilize the capabilities of this system. The coarse decomposition is very similar to that used for MPI systems, but the fine decomposition can be very different due to the significantly higher memory bandwidth and smaller cache of GPUs. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\subsection{Parallelization Opportunities in PIC Codes}
@@ -83,17 +83,53 @@ The point hear is that multiple domain decompositions must be performed in order
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=4in]{introduction/not_finished.pdf}
+\input{introduction/parallel_pic_flowchart.tex}
 \end{center}
 \caption{Flow schematic for the PIC method with parallelizable steps highlighted. Need to make figure}
 \label{fig:pic_flowchart_parallel}
 \end{figure}
 
+Most of the steps in the PIC method can be parallelized. The particle advancing step is the most obvious step, but there are also ways to parallelize the charge assign and field solve. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\subsection{Current Status of GPU PIC codes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-						Some work on efficient GPU based PIC codes has already been done. This past work will be briefly introduced here and discused in depth in chapter \ref{ch:design}. Burau et al developed a fully relativistic PIC code for a gpu cluster. 
+						Some work on efficient GPU based PIC codes has already been done. This past work will be briefly introduced here and discused in depth in chapter \ref{ch:design}. One of the earliest efforts in developing plasma PIC simulations on the GPU is that of George Stantchev et al. In 2008 Stantchev's group published a paper in the \emph{Journal of Parallel Distributed Computing} outlining the development of a fast density accumulation method for PIC implementations on the GPU. Stantchev's group was one of the first to identify the issue of parallelizing the density update and develop a very efficient solution. The solution involves defining clusters of grid cells and sorting the particle list according to which particle cluster they belong to. The cell clusters are small enough to fit into shared memory and updated pseudo atomically using a now obsolete thread tagging technique. The simplicity and efficiency of this method has led to its use in many other GPU PIC implementations. Stantchev's group also identified the issue of the particle sort step required by their density accumulation method. Developing an optimized sort has since become one of the biggest challenges for GPU PIC implementations. \cite{Stantchev2008}
+
+Also in 2008, Dominique Aubert et al published their development of a GPGPU galactic dynamics PIC code. Aubert's group adapted their entire code for GPUs and tested several field solving and density accumulation techniques. The first density accumulation techniques used relied on using the radix sort provided by the CUDPP library to order the particle data and perform a histogram. The second technique used the GPU to find the nearest cells for each particle and then perform the histogram on the CPU. As for field solving techniques, GPU versions of both FFT and multi-grid Poisson solvers were used. The FFT solver made use of the CUFFT API provided by the CUDA Toolkit. The multi-grid solver was a from scratch GPU implementation of the MG solver outlined in \cite{NumericalRecipes}. Aubert et al achieved speed ups of 40x for the FFT and 60 for MG, approximately 20x for the velocity and position updates, but the histogramming was on the order of 5-10 times \emph{slower} on the GPU. They acknowledge that their histogramming method is too slow, and propose using an improved technique following that developed by Stantchev et al.\cite{Aubert2009}.
+
+A large leap in GPU PIC codes was taken in 2010 by the simulation code PIConGPU, developed by Heiko Burau et al. PIConGPU was one of the first scalable GPU PIC implementations involving multiple nodes. PIConGPU is a fully relativistic, 2D electromagnetic code used to simulate the acceleration of electrons in an underdense plasma by a laser-driven wakefield. Burau et al also identified the issue of parallelizing charge and current density accumulation on SIMD architectures and came up with a unique solution, a linked particle list. This linked particle list is one of the core features of PIConGPU and is geared towards maintaining localized data access for each kernel. In order to facilitate scalability over multiple nodes the simulation volume is domain decomposed and distributed across multiple GPUs. Each subdomain is bordered by a region of guard cells to facilitate particle transfers between subdomains. The results of this research indicated that single GPU PIC algorithms can be scaled to multi-node clusters despite high host-device communication latency.\cite{Burau2010}
+
+In March, 2010 NVIDIA released the first GPUs utilizing the Fermi architecture. Fermi boasted several key improvements for scientific computing over the G80 and GT200 architectures. These improvements included \cite{NVIDIACorporation2009}:
+
+\begin{itemize}
+\singlespacing
+\item Configurable L1 and unified L2 caches.
+\item 8x the double precision performance of the GT200 architecture. 
+\item ECC support. 
+\item Improved atomic memory operation performance.
+\item Full IEEE 754-2008 32-bit and 64-bit precision. 
+\end{itemize}
+
+The significant increase in double precision performance and addition of ECC support are huge wins for scientific computing on GPUs. With the launch of Fermi, work on GPU based PIC codes increased significantly. Another 2D relativistic GPU PIC code was developed by Paulo Abreu et al in late 2010. Abreu et al chose an approach to the charge and current accumulation was in some regards opposite of that employed by Stantchev et al. This approach was based on using pseudo atomic operations that actually consisted of two \textbf{atomicExchange}$()$ operations. In order to minimize atomic collisions the particle list was ordered such that the probability that two threads within a warp were operating on particles in the same cell is low. The initial particle distribution is prepared in way to minimize this probability, but this distribution can be upset throughout the simulation. If the distribution degradation reaches a certain threshold then a redistribution of the particle list takes place. This redistribution was handled by a sorting operation, using the CUDPP radix sort, and a \emph{stride} distance. The resulting code had a relatively fast particle advance but the current deposition was rather slow. The current deposition step constituted approximately 67\% of the code runtime for 1.2 million particles on a $128^2$ grid.\cite{Abreu2011}
+
+One of the more unique GPU PIC implementations was developed by Rejith Joseph et al and published at the 2011 \emph{IEEE International Parallel \& Distributed Processing Symposium}. 
+This code, a GPU implementation of the XGC1 code differed from previous codes in two ways. 
+First, XGC1 uses an asymmetric triangular mesh, unlike most GPU PIC codes which use symmetric rectangular meshes. Second, there are no limits imposed on particle movement. 
+
+The first point, the use of a triangular mesh is interesting because most of the time a symmetric rectangular mesh is preferred on the GPU. As in other PIC codes, in order to facilitate a fast particle to grid interpolation it was important that all of the triangles that a thread-block might access fit into the limited shared memory. This limit imposed by the size of shared memory necessitated that the primary mesh be partitioned into smaller regions. Joseph et al tried three different partitioning strategies, density based, uniform, and non-uniform. The density based strategy partitioned the mesh such that each region had approximately the same triangle density. The uniform approach divided the mesh into large uniform rectangular regions. Lastly the non-uniform partitioning was a sort of hybrid of the uniform and density approaches, using rectangular regions that varied in size depending on the granularity of the triangle density. 
+
+The goal of these partitioning schemes was to take care of load balance on the GPU.
+
+
+
+
+
+ Several relativistic PIC codes have been developed for the GPU. The first of these, developed by Burau et al is a 2D electromagnetic code called PIConGPU. This was the first 
+
+
+Burau et al developed a fully relativistic PIC code for a gpu cluster. 
 		
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
