@@ -57,6 +57,13 @@ IH~Hutchinson.
   length}.
 \newblock {\em Plasma physics and controlled fusion}, 1477, 2003.
 
+\bibitem{Joseph2011}
+Rejith~George Joseph, Girish Ravunnikutty, Sanjay Ranka, Eduardo D'Azevedo, and
+  Scott Klasky.
+\newblock {Efficient GPU Implementation for Particle in Cell Algorithm}.
+\newblock {\em 2011 IEEE International Parallel \& Distributed Processing
+  Symposium}, pages 395--406, May 2011.
+
 \bibitem{Kong2011}
 Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
 \newblock {Particle-in-cell simulations with charge-conserving current
@@ -79,6 +86,12 @@ L.~Patacchini.
 \newblock {\em {Collisionless Ion Collection by a Sphere in a Weakly Magnetized
   Plasma by Leonardo Patacchini}}.
 \newblock PhD thesis, Massachusetts Institute of Technology, 2007.
+
+\bibitem{Patacchini2010}
+L.~Patacchini.
+\newblock {\em {Collisionless ion collection by non-emitting spherical bodies
+  in E x B fields}}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 2010.
 
 \bibitem{NumericalRecipes}
 William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.

@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  27 APR 2012 08:37
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  29 APR 2012 16:57
 entering extended mode
  %&-line parsing enabled.
 **main
@@ -764,8 +764,11 @@ Package tocbibind Note: The document has chapter divisions.
 
 Package tocbibind Note: Using chapter style headings, unless overridden.
 
-) (./main.aux (./cover.aux) (./contents.aux) (./ch_introduction.aux)
-(./ch_design.aux
+) (./main.aux (./cover.aux) (./contents.aux) (./ch_introduction.aux
+
+LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
+
+) (./ch_design.aux
 
 LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
 
@@ -795,20 +798,20 @@ LaTeX Warning: Label `tab:speedup2' multiply defined.
 ) (./biblio.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
  (/usr/share/texmf/tex/context/base/supp-pdf.tex
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count163
@@ -842,15 +845,15 @@ LaTeX Info: Redefining \selectfont on input line 125.
 \RaggedRightParindent=\skip85
 \JustifyingParindent=\skip86
 )
-Package caption Info: float package v1.3 (or newer) detected on input line 125.
+Package caption Info: float package v1.3 (or newer) detected on input line 126.
 
 Package caption Info: hyperref package v6.74m (or newer) detected on input line
- 125.
+ 126.
 Package caption Info: listings package v1.2 (or newer) detected on input line 1
-25.
-Package caption Info: subref 1.2 or 1.3 detected on input line 125.
-LaTeX Info: Redefining \subref on input line 125.
-Package hyperref Info: Link coloring OFF on input line 125.
+26.
+Package caption Info: subref 1.2 or 1.3 detected on input line 126.
+LaTeX Info: Redefining \subref on input line 126.
+Package hyperref Info: Link coloring OFF on input line 126.
 
 (/usr/share/texmf/tex/latex/hyperref/nameref.sty
 Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
@@ -860,8 +863,8 @@ Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
 )
 \c@section@level=\count168
 )
-LaTeX Info: Redefining \ref on input line 125.
-LaTeX Info: Redefining \pageref on input line 125.
+LaTeX Info: Redefining \ref on input line 126.
+LaTeX Info: Redefining \pageref on input line 126.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -896,40 +899,40 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
 
 
 
-] (./main.toc [7] [8])
+] (./main.toc [7])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [9] [10
-
-] (./main.lof
+ [8] (./main.lof
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [9
 
- [12])
+]
+Underfull \vbox (badness 4765) has occurred while \output is active []
+
+ [10])
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
 
-[13] [14
+[11] [12
 
 ] (./main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
- [15] [16
+ [13] [14
 
 ] (./main.loa)
 \tf@loa=\write8
 \openout8 = `main.loa'.
 
-) [17]
+) [15]
 \openout2 = `ch_introduction.aux'.
 
  (./ch_introduction.tex
-[18
+[16
 
 
 
@@ -938,33 +941,33 @@ Chapter 1.
 
 Underfull \vbox (badness 1122) has occurred while \output is active []
 
- [19]
+ [17]
 (./introduction/pic_flowchart.tex
 Overfull \hbox (1.60368pt too wide) in paragraph at lines 8--78
  [] 
  []
 
-) [20pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+) [18pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 .1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.28 		\subsection
                   {GPUs vs CPUs}]
-<introduction/gpu_vs_cpu.png, id=510, 498.86375pt x 401.5pt>
+<introduction/gpu_vs_cpu.png, id=477, 498.86375pt x 401.5pt>
 File: introduction/gpu_vs_cpu.png Graphic file (type png)
 
 <use introduction/gpu_vs_cpu.png>
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 46.
- [21] [22pdfTeX warning (ext4): destination with the same identifier (name{figu
+ [19] [20pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.1.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.64 
       <./introduction/gpu_vs_cpu.png>]
-<introduction/multi_parallel.png, id=520, 735.548pt x 838.332pt>
+<introduction/multi_parallel.png, id=488, 735.548pt x 838.332pt>
 File: introduction/multi_parallel.png Graphic file (type png)
 
 <use introduction/multi_parallel.png>
@@ -973,48 +976,50 @@ Overfull \hbox (11.2201pt too wide) in paragraph at lines 12--127
  [] 
  []
 
-) [23] [24pdfTeX warning (ext4): destination with the same identifier (name{fig
+) [21] [22pdfTeX warning (ext4): destination with the same identifier (name{fig
 ure.1.3}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.99 
+l.93 
       <./introduction/multi_parallel.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
+ [23pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
 4}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.101 
-      ]
+l.96 T
+      he last step (C), the field solve, can be fairly straightforward to pa...
+] [24]
+Underfull \vbox (badness 5189) has occurred while \output is active []
+
+ [25]
 
 LaTeX Warning: Citation `NVIDIACorporation2009' on page 26 undefined on input l
-ine 104.
+ine 111.
 
 [26] [27]
 
-pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
- found PDF version <1.5>, but at most version <1.4> allowed
-<introduction/not_finished.pdf, id=558, 848.2691pt x 600.71925pt>
-File: introduction/not_finished.pdf Graphic file (type pdf)
+LaTeX Warning: Reference `fig:sceptic3D_profile' on page 28 undefined on input 
+line 141.
 
-<use introduction/not_finished.pdf>)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+(./introduction/sceptic3D_profile.tex
+\c@a=\count169
+\c@b=\count170
+)
 
- [28]
-[29pdfTeX warning (ext4): destination with the same identifier (name{figure.1.5
-}) has been already used, duplicate ignored
+LaTeX Warning: Reference `fig:sceptic3D_profile' on page 28 undefined on input 
+line 152.
+
+[28]) [29pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.1.5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.130 \include{ch_introduction}
-                                <./introduction/not_finished.pdf
-
-pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
- Page Group detected which pdfTeX can't handle. Ignoring it.
->]
+l.131 \include{ch_introduction}
+                               ]
 \openout2 = `ch_design.aux'.
 
  (./ch_design.tex [30
@@ -1027,7 +1032,7 @@ Chapter 2.
 
 pdfTeX warning: pdflatex (file ./design/sandbox_run_histo.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<design/sandbox_run_histo.pdf, id=600, 361.35pt x 216.81pt>
+<design/sandbox_run_histo.pdf, id=574, 361.35pt x 216.81pt>
 File: design/sandbox_run_histo.pdf Graphic file (type pdf)
 
 <use design/sandbox_run_histo.pdf>
@@ -1190,6 +1195,10 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no ) in font nullfont!
 )
+
+pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
+ found PDF version <1.5>, but at most version <1.4> allowed
+<introduction/not_finished.pdf, id=628, 848.2691pt x 600.71925pt>
 File: introduction/not_finished.pdf Graphic file (type pdf)
 
 <use introduction/not_finished.pdf>
@@ -1205,7 +1214,7 @@ l.156
 
 pdfTeX warning: pdflatex (file ./design/atomic_vs_sorted.pdf): PDF inclusion: f
 ound PDF version <1.5>, but at most version <1.4> allowed
-<design/atomic_vs_sorted.pdf, id=661, 361.35pt x 216.81pt>
+<design/atomic_vs_sorted.pdf, id=635, 361.35pt x 216.81pt>
 File: design/atomic_vs_sorted.pdf Graphic file (type pdf)
 
 <use design/atomic_vs_sorted.pdf>
@@ -1217,8 +1226,12 @@ Underfull \vbox (badness 1496) has occurred while \output is active []
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.175 
-      ] [39pdfTeX warning (ext4): destination with the same identifier (name{fi
-gure.2.6}) has been already used, duplicate ignored
+       <./introduction/not_finished.pdf
+
+pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
+ Page Group detected which pdfTeX can't handle. Ignoring it.
+>] [39pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2.6}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
@@ -1231,7 +1244,7 @@ age Group detected which pdfTeX can't handle. Ignoring it.
 Underfull \vbox (badness 3439) has occurred while \output is active []
 
  [40]
-[41] <design/kong_sort.png, id=709, 3417.76875pt x 3766.07pt>
+[41] <design/kong_sort.png, id=692, 3417.76875pt x 3766.07pt>
 File: design/kong_sort.png Graphic file (type png)
 
 <use design/kong_sort.png> [42] [43pdfTeX warning (ext4): destination with the 
@@ -1512,7 +1525,7 @@ Underfull \vbox (badness 1609) has occurred while \output is active []
 
 pdfTeX warning: pdflatex (file ./design/sort_compare.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<design/sort_compare.pdf, id=779, 361.35pt x 216.81pt>
+<design/sort_compare.pdf, id=762, 361.35pt x 198.7425pt>
 File: design/sort_compare.pdf Graphic file (type pdf)
 
 <use design/sort_compare.pdf>
@@ -1538,7 +1551,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 
 pdfTeX warning: pdflatex (file ./design/soa_vs_aos.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<design/soa_vs_aos.pdf, id=808, 361.35pt x 216.81pt>
+<design/soa_vs_aos.pdf, id=791, 361.35pt x 216.81pt>
 File: design/soa_vs_aos.pdf Graphic file (type pdf)
 
 <use design/soa_vs_aos.pdf>
@@ -1655,194 +1668,194 @@ l.392
 
 pdfTeX warning: pdflatex (file ./design/soa_vs_aos.pdf): PDF inclusion: Page Gr
 oup detected which pdfTeX can't handle. Ignoring it.
->] [53]) [54]
+>]) [53]
 \openout2 = `ch_implementation.aux'.
 
- (./ch_implementation.tex
-Chapter 3.
-[55
+ (./ch_implementation.tex [54
 
 
 
 ]
+Chapter 3.
+[55] [56]
 
-LaTeX Warning: Reference `sec:grid_constraints' on page 56 undefined on input l
-ine 22.
+LaTeX Warning: Reference `sec:grid_constraints' on page 57 undefined on input l
+ine 36.
 
 
 
 pdfTeX warning: pdflatex (file ./implementation/zorder_sceptic.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<implementation/zorder_sceptic.pdf, id=857, 361.35pt x 216.81pt>
+<implementation/zorder_sceptic.pdf, id=845, 361.35pt x 216.81pt>
 File: implementation/zorder_sceptic.pdf Graphic file (type pdf)
 
-<use implementation/zorder_sceptic.pdf> [56]pdfTeX warning (ext4): destination 
+<use implementation/zorder_sceptic.pdf> [57]pdfTeX warning (ext4): destination 
 with the same identifier (name{ALC@rem.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.45 ...icleList.nptcls}$ in \underline{parallel}}
+l.59 ...icleList.nptcls}$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.1}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.45 ...icleList.nptcls}$ in \underline{parallel}}
+l.59 ...icleList.nptcls}$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.2}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.46 			\STATE
+l.60 			\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.46 			\STATE
+l.60 			\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 			\STATE
+l.61 			\STATE
                $\mathrm{binID} = \mathrm{ParticleList.binID}[\mathrm{threadI...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.3}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 			\STATE
+l.61 			\STATE
                $\mathrm{binID} = \mathrm{ParticleList.binID}[\mathrm{threadI...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.4}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.48 			\STATE
+l.62 			\STATE
                $\mathrm{binID_{left}} = \mathrm{ParticleList.binID}[\mathrm{...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.4}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.48 			\STATE
+l.62 			\STATE
                $\mathrm{binID_{left}} = \mathrm{ParticleList.binID}[\mathrm{...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.5}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.49 			\STATE
+l.63 			\STATE
                $\mathrm{binID_{right}} = \mathrm{ParticleList.binID}[\mathrm...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.5}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.49 			\STATE
+l.63 			\STATE
                $\mathrm{binID_{right}} = \mathrm{ParticleList.binID}[\mathrm...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.6}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.51 ...mathrm{binID} \neq \mathrm{binID_{left}}$}
+l.65 ...mathrm{binID} \neq \mathrm{binID_{left}}$}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.6}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.51 ...mathrm{binID} \neq \mathrm{binID_{left}}$}
+l.65 ...mathrm{binID} \neq \mathrm{binID_{left}}$}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.7}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.52 				\STATE
+l.66 				\STATE
                 $\mathrm{ParticleBins[binID].ifirstp} = \mathrm{threadID}$pdfTe
 X warning (ext4): destination with the same identifier (name{ALC@line.7}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.52 				\STATE
+l.66 				\STATE
                 $\mathrm{ParticleBins[binID].ifirstp} = \mathrm{threadID}$pdfTe
 X warning (ext4): destination with the same identifier (name{ALC@rem.8}) has be
 en already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.53 				\STATE
+l.67 				\STATE
                 $\mathrm{ParticleBins[binID_{left}].ilastp} = \mathrm{thread...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.8}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.53 				\STATE
+l.67 				\STATE
                 $\mathrm{ParticleBins[binID_{left}].ilastp} = \mathrm{thread...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.9}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.54 			\ENDIF
+l.68 			\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.54 			\ENDIF
+l.68 			\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.56 ...athrm{binID} \neq \mathrm{binID_{right}}$}
+l.70 ...athrm{binID} \neq \mathrm{binID_{right}}$}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.10}) has been already used, dupli
 cate ignored
 <to be read again> 
                    \relax 
-l.56 ...athrm{binID} \neq \mathrm{binID_{right}}$}
+l.70 ...athrm{binID} \neq \mathrm{binID_{right}}$}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.11}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.57 				\STATE
+l.71 				\STATE
                 $\mathrm{ParticleBins[binID].ilastp} = \mathrm{threadID}$pdfTeX
  warning (ext4): destination with the same identifier (name{ALC@line.11}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.57 				\STATE
+l.71 				\STATE
                 $\mathrm{ParticleBins[binID].ilastp} = \mathrm{threadID}$pdfTeX
  warning (ext4): destination with the same identifier (name{ALC@rem.12}) has be
 en already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.58 				\STATE
+l.72 				\STATE
                 $\mathrm{ParticleBins[binID_{right}].ifirstp} = \mathrm{thre...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.12})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.58 				\STATE
+l.72 				\STATE
                 $\mathrm{ParticleBins[binID_{right}].ifirstp} = \mathrm{thre...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.13}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.59 			\ENDIF
+l.73 			\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.59 			\ENDIF
+l.73 			\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.61 		\ENDFOR
+l.75 		\ENDFOR
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.61 		\ENDFOR
-               [57pdfTeX warning (ext4): destination with the same identifier (
+l.75 		\ENDFOR
+               [58pdfTeX warning (ext4): destination with the same identifier (
 name{figure.3.1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.67 
+l.81 
       <./implementation/zorder_sceptic.pdf
 
 pdfTeX warning: pdflatex (file ./implementation/zorder_sceptic.pdf): PDF inclus
@@ -1851,615 +1864,629 @@ ion: Page Group detected which pdfTeX can't handle. Ignoring it.
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.75 ...icleBin \in Grid$ in \underline{parallel}}
+l.89 ...icleBin \in Grid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.1}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.75 ...icleBin \in Grid$ in \underline{parallel}}
+l.89 ...icleBin \in Grid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.2}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.76 			\STATE
+l.90 			\STATE
                \emph{$\backslash \backslash$ Inside the threadBlock with ID ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.2}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.76 			\STATE
+l.90 			\STATE
                \emph{$\backslash \backslash$ Inside the threadBlock with ID ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.3}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.78 			\STATE
+l.92 			\STATE
                \_\_shared\_\_ float $subGrid(nb_r,nb_{\theta},nb_{\psi})$pdfTeX
  warning (ext4): destination with the same identifier (name{ALC@line.3}) has be
 en already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.78 			\STATE
+l.92 			\STATE
                \_\_shared\_\_ float $subGrid(nb_r,nb_{\theta},nb_{\psi})$pdfTeX
  warning (ext4): destination with the same identifier (name{ALC@rem.4}) has bee
 n already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.80 ...node \in subGrid$ in \underline{parallel}}
+l.94 ...node \in subGrid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.4}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.80 ...node \in subGrid$ in \underline{parallel}}
+l.94 ...node \in subGrid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.5}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.81 			\STATE
+l.95 			\STATE
                $node = 0$pdfTeX warning (ext4): destination with the same ident
 ifier (name{ALC@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.81 			\STATE
+l.95 			\STATE
                $node = 0$pdfTeX warning (ext4): destination with the same ident
 ifier (name{ALC@rem.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.82 			\ENDFOR
+l.96 			\ENDFOR
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.82 			\ENDFOR
+l.96 			\ENDFOR
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@rem.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.84 			\STATE
+l.98 			\STATE
                \_\_syncthreads()pdfTeX warning (ext4): destination with the sam
 e identifier (name{ALC@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.84 			\STATE
+l.98 			\STATE
                \_\_syncthreads()pdfTeX warning (ext4): destination with the sam
 e identifier (name{ALC@rem.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.87 ... \in ParticleBin$ in \underline{parallel}}
+l.101 ...\in ParticleBin$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.8}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.87 ... \in ParticleBin$ in \underline{parallel}}
+l.101 ...\in ParticleBin$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.9}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.88 				\STATE
-                cell = $particle.cell - ParticleBin.origin$pdfTeX warning (ext4
-): destination with the same identifier (name{ALC@line.9}) has been already use
-d, duplicate ignored
+l.102 				\STATE
+                 cell = $particle.cell - ParticleBin.origin$pdfTeX warning (ext
+4): destination with the same identifier (name{ALC@line.9}) has been already us
+ed, duplicate ignored
 <to be read again> 
                    \relax 
-l.88 				\STATE
-                cell = $particle.cell - ParticleBin.origin$pdfTeX warning (ext4
-): destination with the same identifier (name{ALC@rem.10}) has been already use
-d, duplicate ignored
+l.102 				\STATE
+                 cell = $particle.cell - ParticleBin.origin$pdfTeX warning (ext
+4): destination with the same identifier (name{ALC@rem.10}) has been already us
+ed, duplicate ignored
 <to be read again> 
                    \relax 
-l.89 				\FORALL{ $node \in cell$}
-                                  pdfTeX warning (ext4): destination with the s
-ame identifier (name{ALC@line.10}) has been already used, duplicate ignored
+l.103 				\FORALL{ $node \in cell$}
+                                   pdfTeX warning (ext4): destination with the 
+same identifier (name{ALC@line.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.89 				\FORALL{ $node \in cell$}
-                                  pdfTeX warning (ext4): destination with the s
-ame identifier (name{ALC@rem.11}) has been already used, duplicate ignored
+l.103 				\FORALL{ $node \in cell$}
+                                   pdfTeX warning (ext4): destination with the 
+same identifier (name{ALC@rem.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.90 					\STATE
-                 atomicAdd($subGrid(cell,node)$, weight($node$))pdfTeX warning 
-(ext4): destination with the same identifier (name{ALC@line.11}) has been alrea
+l.104 					\STATE
+                  atomicAdd($subGrid(cell,node)$, weight($node$))pdfTeX warning
+ (ext4): destination with the same identifier (name{ALC@line.11}) has been alre
+ady used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.104 					\STATE
+                  atomicAdd($subGrid(cell,node)$, weight($node$))pdfTeX warning
+ (ext4): destination with the same identifier (name{ALC@rem.12}) has been alrea
 dy used, duplicate ignored
 <to be read again> 
                    \relax 
-l.90 					\STATE
-                 atomicAdd($subGrid(cell,node)$, weight($node$))pdfTeX warning 
-(ext4): destination with the same identifier (name{ALC@rem.12}) has been alread
-y used, duplicate ignored
+l.105 				\ENDFOR
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{ALC@line.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.91 				\ENDFOR
+l.105 				\ENDFOR
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{ALC@rem.13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.106 			\ENDFOR
                 pdfTeX warning (ext4): destination with the same identifier (na
-me{ALC@line.12}) has been already used, duplicate ignored
+me{ALC@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.91 				\ENDFOR
+l.106 			\ENDFOR
                 pdfTeX warning (ext4): destination with the same identifier (na
-me{ALC@rem.13}) has been already used, duplicate ignored
+me{ALC@rem.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.92 			\ENDFOR
-               pdfTeX warning (ext4): destination with the same identifier (nam
-e{ALC@line.13}) has been already used, duplicate ignored
+l.107 			\STATE
+                \_\_syncthreads()pdfTeX warning (ext4): destination with the sa
+me identifier (name{ALC@line.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.92 			\ENDFOR
-               pdfTeX warning (ext4): destination with the same identifier (nam
-e{ALC@rem.14}) has been already used, duplicate ignored
+l.107 			\STATE
+                \_\_syncthreads()pdfTeX warning (ext4): destination with the sa
+me identifier (name{ALC@rem.15}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 			\STATE
-               \_\_syncthreads()pdfTeX warning (ext4): destination with the sam
-e identifier (name{ALC@line.14}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.93 			\STATE
-               \_\_syncthreads()pdfTeX warning (ext4): destination with the sam
-e identifier (name{ALC@rem.15}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.95 			\STATE
-               \emph{$\backslash \backslash$ Write block results to global m...
+l.109 			\STATE
+                \emph{$\backslash \backslash$ Write block results to global ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.15})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.95 			\STATE
-               \emph{$\backslash \backslash$ Write block results to global m...
+l.109 			\STATE
+                \emph{$\backslash \backslash$ Write block results to global ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.16}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.96 ...node \in subGrid$ in \underline{parallel}}
+l.110 ...ode \in subGrid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@line.16}) has been already used, dupli
 cate ignored
 <to be read again> 
                    \relax 
-l.96 ...node \in subGrid$ in \underline{parallel}}
+l.110 ...ode \in subGrid$ in \underline{parallel}}
                                                   pdfTeX warning (ext4): destin
 ation with the same identifier (name{ALC@rem.17}) has been already used, duplic
 ate ignored
 <to be read again> 
                    \relax 
-l.97 				\STATE
-                atomicAdd($Grid(blockID,node)$, $subGrid(node)$)pdfTeX warning 
-(ext4): destination with the same identifier (name{ALC@line.17}) has been alrea
+l.111 				\STATE
+                 atomicAdd($Grid(blockID,node)$, $subGrid(node)$)pdfTeX warning
+ (ext4): destination with the same identifier (name{ALC@line.17}) has been alre
+ady used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.111 				\STATE
+                 atomicAdd($Grid(blockID,node)$, $subGrid(node)$)pdfTeX warning
+ (ext4): destination with the same identifier (name{ALC@rem.18}) has been alrea
 dy used, duplicate ignored
 <to be read again> 
                    \relax 
-l.97 				\STATE
-                atomicAdd($Grid(blockID,node)$, $subGrid(node)$)pdfTeX warning 
-(ext4): destination with the same identifier (name{ALC@rem.18}) has been alread
-y used, duplicate ignored
+l.112 			\ENDFOR
+                pdfTeX warning (ext4): destination with the same identifier (na
+me{ALC@line.18}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.98 			\ENDFOR
-               pdfTeX warning (ext4): destination with the same identifier (nam
-e{ALC@line.18}) has been already used, duplicate ignored
+l.112 			\ENDFOR
+                pdfTeX warning (ext4): destination with the same identifier (na
+me{ALC@rem.19}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.98 			\ENDFOR
-               pdfTeX warning (ext4): destination with the same identifier (nam
-e{ALC@rem.19}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.100 		\ENDFOR
+l.114 		\ENDFOR
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.19}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.100 		\ENDFOR
-                [58]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+l.114 		\ENDFOR
+                [59]
+Underfull \vbox (badness 4981) has occurred while \output is active []
 
- [59]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
+ [60]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
 1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.131 		\STATE
+l.145 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.131 		\STATE
+l.145 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.132 		\STATE
+l.146 		\STATE
                Populate\_KeyValues(Particles, Mesh, sort\_keys, sort\_values)pd
 fTeX warning (ext4): destination with the same identifier (name{ALC@line.2}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.132 		\STATE
+l.146 		\STATE
                Populate\_KeyValues(Particles, Mesh, sort\_keys, sort\_values)pd
 fTeX warning (ext4): destination with the same identifier (name{ALC@rem.3}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.133 		\STATE
+l.147 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.133 		\STATE
+l.147 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.134 		\STATE
+l.148 		\STATE
                thrust::sort\_by\_key(sort\_keys,sort\_keys+nptcls,sort\_values)
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.4}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.134 		\STATE
+l.148 		\STATE
                thrust::sort\_by\_key(sort\_keys,sort\_keys+nptcls,sort\_values)
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.5}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.135 		\STATE
+l.149 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.135 		\STATE
+l.149 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.136 		\STATE
+l.150 		\STATE
                Payload\_Move(Particles, sort\_values)pdfTeX warning (ext4): des
 tination with the same identifier (name{ALC@line.6}) has been already used, dup
 licate ignored
 <to be read again> 
                    \relax 
-l.136 		\STATE
-               Payload\_Move(Particles, sort\_values) [60]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 159.
+l.150 		\STATE
+               Payload\_Move(Particles, sort\_values) [61]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 173.
 
 
 (/usr/share/texmf/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 159.
- [61]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 173.
+
+Underfull \vbox (badness 3138) has occurred while \output is active []
+
+ [62]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
 1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.179 		\FORALL{ $member \in XPlist$}
+l.193 		\FORALL{ $member \in XPlist$}
                                      pdfTeX warning (ext4): destination with th
 e same identifier (name{ALC@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.179 		\FORALL{ $member \in XPlist$}
+l.193 		\FORALL{ $member \in XPlist$}
                                      pdfTeX warning (ext4): destination with th
 e same identifier (name{ALC@rem.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.180 		\STATE
+l.194 		\STATE
                float* idata = memberpdfTeX warning (ext4): destination with the
  same identifier (name{ALC@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.180 		\STATE
+l.194 		\STATE
                float* idata = memberpdfTeX warning (ext4): destination with the
  same identifier (name{ALC@rem.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.181 		\STATE
+l.195 		\STATE
                float* odata = XPlist.bufferpdfTeX warning (ext4): destination w
 ith the same identifier (name{ALC@line.3}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.181 		\STATE
+l.195 		\STATE
                float* odata = XPlist.bufferpdfTeX warning (ext4): destination w
 ith the same identifier (name{ALC@rem.4}) has been already used, duplicate igno
 red
 <to be read again> 
                    \relax 
-l.182 		\STATE
+l.196 		\STATE
                \textbf{reorder\_data}(odata,idata,particleIDs)pdfTeX warning (e
 xt4): destination with the same identifier (name{ALC@line.4}) has been already 
 used, duplicate ignored
 <to be read again> 
                    \relax 
-l.182 		\STATE
+l.196 		\STATE
                \textbf{reorder\_data}(odata,idata,particleIDs)pdfTeX warning (e
 xt4): destination with the same identifier (name{ALC@rem.5}) has been already u
 sed, duplicate ignored
 <to be read again> 
                    \relax 
-l.183 		\STATE
+l.197 		\STATE
                member = odatapdfTeX warning (ext4): destination with the same i
 dentifier (name{ALC@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.183 		\STATE
+l.197 		\STATE
                member = odatapdfTeX warning (ext4): destination with the same i
 dentifier (name{ALC@rem.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.184 		\STATE
+l.198 		\STATE
                buffer = idatapdfTeX warning (ext4): destination with the same i
 dentifier (name{ALC@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.184 		\STATE
+l.198 		\STATE
                buffer = idatapdfTeX warning (ext4): destination with the same i
 dentifier (name{ALC@rem.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.185 		\ENDFOR
+l.199 		\ENDFOR
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.185 		\ENDFOR
-               
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [62pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-2}) has been already used, duplicate ignored
+l.199 		\ENDFOR
+                [63pdfTeX warning (ext4): destination with the same identifier 
+(name{figure.3.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.195 
+l.204 
       ]
+Underfull \vbox (badness 3838) has occurred while \output is active []
 
-LaTeX Warning: Reference `Patacchini2007' on page 63 undefined on input line 20
-2.
+ [64]
+
+LaTeX Warning: Citation `Patachini2010' on page 65 undefined on input line 242.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[65]
 
- [63]
-[64]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.1
-}) has been already used, duplicate ignored
+LaTeX Warning: Reference `Patacchini2007' on page 66 undefined on input line 25
+7.
+
+[66] [67]pdfTeX warning (ext4): destination with the same identifier (name{ALC@
+rem.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.239 		\STATE
+l.294 		\STATE
                // Update The particle positions and check domain boundariespdfT
 eX warning (ext4): destination with the same identifier (name{ALC@line.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.239 		\STATE
+l.294 		\STATE
                // Update The particle positions and check domain boundariespdfT
 eX warning (ext4): destination with the same identifier (name{ALC@rem.2}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.240 		\STATE
+l.295 		\STATE
                $\textbf{GPU\_Advance}(particles,mesh,Exit\_Flags)$pdfTeX warnin
 g (ext4): destination with the same identifier (name{ALC@line.2}) has been alre
 ady used, duplicate ignored
 <to be read again> 
                    \relax 
-l.240 		\STATE
+l.295 		\STATE
                $\textbf{GPU\_Advance}(particles,mesh,Exit\_Flags)$pdfTeX warnin
 g (ext4): destination with the same identifier (name{ALC@rem.3}) has been alrea
 dy used, duplicate ignored
 <to be read again> 
                    \relax 
-l.241 		\STATE
+l.296 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.241 		\STATE
+l.296 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.242 		\STATE
+l.297 		\STATE
                \textbf{Prefix\_Scan}(Exit\_Flags)pdfTeX warning (ext4): destina
 tion with the same identifier (name{ALC@line.4}) has been already used, duplica
 te ignored
 <to be read again> 
                    \relax 
-l.242 		\STATE
+l.297 		\STATE
                \textbf{Prefix\_Scan}(Exit\_Flags)pdfTeX warning (ext4): destina
 tion with the same identifier (name{ALC@rem.5}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.243 		\STATE
+l.298 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.243 		\STATE
+l.298 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.244 		\STATE
+l.299 		\STATE
                nptcls\_reinject = Exit\_Flags[nptcls-1]pdfTeX warning (ext4): d
 estination with the same identifier (name{ALC@line.6}) has been already used, d
 uplicate ignored
 <to be read again> 
                    \relax 
-l.244 		\STATE
+l.299 		\STATE
                nptcls\_reinject = Exit\_Flags[nptcls-1]pdfTeX warning (ext4): d
 estination with the same identifier (name{ALC@rem.7}) has been already used, du
 plicate ignored
 <to be read again> 
                    \relax 
-l.245 		\STATE
+l.300 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.245 		\STATE
+l.300 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.246 		\IF{nptcls\_reinject $>$ 0}
+l.301 		\IF{nptcls\_reinject $>$ 0}
                                    pdfTeX warning (ext4): destination with the 
 same identifier (name{ALC@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.246 		\IF{nptcls\_reinject $>$ 0}
+l.301 		\IF{nptcls\_reinject $>$ 0}
                                    pdfTeX warning (ext4): destination with the 
 same identifier (name{ALC@rem.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.247 			\STATE
+l.302 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.247 			\STATE
+l.302 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@rem.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.248 			\STATE
+l.303 			\STATE
                 reinjected\_particles.allocate(nptcls\_reinject)pdfTeX warning 
 (ext4): destination with the same identifier (name{ALC@line.10}) has been alrea
 dy used, duplicate ignored
 <to be read again> 
                    \relax 
-l.248 			\STATE
+l.303 			\STATE
                 reinjected\_particles.allocate(nptcls\_reinject)pdfTeX warning 
 (ext4): destination with the same identifier (name{ALC@rem.11}) has been alread
 y used, duplicate ignored
 <to be read again> 
                    \relax 
-l.249 			\STATE
+l.304 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.249 			\STATE
+l.304 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@rem.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.250 			\STATE
+l.305 			\STATE
                 \textbf{Stream\_Compact}(particles $\subset$ exited $\righta...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.12})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.250 			\STATE
+l.305 			\STATE
                 \textbf{Stream\_Compact}(particles $\subset$ exited $\righta...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.13}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.251 			\STATE
+l.306 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.251 			\STATE
+l.306 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@rem.14}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.252 			\STATE
+l.307 			\STATE
                 // Recursivley call the Advance on the reinjected particlespdfT
 eX warning (ext4): destination with the same identifier (name{ALC@line.14}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.252 			\STATE
+l.307 			\STATE
                 // Recursivley call the Advance on the reinjected particlespdfT
 eX warning (ext4): destination with the same identifier (name{ALC@rem.15}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.253 			\STATE
+l.308 			\STATE
                 reinjected\_particles.advance()pdfTeX warning (ext4): destinati
 on with the same identifier (name{ALC@line.15}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.253 			\STATE
+l.308 			\STATE
                 reinjected\_particles.advance()pdfTeX warning (ext4): destinati
 on with the same identifier (name{ALC@rem.16}) has been already used, duplicate
  ignored
 <to be read again> 
                    \relax 
-l.254 			\STATE
+l.309 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@line.16}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.254 			\STATE
+l.309 			\STATE
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{ALC@rem.17}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.255 			\STATE
+l.310 			\STATE
                 \textbf{Stream\_Expand}(reinjected\_particles $\rightarrow$ ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@line.17})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.255 			\STATE
+l.310 			\STATE
                 \textbf{Stream\_Expand}(reinjected\_particles $\rightarrow$ ...
 pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.18}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.256 		\ENDIF
+l.311 		\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.18}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.256 		\ENDIF
+l.311 		\ENDIF
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.19}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.257 		\STATE
+l.312 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@line.19}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.257 		\STATE
+l.312 		\STATE
               pdfTeX warning (ext4): destination with the same identifier (name
 {ALC@rem.20}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.258 		\STATE
+l.313 		\STATE
                returnpdfTeX warning (ext4): destination with the same identifie
 r (name{ALC@line.20}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.258 		\STATE
-               return
-<implementation/stream_compact.jpg, id=930, 301.125pt x 152.06813pt>
-File: implementation/stream_compact.jpg Graphic file (type jpg)
-
-<use implementation/stream_compact.jpg> [65] [66pdfTeX warning (ext4): destinat
-ion with the same identifier (name{figure.3.3}) has been already used, duplicat
-e ignored
+l.313 		\STATE
+               return [68] (./implementation/reinject_collide.tex
+\c@prim@a=\count171
+\c@prim@b=\count172
+\c@prim@c=\count173
+\c@prim@d=\count174
+) [69pdfTeX warning (ext4): destination with the same identifier (name{figure.3
+.3}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.285 \item T
+l.331 
+      ] <implementation/stream_compact.jpg, id=949, 301.125pt x 152.06813pt>
+File: implementation/stream_compact.jpg Graphic file (type jpg)
+
+<use implementation/stream_compact.jpg> [70pdfTeX warning (ext4): destination w
+ith the same identifier (name{figure.3.4}) has been already used, duplicate ign
+ored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.352 \item T
              otal momentum lost to particles leaving the system. <./implementat
-ion/stream_compact.jpg>]) [67]
+ion/stream_compact.jpg>]) [71]
 \openout2 = `ch_performance.aux'.
 
- (./ch_performance.tex [68
+ (./ch_performance.tex [72
 
 
 
@@ -2469,29 +2496,29 @@ Chapter 4.
 
 pdfTeX warning: pdflatex (file ./performance/architecture_compare.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_compare.pdf, id=953, 433.62pt x 216.81pt>
+<performance/architecture_compare.pdf, id=966, 361.35pt x 198.7425pt>
 File: performance/architecture_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_compare.pdf>
 
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_speedup_compare.pdf, id=954, 433.62pt x 216.81pt>
+<performance/architecture_speedup_compare.pdf, id=967, 361.35pt x 198.7425pt>
 File: performance/architecture_speedup_compare.pdf Graphic file (type pdf)
 
-<use performance/architecture_speedup_compare.pdf> [69] [70pdfTeX warning (ext4
+<use performance/architecture_speedup_compare.pdf> [73] [74pdfTeX warning (ext4
 ): destination with the same identifier (name{figure.4.1}) has been already use
 d, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.35 
+l.36 
      pdfTeX warning (ext4): destination with the same identifier (name{figure.4
 .2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.35 
+l.36 
       <./performance/architecture_compare.pdf
 
 pdfTeX warning: pdflatex (file ./performance/architecture_compare.pdf): PDF inc
@@ -2501,119 +2528,170 @@ lusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 >]
-<performance/nptclsize_scan128x64x64ons8bins.pdf, id=987, 513.92pt x 313.17pt>
+<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1001, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan128x64x64ons8bins.pdf Graphic file (type pdf)
-
 <use performance/nptclsize_scan128x64x64ons8bins.pdf>
-<performance/nptclsize_scan64x32x32ons8bins.pdf, id=988, 513.92pt x 313.17pt>
+<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1002, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan64x32x32ons8bins.pdf Graphic file (type pdf)
 
 <use performance/nptclsize_scan64x32x32ons8bins.pdf>
-<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=989, 516.93124pt x 311.
-1625pt>
+<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1003, 516.93124pt x 311
+.1625pt>
 File: performance/nptclspeedup_scan128x64x64ons8bins.pdf Graphic file (type pdf
 )
- <use performance/nptclspeedup_scan128x64x64ons8bins.pdf> [71] [72pdfTeX warnin
+ <use performance/nptclspeedup_scan128x64x64ons8bins.pdf> [75] [76pdfTeX warnin
 g (ext4): destination with the same identifier (name{figure.4.3}) has been alre
 ady used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.67 
+l.68 
      pdfTeX warning (ext4): destination with the same identifier (name{figure.4
 .4}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.67 
+l.68 
       <./performance/nptclsize_scan128x64x64ons8bins.pdf> <./performance/nptcls
 ize_scan64x32x32ons8bins.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [73pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [77pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.73 
+l.74 
       <./performance/nptclspeedup_scan128x64x64ons8bins.pdf>]
-<performance/gridsize_scan16ptcls8bins.pdf, id=1025, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls8bins.pdf, id=1038, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls8bins.pdf>
-<performance/gridsize_scan16ptcls16bins.pdf, id=1026, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls16bins.pdf, id=1039, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls16bins.pdf>
-<performance/gridsize_scan34ptcls8bins.pdf, id=1027, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls8bins.pdf, id=1040, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls8bins.pdf>
-<performance/gridsize_scan34ptcls16bins.pdf, id=1028, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls16bins.pdf, id=1041, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls16bins.pdf>
-<performance/gridsize_speedup_scan.pdf, id=1029, 513.92pt x 313.17pt>
+<performance/gridsize_speedup_scan.pdf, id=1042, 513.92pt x 313.17pt>
 File: performance/gridsize_speedup_scan.pdf Graphic file (type pdf)
 
-<use performance/gridsize_speedup_scan.pdf> [74] [75pdfTeX warning (ext4): dest
+<use performance/gridsize_speedup_scan.pdf> [78] [79pdfTeX warning (ext4): dest
 ination with the same identifier (name{figure.4.6}) has been already used, dupl
 icate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.138 
+l.139 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.7}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.138 
+l.139 
        <./performance/gridsize_scan16ptcls8bins.pdf> <./performance/gridsize_sc
-an16ptcls16bins.pdf>] [76pdfTeX warning (ext4): destination with the same ident
+an16ptcls16bins.pdf>] [80pdfTeX warning (ext4): destination with the same ident
 ifier (name{figure.4.8}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.138 
+l.139 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.9}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.138 
+l.139 
        <./performance/gridsize_scan34ptcls8bins.pdf> <./performance/gridsize_sc
-an34ptcls16bins.pdf>] [77pdfTeX warning (ext4): destination with the same ident
+an34ptcls16bins.pdf>] [81pdfTeX warning (ext4): destination with the same ident
 ifier (name{figure.4.10}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.145 
+l.146 
        <./performance/gridsize_speedup_scan.pdf>]
-<performance/gridshape_scan.pdf, id=1079, 513.92pt x 313.17pt>
+<performance/gridshape_scan.pdf, id=1093, 513.92pt x 313.17pt>
 File: performance/gridshape_scan.pdf Graphic file (type pdf)
 
-<use performance/gridshape_scan.pdf>) [78pdfTeX warning (ext4): destination wit
-h the same identifier (name{figure.4.11}) has been already used, duplicate igno
-red
+<use performance/gridshape_scan.pdf> [82pdfTeX warning (ext4): destination with
+ the same identifier (name{figure.4.11}) has been already used, duplicate ignor
+ed
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.133 \include{ch_performance}
-                               <./performance/gridshape_scan.pdf>]
+l.158 
+       <./performance/gridshape_scan.pdf>]
+
+pdfTeX warning: pdflatex (file ./performance/kernel_param.pdf): PDF inclusion: 
+found PDF version <1.5>, but at most version <1.4> allowed
+<performance/kernel_param.pdf, id=1105, 361.35pt x 198.7425pt>
+File: performance/kernel_param.pdf Graphic file (type pdf)
+
+<use performance/kernel_param.pdf> [83pdfTeX warning (ext4): destination with t
+he same identifier (name{figure.4.12}) has been already used, duplicate ignored
+
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.174 
+       <./performance/kernel_param.pdf
+
+pdfTeX warning: pdflatex (file ./performance/kernel_param.pdf): PDF inclusion: 
+Page Group detected which pdfTeX can't handle. Ignoring it.
+>]
+
+pdfTeX warning: pdflatex (file ./performance/texture_tests64.pdf): PDF inclusio
+n: found PDF version <1.5>, but at most version <1.4> allowed
+<performance/texture_tests64.pdf, id=1121, 361.35pt x 198.7425pt>
+File: performance/texture_tests64.pdf Graphic file (type pdf)
+
+<use performance/texture_tests64.pdf>
+
+pdfTeX warning: pdflatex (file ./performance/texture_tests128.pdf): PDF inclusi
+on: found PDF version <1.5>, but at most version <1.4> allowed
+<performance/texture_tests128.pdf, id=1122, 361.35pt x 198.7425pt>
+File: performance/texture_tests128.pdf Graphic file (type pdf)
+
+<use performance/texture_tests128.pdf>) [84pdfTeX warning (ext4): destination w
+ith the same identifier (name{figure.4.13}) has been already used, duplicate ig
+nored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.134 \include{ch_performance}
+                               <./performance/texture_tests64.pdf
+
+pdfTeX warning: pdflatex (file ./performance/texture_tests64.pdf): PDF inclusio
+n: Page Group detected which pdfTeX can't handle. Ignoring it.
+>] [85pdfTeX warning (ext4): destination with the same identifier (name{figure.
+4.14}) has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.134 \include{ch_performance}
+                               <./performance/texture_tests128.pdf
+
+pdfTeX warning: pdflatex (file ./performance/texture_tests128.pdf): PDF inclusi
+on: Page Group detected which pdfTeX can't handle. Ignoring it.
+>]
 \openout2 = `ch_conclusion.aux'.
 
-
-(./ch_conclusion.tex
-Chapter 5.
-) [79
+ (./ch_conclusion.tex [86
 
 
 
 ]
+Chapter 5.
+) [87]
 \openout2 = `appa.aux'.
 
- (./appa.tex [80
+ (./appa.tex [88
 
 
 
@@ -2668,13 +2746,13 @@ Overfull \hbox (14.71854pt too wide) in paragraph at lines 63--73
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[81pdfTeX warning (ext4): destination with the same identifier (name{table.A.1}
+[89pdfTeX warning (ext4): destination with the same identifier (name{table.A.1}
 ) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.80 \clearpage
-               ] [82pdfTeX warning (ext4): destination with the same identifier
+               ] [90pdfTeX warning (ext4): destination with the same identifier
  (name{table.A.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2692,7 +2770,7 @@ e{table.A.4}) has been already used, duplicate ignored
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.80 \clearpage
-               ] [83pdfTeX warning (ext4): destination with the same identifier
+               ] [91pdfTeX warning (ext4): destination with the same identifier
  (name{table.A.5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2701,16 +2779,16 @@ l.80 \clearpage
                ])
 \openout2 = `biblio.aux'.
 
- (./biblio.tex (./main.bbl [84
+ (./biblio.tex (./main.bbl [92
 
 
 
 
-] [85]
+] [93]
 Missing character: There is no â in font cmr12!
 Missing character: There is no ˜ in font cmr12!
 Missing character: There is no † in font cmr12!
-)) [86] (./main.aux
+)) [94] (./main.aux
 (./cover.aux) (./contents.aux) (./ch_introduction.aux) (./ch_design.aux)
 (./ch_implementation.aux) (./ch_performance.aux) (./ch_conclusion.aux)
 (./appa.aux) (./biblio.aux))
@@ -2722,13 +2800,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19072 strings out of 256216
- 360811 string characters out of 1917072
- 450925 words of memory out of 1500000
- 21567 multiletter control sequences out of 10000+200000
+ 19695 strings out of 256216
+ 371362 string characters out of 1917072
+ 471678 words of memory out of 1500000
+ 22170 multiletter control sequences out of 10000+200000
  12080 words of font info for 43 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 56i,19n,64p,1547b,1628s stack positions out of 5000i,500n,6000p,200000b,15000s
+ 56i,19n,64p,1547b,1662s stack positions out of 5000i,500n,6000p,200000b,15000s
 pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -2748,9 +2826,9 @@ mf/fonts/type1/bluesky/cm/cmr6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr
 /type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy7.pfb
 ></usr/share/texmf/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf/fonts/typ
 e1/bluesky/cm/cmti12.pfb>
-Output written on main.pdf (86 pages, 3932719 bytes).
+Output written on main.pdf (94 pages, 3995668 bytes).
 PDF statistics:
- 1254 PDF objects out of 1440 (max. 8388607)
- 293 named destinations out of 1000 (max. 131072)
- 558 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1321 PDF objects out of 1440 (max. 8388607)
+ 304 named destinations out of 1000 (max. 131072)
+ 517 words of extra memory for PDF output out of 10000 (max. 10000000)
 

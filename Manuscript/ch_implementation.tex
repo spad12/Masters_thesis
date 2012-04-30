@@ -4,9 +4,23 @@
 %% You can process specific files by typing their names in at the 
 %% \files=
 %% prompt when you run the file main.tex through LaTeX.
-\chapter{Implementation}
+\chapter{Implementation} 
+	In this chapter we will detail the steps taken to implement the methods discussed in chapter \ref{ch:design}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Constraining Grid Dimensions}
+	\label{sec:grid_constraincts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the block subdomain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$.
+		
+\begin{equation}
+\frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
+\end{equation} 
 
+Where $n_{virtual}$ is the number of blocks that the grid is divided into in any dimension. In order to fully satisfy the constraints for a simple z-order curve, $n_{virtual}$ must be a power of 2.
 
+The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the chargeassign stage of the code. Given that each block has the maximum number of threads, 512, and each thread requires roughly 25 registers, then the maximum number of threadblocks that can exist simultaneously on a single SM is 2. This means that each block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three block dimensions can be is 18. For the sake of simplicity this sets $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. 
+
+A third, loose constraint can be set in order to force a minimum nuber of threadblocks for the charge-assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough threadblocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread-blocks. For a GTX 580 with 16 SMs 32 thread-blocks are required to fill all of the processors.  
 		%\section{Holding to Grid Constraints}
 
 	\section{Particle List Transpose}
@@ -191,13 +205,54 @@ ib_r = \frac{i_r}{nb_r} \mathrm{;}\hspace{0.5in} ib_{\theta} = \frac{i_{\theta}}
 
 
 	\section{Poisson Solve}
-	When the particle advancing is accelerated by a factor of 70, the poisson solve becomes the major bottleneck. For sceptic3D leaving the poisson solve on the CPU resulted in only a factor of 10 speedup for the code. In order to achieve reasonable performance boost for the entire code we need to speed up the poisson solve by a factor of 20 or so. 
+The field solve used in SCEPTIC3D involves solving a dimensionless electrostatic Poisson equation:
+
+\begin{equation}
+\nabla^2\phi=\frac{n_e-n_i}{\Lambda_{De}^2}
+\label{eqn:poisson_eqn1}
+\end{equation}
+
+Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge densities normalized to the background charge density $N_\infty$, and $\Lambda_{De}$ is the unperturbed electron Debye length $\Lambda_{De} = \sqrt{\varepsilon_0T_e/N_\infty e^2}$. Using the SCEPTIC3D approximation that the electron density can be taken to be a Boltzmann distribution, and normalizing $\nabla$ to $1/R_p$ the probe radius, the Poisson equation can be rewritten as 
+
+\begin{equation}
+\nabla^2\phi=\frac{exp(\phi)-n}{\lambda_{De}^2}
+\label{eqn:poisson_eqn2}
+\end{equation}
+
+We are changing $n_i$ to $n$ in order to avoid confusion with the use of $i$ as a spatial index. Assuming that the potential varies little from one time step to the next we can expand equation \ref{eqn:poisson_eqn2} about the known potential $\phi^*$ yielding
+   
+\begin{equation}
+\nabla^2\phi_{i+1}=\frac{exp(\phi^*)[1+(\phi_{i+1}-\phi^*]-n}{\lambda_{De}^2}
+\label{eqn:poisson_eqn3}
+\end{equation}
+
+Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = \sigma$ using finite volumes. Following the derivation for the linear operator $A$ from \cite{Patacchini2010} we get:
 
 
+\begin{align}
+(A\phi)_{i,j,k}) &= a_i\phi_{i+1,j,k}
+		  -b_i\phi_{i-1,j,k}
+		  +c_{i,j}\phi{i,j+1,k}
+		  -d_{i,j}\phi_{i,j-1,k} \nonumber \\
+		  &\qquad{} +e_{i,j}(\phi_{i,j,k+1}-\phi_{i,j,k-1})
+		  -[f_{i,j} + exp(\phi_{i,j,k}^*)]\phi_{i,j,k}
+\label{eqn:psolve}
+\end{align}
 
-The field solve used in the serial version of sceptic3D involves solving the problem $Ax=b$ where $b$, the charge density, is an array of $n_r\times n_{\phi} \times n_{psi}$, $A$ is the stiffness matrix of the Poisson solver and $x$ is the potential. The biconjugate gradient method is used to solve this system, and since this method is merely a series of matrix multiplications it is easily parallelized on the GPU.  
+The full derivation of equation \ref{eqn:psolve} along with the definitions of the vectors $a$ through $f$ can be found in \cite{Patachini2010}.
 
+Now that we have our linear operator defined, along with the vectors $\omega$ and $\sigma$ we can see that this is a simple sparse linear system. These system is fairly easy to solve using any sparse linear system solving scheme. One of the easier schemes to implement on the GPU is the preconditioned biconjugate gradient method \emph{PBCG}. This method is easy to parallelize due to the simplicity of the operations involved, namely \emph{PBCG} consists solely of sparse matrix multiplication, vector dot products, and multiplication of a matrix by a scalar. All of these operations can be implemented efficiently on the GPU. 
+
+We can make an additional optimization of the PBCG solver by recognizing that only one element of our linear operator $A$ changes every time step. This means that we can make use of some of the read-only memory spaces on the GPU, such as texture memory. Since texture memory is cached spatially in its own on-chip cache, we hope that we can significantly reduce the number of global memory transactions for all of the matrix multiplications. We ended up implementing two versions of the Poisson solve, one that stores both $A$ and $\phi^*$ as textures, and one that stores them in global memory. The version to be used is determined at compile time with the use of pre-processor macros. 
+The only concern with the texture implementation would be the cost of calling cudaBindTextureToArray(). However, since only one diagonal of $A$ and and $\phi^*$ change over the course of the time step, the binding cost should not be an issue. Using textures for arrays in other parts of the code is also possible. Since we are using textures for the potential in the field solve it is very simple to also use a texture based potential for the particle advancing. The actual gain of using textures will be discussed in chapter \ref{ch:performance}.
+
+We will not bother with GPU implementations of the pre-processing steps required to prepare the ion density $n$ from the particle-density interpolation since those steps do not represent a significant computational cost. Additionally, the particle-density array already exists in host memory due to the fact that an MPI reduce must be performed to gather this array from multiple GPUs. Since this data is already in host memory, and the computational time is low, there is very little reason to rewrite these routines for the GPU.  
+
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Particle List Advance}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 Moving the particles on the grid is fairly straightforward. The process starts with determining the acceleration of the particle. This is calculated by interpolating the potential, $\phi$, from the spherical mesh using the same methods as the cpu code. The new position of the particle is simply $\vec{x}' = \vec{x}+\vec{v}\Delta t+\frac{1}{2}\vec{a}\Delta t^2$. A more detailed description of the basics of the particle advance can be found in reference \ref{Patacchini2007} section 3.1.2.
 		
@@ -230,7 +285,7 @@ We can then use the quadratic equation to solve for $d$. There are a few qualifi
 		\subsection{Handling Reinjections}
 Once it has been determined that particles have left the grid, new particles must be reinjected to replace them. In the serial version of the code this is handled by simply calling a reinjection subroutine that determines the new particle's position and velocity. Once the new position and velocity has been found the particle is moved for the remainder of the time step, and be replaced by a new particle if the reinjected particle leaves the domain.  
 
-Performing reinjections in this manner on the GPU would introduce very large divergences in warp execution as well as very uncoalesced memory accesses. Eliminating the warp divergences requires that all of the threads in a warp be operating on reinjected particles. Reducing the uncoalesced memory accesses would require that all of the reinjected particles be adjacent in memory. Since we already have an object with methods that can move a list of particles and handle reinjections, all we really need is some method by which we can efficiently and reversibly ``pop" a subset of the particles in the main list to a secondary list. From there we can perform the particle advance on the secondary list, and place the results back in the empty particle slots in the main list. The resulting advancing algorithm is as follows:
+Performing reinjections in this manner on the GPU would introduce very large divergences in warp execution as well as very uncoalesced memory accesses. Eliminating the warp divergences requires that all of the threads in a warp be operating on reinjected particles. Reducing the uncoalesced memory accesses would require that all of the reinjected particles be adjacent in memory.  Since we already have an object with methods that can move a list of particles and handle reinjections, all we really need is some method by which we can efficiently and reversibly ``pop" a subset of the particles in the main list to a secondary list. From there we can perform the particle advance on the secondary list, and place the results back in the empty particle slots in the main list. The resulting advancing algorithm is as follows:
 
 \begin{algorithm}
 	\caption{Particle Advancing Algorithm}
@@ -259,7 +314,20 @@ Performing reinjections in this manner on the GPU would introduce very large div
 	\end{algorithmic}
 \end{algorithm}
 
-Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. 
+A graphical representation of algorithm \ref{alg:advancing} can be seen in figure \ref{fig:padvnc}, which also includes the handling of collisions. For the handling of both collisions and reinjections four separate steps are needed. Step (1) determines whether or not a particle will be colliding, when the collision happens, and flags that particle in the list. Step (2) advances the particles positions and velocities, and flags all particles that leave the simulation domain. Particles undergoing collisions in step (2) are only advanced to the time of collision, and particles that leave the domain are advanced to the point where they exit the domain. Particles that are flagged for a collision, but leave the domain before the collision takes place do not undergo a collision, but are flagged for reinjection. At this point we have several groups of particles, two that require special operations and additional advancing, and a third that is completely finished. 
+In step (3) we separate these groups of particles and into compacted collision and reinjection lists, and a sparse main list. The compacted lists are operated by the collision and reinjection operators respectively and then moved recursively. 
+Once the recursive moves have been completed the particles in the two sub-lists are placed back in their original places in the main list by step (4). It should be noted that collisions have not yet been implemented in the GPU code, but the data handling infrastructure needed to support them as shown in figure \ref{fig:padvnc} has been implemented. 
+Since the collision and reinjection operators are completely independent, we could make use of multiple CUDA ``streams" such that the two processes could be carried out asynchronously on the same GPU. 
+
+\begin{figure}
+\begin{center}
+\input{implementation/reinject_collide.tex}
+\end{center}
+\caption{Illustration of GPU particle advancing algorithm with handling of reinjections and collisions.}
+\label{fig:padvnc}
+\end{figure}
+
+Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. 
 
 \begin{figure}
 \begin{center}
@@ -269,7 +337,7 @@ Compacting some subset of a parent list is a fairly easy parallel operation call
 \label{fig:stream_compact}
 \end{figure}
 
-Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. 
+
 
 The new positions and velocities for reinjected particles are taken from a precalculate pool of new particles. This pool is approximately 1/10\textsuperscript{th} the size of the main particle list, and is repopulated prior to every advance step. Prior to the first advance step the entire pool is populated, but subsequent steps only refill slots that have been used in reinjections. This ``pool" method was chosen over implementing the reinjection calculations on the GPU for reasons of code maintenance. There are currently several different reinjection schemes that sceptic3D can call. Maintaining versions of those routines in both fortran and CUDA would be more cumbersome than the small benefit that calculating them on the GPU would provide. 
 
@@ -280,7 +348,6 @@ The new positions and velocities for reinjected particles are taken from a preca
 
 \begin{itemize}
 \singlespacing
-\parskip 0.0pt
 \item Total momentum transferred to the probe.
 \item Total momentum lost to particles leaving the system.
 \item Total momentum added to the system from reinjections.
@@ -292,7 +359,7 @@ The new positions and velocities for reinjected particles are taken from a preca
 \end{itemize}
 
 
-	For the single value quantities, such as the quantities of total momentum, energy, and particle count are tallied using atomic operations in shared memory. 
+	For the single value quantities, such as the quantities of total momentum, energy, and particle count are tallied using atomic operations in shared memory. Since the fraction of particles that leave the domain during a timestep is small, $~7\%$, we can just use conditional statements within the primary move kernel to perform the tallies. While this is not strictly optimal, it does not have a very large impact on the overall performance of the move kernel. 
 
 
 

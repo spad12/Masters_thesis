@@ -14,45 +14,45 @@ Database file #1: main.bib
 Warning--I didn't find a database entry for "NVIDIACorporation2009"
 Warning--empty institution in NVIDIACorporation2011a
 Warning--there's a number but no volume in Satish2009
-You've used 16 entries,
+You've used 18 entries,
             2118 wiz_defined-function locations,
-            617 strings with 7142 characters,
-and the built_in function-call counts, 5123 in all, are:
-= -- 504
-> -- 260
-< -- 2
-+ -- 103
-- -- 87
-* -- 399
-:= -- 905
-add.period$ -- 49
-call.type$ -- 16
-change.case$ -- 91
+            626 strings with 7511 characters,
+and the built_in function-call counts, 5839 in all, are:
+= -- 578
+> -- 295
+< -- 3
++ -- 117
+- -- 99
+* -- 446
+:= -- 1024
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 102
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 173
-empty$ -- 374
-format.name$ -- 87
-if$ -- 1016
+cite$ -- 20
+duplicate$ -- 202
+empty$ -- 420
+format.name$ -- 99
+if$ -- 1166
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 14
-newline$ -- 83
-num.names$ -- 34
-pop$ -- 73
+int.to.str$ -- 18
+missing$ -- 15
+newline$ -- 93
+num.names$ -- 38
+pop$ -- 84
 preamble$ -- 1
-purify$ -- 75
+purify$ -- 85
 quote$ -- 0
-skip$ -- 105
+skip$ -- 130
 stack$ -- 0
-substring$ -- 308
-swap$ -- 16
-text.length$ -- 2
+substring$ -- 350
+swap$ -- 27
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 70
 warning$ -- 2
-while$ -- 51
-width$ -- 18
-write$ -- 179
+while$ -- 58
+width$ -- 20
+write$ -- 201
 (There were 3 warnings)

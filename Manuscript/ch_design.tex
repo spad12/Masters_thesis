@@ -220,7 +220,7 @@ Each of these methods have their own advantages and disadvantages. For the purpo
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=3in]{design/kong_sort.png}
+\includegraphics[width=5in]{design/kong_sort.png}
 \end{center}
 \caption{Kong particle sort. (a) Bi-cluster of cells. (b) Data structure of the bi-cluster particle array. (c.1) Particle 3 and 5 move to the right. Particle 3 is moved first to slot 12 which frees up slot 3. Slot 3, now empty, copies the last particle in the data region, which is particle 5. Particle 5 is also moving to the right so slot 3 copies it to slot 13 and replaces the contents of slot 3 with particle 4. Image taken from \cite{Kong2011}.}
 \label{fig:kong_sort}
@@ -392,21 +392,7 @@ Reinjections on the CPU are performed whenever a particle leaves the computation
 
 Unfortunately this method does not work well on the GPU. If this same algorithm were to be used on the GPU it would result in a large amount of warp divergence. Calculating new random positions and velocities is also expensive. Ideally we would have all of the particles be moved, and then operate on the subset of particles that need to be reinjected. In CUDA this is done by compacting the particle stream down to a list that contains only particles that are undergoing reinjection. This compacted particle list is still a particle list, and can be advanced in the same manner as the main list.  
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Constraining Grid Dimensions}
-	\label{sec:grid_constraincts}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the block subdomain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$.
-		
-\begin{equation}
-\frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
-\end{equation} 
 
-Where $n_{virtual}$ is the number of blocks that the grid is divided into in any dimension. In order to fully satisfy the constraints for a simple z-order curve, $n_{virtual}$ must be a power of 2.
-
-The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the chargeassign stage of the code. Given that each block has the maximum number of threads, 512, and each thread requires roughly 25 registers, then the maximum number of threadblocks that can exist simultaneously on a single SM is 2. This means that each block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three block dimensions can be is 18. For the sake of simplicity this sets $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. 
-
-A third, loose constraint can be set in order to force a minimum nuber of threadblocks for the charge-assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough threadblocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread-blocks. For a GTX 580 with 16 SMs 32 thread-blocks are required to fill all of the processors.  
 
 
 

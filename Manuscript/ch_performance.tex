@@ -1,4 +1,5 @@
-\chapter{Performance} 
+\chapter{Performance}
+\label{ch:performance} 
 	Unless otherwise specified the following tests were performed using two CPUs or two GPUs, with MPI as the interface between multiple threads. The machine specifications are as follows:
 \begin{itemize}
 	\item CPU: Intel Core i7 930 @ 2.8GHz.
@@ -141,7 +142,7 @@ Another point of interest is the scaling of the particle sort, note that it only
 
 
 \subsection{Threadblock Sub-Domain Size}
-In chapter 4 we discussed the scaling of both the particle advance and the charge assign subroutines with grid size. Smaller grids should lead to more atomic conflicts in the charge assign and thus longer run time. On the other hand, for the particle advance smaller grids mean that a larger fraction of the grid can be stored in cache, which leads to fewer global memory accesses. Taking these two effects together, we should see a clear minimum in the data. Figure \ref{fig:subdomain_size_scan} shows the time per step of each routine vs the size of the sub-domain. 
+In chapter 4 we discussed the scaling of both the particle advance and the charge assign subroutines with grid size. Smaller grids should lead to more atomic conflicts in the charge assign and thus longer run time. On the other hand, for the particle advance smaller grids mean that a larger fraction of the grid can be stored in cache, which leads to fewer global memory accesses. Taking these two effects together, we should see a clear minimum in the data. Figure \ref{fig:subdomain_size_scan} shows the time per step of each routine vs the size of the sub-domain. Correcting for the Poisson solve we do in fact see a minimum in the run time. 
 
 \begin{figure}[H]
 \begin{center}
@@ -152,7 +153,43 @@ In chapter 4 we discussed the scaling of both the particle advance and the charg
 \end{figure}
 
 
-
 	\section{Kernel Parameters Scan}
+One important performance consideration for GPU computing is ensuring that every thread performs enough work to warrant the cost of its creation. For the case of the advancing kernel we adjusted the number of particles processed by each thread. This is essentially a parameter that could be optimized with through auto-tuning, and will likely vary based on the hardware configuration. We performed such a scan with the advancing kernel, ranging the number of particles processed per thread from 3 to 16. The results of this scan can can be seen in figure \ref{fig:kernel_param_scan}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=6in]{performance/kernel_param.pdf}
+\end{center}
+\caption{Adjusting the amount of work per thread for the advancing kernel.}
+\label{fig:kernel_param_scan}
+\end{figure}
+
+As we can see from the figure, there is a minimum around 10 particles per thread, which is about 5\% faster than the 3 particles per thread case. Now a 5\% increase may not seem like much in the context of the GPU advancing kernel, but we have to take it in context with the speedup that we have already achieved. If we recognize that the GPU advancing routine is 80 times faster than the CPU version, then a 5\% performance boost brings the GPU version to 84 times faster than the CPU version. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Texture Performance}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+One of the more interesting concepts that we investigated was the use of textures as a storage structure for both the potential, and the Poisson solve sparse matrix diagonals. Several comparisons between the two can be seen in figures \ref{fig:texture_tests64} and \ref{fig:texture_tests128}. These tests were performed using 42 million particles with 200 time steps on $128^3$ and $64^3$ grids. We also varied the number of cells per sorting bin (cpb) in order to determine how the performance gain from using texture memory varies with how many possible mesh points an execution block of particles can access.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=6in]{performance/texture_tests64.pdf}
+\end{center}
+\caption{Comparison between texture enabled kernels at various bin sizes. Tests used 42 million particles with 200 time steps on a $64^3$ grid.}
+\label{fig:texture_tests64}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=6in]{performance/texture_tests128.pdf}
+\end{center}
+\caption{Comparison between texture enabled kernels at various bin sizes. Tests used 42 million particles with 200 time steps on a $128^3$ grid.}
+\label{fig:texture_tests128}
+\end{figure}
+
+As you can see from figures \ref{fig:texture_tests64} and \ref{fig:texture_tests128}, utilizing texture memory does provide a noticeable performance boost for the Poisson solve, and a small boost for the particle advance. Additionally, it is interesting to not that for particle advancing varying the number of cells per bin from $4^3$ to $8^3$ does not change the run time of the texture run. The particle advance without textures becomes slower as the number of cells per bin increases, but there is a threshold for the texture based routine.
+
+It is likely that more data structures could be changed to textures, or surfaces for read/write data structures. The Poisson solve in particular could benefit from additional texture/surface memory usage. The primary barrier to this is not performance, but implementation difficulty. Textures are not easy to incorporate into code due to the fact that they cannot be passed as function arguments, and must be declared within the same file scope as they are used. Another downside to textures is the process of ``binding" global memory to the texture reference, which can be expensive.  
 
 

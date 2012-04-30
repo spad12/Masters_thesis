@@ -1,0 +1,251 @@
+% Turing Machine
+% Author: Sebastian Sardina
+%\documentclass[a4paper,10pt]{article}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{tikz}
+%\usepackage{ifthen}
+%\usetikzlibrary{chains,fit,shapes}
+
+%\begin{document}
+
+
+\noindent
+\begin{tikzpicture}
+		\tikzstyle{every path}=[very thick]
+		\tikzstyle{MainSty}=[->,dashdotted]
+		\tikzstyle{CollSty}=[->,color=Emerald,densely dashdotted]
+		\tikzstyle{ReinSty}=[->,color=Maroon,dashed]
+
+		\edef\sizetape{1.0cm}
+		\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+		\tikzstyle{tmtape1}=[draw,minimum height=\sizetape,minimum width=0.5cm]
+		\tikzstyle{tmhead}=[arrow box,draw,minimum size=0.4cm,arrow box
+		arrows={east:.25cm}]
+
+		\tikzstyle{cfill1}=[fill=Purple]
+		\tikzstyle{cfill2}=[fill=SkyBlue]
+		\tikzstyle{cfill3}=[fill=Maroon]
+		\tikzstyle{cfill4}=[fill=Emerald]
+
+
+\def\MainArray{1,...,10}
+\def\ReinArray{1,5,8}
+\def\CollArray{2,4,5,9}
+
+\newcounter{prim@a}
+\newcounter{prim@b}
+\newcounter{prim@c}
+\newcounter{prim@d}
+
+
+% Figure out which nodes will collide
+
+\begin{scope}[start chain=5,node distance=1cm]
+
+% The initial list
+	%\node [on chain=5]	{\begin{tikzpicture}[remember picture]
+		\begin{scope}[start chain=1 going below,node distance=-1pt]
+
+		\foreach \i in \MainArray {
+			\node [on chain=1,tmtape] (pmain\i) {$\i$};
+		}
+		\end{scope}
+		%\end{tikzpicture}};
+
+% The Collision Check
+	%\node [on chain=5]	{\begin{tikzpicture}[remember picture]
+		\begin{scope}[xshift=2.0cm,start chain=1 going below,node distance=-1pt]
+
+
+		\foreach \i in \MainArray{
+			
+			\foreach \j in \CollArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+			\ifthenelse{\value{prim@a}=\value{prim@c}}
+			{ \node [on chain=1,tmtape1,fill=Emerald] (pc\i) {};}%
+   		{ \node [on chain=1,tmtape1] (pc\i) {};}%
+
+		}
+		\end{scope}
+		%\end{tikzpicture}};
+
+% The Reinjection Check
+	%\node [on chain=5]	{\begin{tikzpicture}[remember picture]
+		\begin{scope}[xshift=4.075cm,start chain=1 going below,node distance=-1pt]
+
+		\foreach \i in \MainArray{
+
+			\foreach \j in \ReinArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+			\foreach \j in \CollArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@d}{\i}}{}%
+			}
+
+			\ifthenelse{\value{prim@a}=\value{prim@c}}
+			{ \node [on chain=1,tmtape1,fill=Maroon] (pr\i) {};}%
+   		{ \ifthenelse{\value{prim@a}=\value{prim@d}}
+				{\node [on chain=1,tmtape1,fill=Emerald] (pr\i) {};}
+				{\node [on chain=1,tmtape1] (pr\i) {};}
+
+			}%
+
+		}
+		\end{scope}
+		%\end{tikzpicture}};
+
+% The initial list
+	%\node [on chain=5]	{\begin{tikzpicture}[remember picture,start chain=4 going above,node distance=0.5cm]
+	\begin{scope}[xshift=8.125cm,yshift=-9.0cm,start chain=4 going above,node distance=0.5cm]
+		\node [on chain=4,tmtape] (wait) {Wait};
+
+		\begin{scope}[yshift=9.0cm,start chain=1 going below,node distance=-1pt]
+			\node [on chain=1] {\footnotesize Collide \& Move};
+
+			\foreach \i in \CollArray {
+
+			\foreach \j in \ReinArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+				\ifthenelse{\value{prim@a}=\value{prim@c}}{}
+				{\node [on chain=1,tmtape] (lc\i) {$\i$};}%
+			}
+		\end{scope}
+
+		\begin{scope}[yshift=5.0cm,start chain=1 going below,node distance=-1pt]
+
+			\node [on chain=1] {\footnotesize Reinject \& Move};
+			\foreach \i in \ReinArray {
+				\node [on chain=1,tmtape] (lr\i) {$\i$};
+			}
+			\end{scope}
+
+		\end{scope}
+		%\end{tikzpicture}};
+
+% The Main list without collision and reinjection
+	%\node [on chain=5]	{\begin{tikzpicture}[remember picture]
+		\begin{scope}[xshift=12.25cm,start chain=1 going below,node distance=-1pt]
+
+		\foreach \i in \MainArray{
+
+			\foreach \j in \ReinArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+			\foreach \j in \CollArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+			\ifthenelse{\value{prim@a}=\value{prim@c}}
+			{ \node [on chain=1,tmtape] (pm\i) {$\i^*$};}%
+   		{ \node [on chain=1,tmtape] (pm\i) {$\i$};}%
+
+		}
+		\end{scope}
+		%\end{tikzpicture}};
+
+
+		\foreach \i in \MainArray
+		{
+
+			\setcounter{prim@a}{\i}
+
+			\foreach \j in \ReinArray
+			{
+				\setcounter{prim@a}{\i}
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@c}{\i}}{}%
+			}
+
+			\foreach \j in \CollArray
+			{
+				\setcounter{prim@b}{\j}
+				\ifthenelse{\value{prim@a}=\value{prim@b}}
+				{\setcounter{prim@d}{\i}}{}%
+			}
+
+			\ifthenelse{\value{prim@a}=\value{prim@c}}
+			{ 
+				\draw[MainSty] (pmain\i) to[->] (pc\i);
+
+			  \ifthenelse{\value{prim@a}=\value{prim@d}}
+				{\draw[CollSty] (pc\i) to (pr\i);}
+				{\draw[MainSty] (pc\i) to (pr\i);}
+			  \begin{scope}[ReinSty]
+				\draw[->] (pr\i.mid east) to[in=180] (lr\i);
+				\draw[->] (lr\i) to[out=0,in=180] (pm\i.mid west);
+			  \end{scope}
+
+			}%
+   		{\ifthenelse{\value{prim@a}=\value{prim@d}}
+			{ \draw[MainSty] (pmain\i) to (pc\i);
+			  \begin{scope}[CollSty]
+				\draw[->] (pc\i) to (pr\i);
+				\draw[->] (pr\i.mid east) to[in=180] (lc\i);
+				\draw[->] (lc\i) to[out=0] (pm\i.mid west);
+			  \end{scope}
+			}
+			{	\begin{scope}[MainSty]
+				\draw[->] (pmain\i) to[->] (pc\i);
+				\draw[->] (pc\i) to (pr\i);
+				\draw[->] (pr\i.mid east) to[in=180] (wait);
+				\draw[->] (wait) to[out=0] (pm\i.mid west);
+				\end{scope}
+			}%
+			}
+
+		}
+
+		\begin{scope}[yshift=0.9cm,start chain=1,node distance=1cm,align=center]
+			\node  {Initial List};
+			\node [on chain=1,tmtape,draw=none] {};
+			\node [on chain=1,tmtape1,draw=none] {\large\textbf{(1)}};
+			\node [on chain=1,tmtape1,draw=none] {\large\textbf{(2)}};
+			\node [on chain=1,tmtape,draw=none] {};
+			\node [on chain=1,tmtape,draw=none] {\large\textbf{(3)}};
+			\node [on chain=1,tmtape,draw=none] {};
+			\node [on chain=1,tmtape,draw=none] {\large\textbf{(4)}};
+	
+		\end{scope}
+
+
+
+
+
+
+
+\end{scope}
+
+\end{tikzpicture}
+%\end{document}
+
