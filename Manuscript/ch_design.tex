@@ -144,13 +144,13 @@ Now consider this, the MPI code works well for a few randomly ordered sets of ma
 
 We can take this methodology even further on the GPU by recognizing that we can parallelize the single element summations using reductions. Taking this to the limit of one thread per particle on the GPU we end up with each thread block, or several blocks, is responsible for a subset of the particle list. All of the particles in the block's list will contribute to the same element. The threads within each block read in their particles contribution to that element into shared memory. With all of the data in shared memory a very fast parallel reduction can be performed.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=5in]{introduction/not_finished.pdf}
-\end{center}
-\caption{Three levels of parallelism for the charge assign}
-\label{fig:pic_flowchart_parallel}
-\end{figure}
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=5in]{introduction/not_finished.pdf}
+%\end{center}
+%\caption{Three levels of parallelism for the charge assign}
+%\label{fig:pic_flowchart_parallel}
+%\end{figure}
 
 We implemented this technique in the sandbox PIC code and compared the runtime of the reduction particle-pull to the atomic particle-push. The results of this comparison can be seen in table \ref{tab:GPUPIC_comparison}.
 

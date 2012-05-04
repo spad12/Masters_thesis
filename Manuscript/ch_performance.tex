@@ -12,14 +12,14 @@
 %		\subsection{Machine Parameters}
 %		\subsection{Memory Bandwidth Comparison}
 
-Typical total\footnote[1]{Total run time includes MPI reduces and various other subroutines that were not ported to the GPU} speedups on this setup are on the order of 40x. A detailed breakdown of the run times per particle per time step and the speedup achieved by the GPU can be seen in table \ref{tab:speedup}. This run was performed on 2 GPUs with 17 million particles per GPU and a grid size of $64^3$.
+Typical total\footnote[1]{Total run time includes MPI reduces and various other subroutines that were not ported to the GPU} speedups on this setup are on the order of 40x. A detailed breakdown of the run times per particle per time step and the speedup achieved by the GPU can be seen in figures \ref{fig:speedup} and \ref{fig:speedup2}. This run was performed on 2 GPUs with 17 million particles per GPU and a grid size of $64^3$.
 
 \noindent \begin{figure}
 \begin{center}
 \includegraphics[width=6in]{performance/architecture_compare.pdf}
 \end{center}
 \caption{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
-\label{tab:speedup2} 
+\label{fig:speedup} 
 \end{figure} 
 
 \noindent \begin{figure}
@@ -27,12 +27,12 @@ Typical total\footnote[1]{Total run time includes MPI reduces and various other 
 \includegraphics[width=6in]{performance/architecture_speedup_compare.pdf}
 \end{center}
 \caption{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
-\label{tab:speedup2} 
+\label{fig:speedup2} 
 \end{figure} 
 
 
 
-The initial results indicate that a very high speedup was achieved for the charge assign and particle advance routines. It should also be noted that ordering the particle data allows for an incredibly fast charge assign. After accounting for the time that it takes to sort the particle list, the speedup is a more modest 75x. In other codes the primary concern has been how to quickly and efficiently keep the particle list sorted. The results in table \ref{tab:speedup} indicate, that with the latest thrust sort, that speeding up the particle list sort is no longer a major issue. The sort step could be improved by taking into account problem specific properties of a given pic code, but considering the ease of implementation and generality of the thrust sort, it is unlikely that developing an optimized problem-specific sorting routine would really be worth it. 
+The initial results indicate that a very high speedup was achieved for the charge assign and particle advance routines. It should also be noted that ordering the particle data allows for an incredibly fast charge assign. After accounting for the time that it takes to sort the particle list, the speedup is a more modest 75x. In other codes the primary concern has been how to quickly and efficiently keep the particle list sorted. The results in table \ref{fig:speedup} indicate, that with the latest thrust sort, that speeding up the particle list sort is no longer a major issue. The sort step could be improved by taking into account problem specific properties of a given pic code, but considering the ease of implementation and generality of the thrust sort, it is unlikely that developing an optimized problem-specific sorting routine would really be worth it. 
 
 We also compared the performance between single and double gpu cards, as well as performance on different CPU architectures. Table \ref{tab:speedup2} shows the run times for the CPU and GPU on a machine with 2x  Intel(R) Xeon(R) CPU E5420 @ 2.50GHz and 1x NVIDIA GeForce GTX 590. The GTX 590 is a double GPU card with 2 x 512 processing cores clocked at 630 MHz, and 2x 1.5 GB ram. 
 
@@ -191,5 +191,13 @@ One of the more interesting concepts that we investigated was the use of texture
 As you can see from figures \ref{fig:texture_tests64} and \ref{fig:texture_tests128}, utilizing texture memory does provide a noticeable performance boost for the Poisson solve, and a small boost for the particle advance. Additionally, it is interesting to not that for particle advancing varying the number of cells per bin from $4^3$ to $8^3$ does not change the run time of the texture run. The particle advance without textures becomes slower as the number of cells per bin increases, but there is a threshold for the texture based routine.
 
 It is likely that more data structures could be changed to textures, or surfaces for read/write data structures. The Poisson solve in particular could benefit from additional texture/surface memory usage. The primary barrier to this is not performance, but implementation difficulty. Textures are not easy to incorporate into code due to the fact that they cannot be passed as function arguments, and must be declared within the same file scope as they are used. Another downside to textures is the process of ``binding" global memory to the texture reference, which can be expensive.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\section{Resource Utilization}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 64^3 mesh, 40 million ptcls = 63% of time spent running kernels 200 steps
+
+One of the metrics used to measure the performance of GPU codes is the effective bandwidth utilization. The effective bandwidth is simply 
+
 
 

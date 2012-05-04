@@ -48,14 +48,14 @@ Total CPU run time & 2491 & 3284 & 1.31x \\ \hline
 \begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
 \hline
 Component & CPU (ns) & GPU (ns) & Speedup \\ \hline
-Sort & 0 & 1.428 & - \\ \hline
-Charge Assign & 150.265 & 0.577 & 260x \\ \hline
-Charge Assign \& Sort & 150.265 & 2.005 & 75x \\ \hline
-Poisson Solve & 40.347 & 3.045 & 13x \\ \hline
-Particle Advance & 188.177 & 2.475 & 76x \\ \hline
-Total\footnote[1] & 380.635 & 8.695 & 44x \\ \hline
+Sort & 0 & 1.240 & - \\ \hline
+Charge Assign & 192.055 & 0.621 & 308x \\ \hline
+Charge Assign \& Sort & 192.055 & 1.846 & 104x \\ \hline
+Poisson Solve & 38.398 & 1.896 & 21x \\ \hline
+Particle Advance & 185.245 & 1.520 & 122x \\ \hline
+Total\footnote[1] & 417.519 & 5.919 & 71x \\ \hline
 \end{tabular}
-\caption{CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
+\caption{CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 21 million particles each on a $64^3$ grid.}
 \label{tab:speedup} 
 \end{table}
 

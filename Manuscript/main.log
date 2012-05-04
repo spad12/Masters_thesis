@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  29 APR 2012 16:57
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  4 MAY 2012 07:57
 entering extended mode
  %&-line parsing enabled.
 **main
@@ -783,17 +783,11 @@ LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
 
 ) (./ch_implementation.aux) (./ch_performance.aux
 
-LaTeX Warning: Label `tab:speedup2' multiply defined.
-
-
 LaTeX Warning: Label `fig:grid_scan34ptcls16bins' multiply defined.
 
 ) (./ch_conclusion.aux) (./appa.aux
 
 LaTeX Warning: Label `tab:struct_compare' multiply defined.
-
-
-LaTeX Warning: Label `tab:speedup2' multiply defined.
 
 ) (./biblio.aux))
 \openout1 = `main.aux'.
@@ -899,40 +893,40 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
 
 
 
-] (./main.toc [7])
+] (./main.toc [7] [8])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [8] (./main.lof
+ [9] [10
+
+] (./main.lof
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9
-
-]
+ [11]
 Underfull \vbox (badness 4765) has occurred while \output is active []
 
- [10])
+ [12])
 \tf@lof=\write6
 \openout6 = `main.lof'.
 
 
-[11] [12
+[13] [14
 
 ] (./main.lot)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
- [13] [14
+ [15] [16
 
 ] (./main.loa)
 \tf@loa=\write8
 \openout8 = `main.loa'.
 
-) [15]
+) [17]
 \openout2 = `ch_introduction.aux'.
 
  (./ch_introduction.tex
-[16
+[18
 
 
 
@@ -941,33 +935,33 @@ Chapter 1.
 
 Underfull \vbox (badness 1122) has occurred while \output is active []
 
- [17]
+ [19]
 (./introduction/pic_flowchart.tex
 Overfull \hbox (1.60368pt too wide) in paragraph at lines 8--78
  [] 
  []
 
-) [18pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+) [20pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 .1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.28 		\subsection
+l.29 		\subsection
                   {GPUs vs CPUs}]
-<introduction/gpu_vs_cpu.png, id=477, 498.86375pt x 401.5pt>
+<introduction/gpu_vs_cpu.png, id=506, 498.86375pt x 401.5pt>
 File: introduction/gpu_vs_cpu.png Graphic file (type png)
 
 <use introduction/gpu_vs_cpu.png>
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 46.
- [19] [20pdfTeX warning (ext4): destination with the same identifier (name{figu
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 47.
+ [21] [22pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.1.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.64 
+l.65 
       <./introduction/gpu_vs_cpu.png>]
-<introduction/multi_parallel.png, id=488, 735.548pt x 838.332pt>
+<introduction/multi_parallel.png, id=516, 735.548pt x 838.332pt>
 File: introduction/multi_parallel.png Graphic file (type png)
 
 <use introduction/multi_parallel.png>
@@ -976,44 +970,44 @@ Overfull \hbox (11.2201pt too wide) in paragraph at lines 12--127
  [] 
  []
 
-) [21] [22pdfTeX warning (ext4): destination with the same identifier (name{fig
+) [23] [24pdfTeX warning (ext4): destination with the same identifier (name{fig
 ure.1.3}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.93 
+l.94 
       <./introduction/multi_parallel.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
+ [25pdfTeX warning (ext4): destination with the same identifier (name{figure.1.
 4}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.96 T
+l.97 T
       he last step (C), the field solve, can be fairly straightforward to pa...
-] [24]
+] [26]
 Underfull \vbox (badness 5189) has occurred while \output is active []
 
- [25]
+ [27]
 
-LaTeX Warning: Citation `NVIDIACorporation2009' on page 26 undefined on input l
-ine 111.
+LaTeX Warning: Citation `NVIDIACorporation2009' on page 28 undefined on input l
+ine 112.
 
-[26] [27]
+[28] [29]
 
-LaTeX Warning: Reference `fig:sceptic3D_profile' on page 28 undefined on input 
-line 141.
+LaTeX Warning: Reference `fig:sceptic3D_profile' on page 30 undefined on input 
+line 142.
 
 (./introduction/sceptic3D_profile.tex
 \c@a=\count169
 \c@b=\count170
 )
 
-LaTeX Warning: Reference `fig:sceptic3D_profile' on page 28 undefined on input 
-line 152.
+LaTeX Warning: Reference `fig:sceptic3D_profile' on page 30 undefined on input 
+line 153.
 
-[28]) [29pdfTeX warning (ext4): destination with the same identifier (name{figu
+[30]) [31pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.1.5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1022,23 +1016,23 @@ l.131 \include{ch_introduction}
                                ]
 \openout2 = `ch_design.aux'.
 
- (./ch_design.tex [30
+ (./ch_design.tex [32
 
 
 
 ]
 Chapter 2.
-[31] [32]
+[33] [34]
 
 pdfTeX warning: pdflatex (file ./design/sandbox_run_histo.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<design/sandbox_run_histo.pdf, id=574, 361.35pt x 216.81pt>
+<design/sandbox_run_histo.pdf, id=602, 361.35pt x 216.81pt>
 File: design/sandbox_run_histo.pdf Graphic file (type pdf)
 
 <use design/sandbox_run_histo.pdf>
 Underfull \vbox (badness 2486) has occurred while \output is active []
 
- [33pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [35pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1051,7 +1045,7 @@ Page Group detected which pdfTeX can't handle. Ignoring it.
 >]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 80.
- [34pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.1
+ [36pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.1
 }) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1148,7 +1142,7 @@ identifier (name{ALC@line.8}) has been already used, duplicate ignored
                                                   
 l.103 T
        he particle pull method] (./design/atomic_memory_collisions.tex)
-[35pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
+[37pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
 }) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1162,7 +1156,7 @@ Overfull \hbox (52.37643pt too wide) in paragraph at lines 77--79
 )
 Underfull \vbox (badness 7379) has occurred while \output is active []
 
- [36pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [38pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 3}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1195,16 +1189,9 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no ) in font nullfont!
 )
-
-pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
- found PDF version <1.5>, but at most version <1.4> allowed
-<introduction/not_finished.pdf, id=628, 848.2691pt x 600.71925pt>
-File: introduction/not_finished.pdf Graphic file (type pdf)
-
-<use introduction/not_finished.pdf>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [39pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 4}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -1214,45 +1201,31 @@ l.156
 
 pdfTeX warning: pdflatex (file ./design/atomic_vs_sorted.pdf): PDF inclusion: f
 ound PDF version <1.5>, but at most version <1.4> allowed
-<design/atomic_vs_sorted.pdf, id=635, 361.35pt x 216.81pt>
+<design/atomic_vs_sorted.pdf, id=662, 361.35pt x 216.81pt>
 File: design/atomic_vs_sorted.pdf Graphic file (type pdf)
 
 <use design/atomic_vs_sorted.pdf>
-Underfull \vbox (badness 1496) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [38pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [40pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.175 
-       <./introduction/not_finished.pdf
-
-pdfTeX warning: pdflatex (file ./introduction/not_finished.pdf): PDF inclusion:
- Page Group detected which pdfTeX can't handle. Ignoring it.
->] [39pdfTeX warning (ext4): destination with the same identifier (name{figure.
-2.6}) has been already used, duplicate ignored
-
-\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
-                                                  
-l.179 
        <./design/atomic_vs_sorted.pdf
 
 pdfTeX warning: pdflatex (file ./design/atomic_vs_sorted.pdf): PDF inclusion: P
 age Group detected which pdfTeX can't handle. Ignoring it.
->]
-Underfull \vbox (badness 3439) has occurred while \output is active []
-
- [40]
-[41] <design/kong_sort.png, id=692, 3417.76875pt x 3766.07pt>
+>] [41] [42] [43] <design/kong_sort.png, id=713, 3417.76875pt x 3766.07pt>
 File: design/kong_sort.png Graphic file (type png)
 
-<use design/kong_sort.png> [42] [43pdfTeX warning (ext4): destination with the 
-same identifier (name{figure.2.7}) has been already used, duplicate ignored
+<use design/kong_sort.png> [44] [45pdfTeX warning (ext4): destination with the 
+same identifier (name{figure.2.6}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.232 
+l.235 
        <./design/kong_sort.png>]pdfTeX warning (ext4): destination with the sam
 e identifier (name{ALC@rem.1}) has been already used, duplicate ignored
 <to be read again> 
@@ -1368,9 +1341,11 @@ red
 <to be read again> 
                    \relax 
 l.249 					\STATE
-                  swap$(p_i, p_{\alpha})$ [44] [45]pdfTeX warning (ext4): desti
-nation with the same identifier (name{ALC@rem.1}) has been already used, duplic
-ate ignored
+                  swap$(p_i, p_{\alpha})$
+Underfull \vbox (badness 6110) has occurred while \output is active []
+
+ [46]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
+1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.272 		\STATE
@@ -1518,24 +1493,21 @@ he same identifier (name{ALC@line.13}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.284 		\STATE
-               // Repeat for even bins [46]
-Underfull \vbox (badness 1609) has occurred while \output is active []
-
- [47]
+               // Repeat for even bins [47] [48]
 
 pdfTeX warning: pdflatex (file ./design/sort_compare.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<design/sort_compare.pdf, id=762, 361.35pt x 198.7425pt>
+<design/sort_compare.pdf, id=776, 361.35pt x 198.7425pt>
 File: design/sort_compare.pdf Graphic file (type pdf)
 
 <use design/sort_compare.pdf>
 Underfull \vbox (badness 2922) has occurred while \output is active []
 
- [48]
+ [49]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-8}) has been already used, duplicate ignored
+ [50pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+7}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
@@ -1547,11 +1519,11 @@ Group detected which pdfTeX can't handle. Ignoring it.
 >]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 336.
- [50]
+ [51]
 
 pdfTeX warning: pdflatex (file ./design/soa_vs_aos.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<design/soa_vs_aos.pdf, id=791, 361.35pt x 216.81pt>
+<design/soa_vs_aos.pdf, id=805, 361.35pt x 216.81pt>
 File: design/soa_vs_aos.pdf Graphic file (type pdf)
 
 <use design/soa_vs_aos.pdf>
@@ -1561,8 +1533,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 1052) has occurred while \output is active []
 
- [51pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-9}) has been already used, duplicate ignored
+ [52pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+8}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
@@ -1658,8 +1630,8 @@ e{ALC@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.385 		\ENDFOR
-                [52pdfTeX warning (ext4): destination with the same identifier 
-(name{figure.2.10}) has been already used, duplicate ignored
+                [53pdfTeX warning (ext4): destination with the same identifier 
+(name{figure.2.9}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
@@ -1668,16 +1640,16 @@ l.392
 
 pdfTeX warning: pdflatex (file ./design/soa_vs_aos.pdf): PDF inclusion: Page Gr
 oup detected which pdfTeX can't handle. Ignoring it.
->]) [53]
+>]) [54]
 \openout2 = `ch_implementation.aux'.
 
- (./ch_implementation.tex [54
-
-
-
-]
+ (./ch_implementation.tex
 Chapter 3.
-[55] [56]
+[55
+
+
+
+] [56]
 
 LaTeX Warning: Reference `sec:grid_constraints' on page 57 undefined on input l
 ine 36.
@@ -1686,7 +1658,7 @@ ine 36.
 
 pdfTeX warning: pdflatex (file ./implementation/zorder_sceptic.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<implementation/zorder_sceptic.pdf, id=845, 361.35pt x 216.81pt>
+<implementation/zorder_sceptic.pdf, id=854, 361.35pt x 216.81pt>
 File: implementation/zorder_sceptic.pdf Graphic file (type pdf)
 
 <use implementation/zorder_sceptic.pdf> [57]pdfTeX warning (ext4): destination 
@@ -2071,7 +2043,7 @@ e{ALC@line.19}) has been already used, duplicate ignored
                    \relax 
 l.114 		\ENDFOR
                 [59]
-Underfull \vbox (badness 4981) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [60]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
 1}) has been already used, duplicate ignored
@@ -2147,9 +2119,6 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 173.
-
-Underfull \vbox (badness 3138) has occurred while \output is active []
-
  [62]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.
 1}) has been already used, duplicate ignored
 <to be read again> 
@@ -2224,27 +2193,27 @@ e{ALC@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.199 		\ENDFOR
-                [63pdfTeX warning (ext4): destination with the same identifier 
-(name{figure.3.2}) has been already used, duplicate ignored
+               
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [63pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.204 
-      ]
-Underfull \vbox (badness 3838) has occurred while \output is active []
+l.210 \begin{equation}
+                      ]
 
- [64]
-
-LaTeX Warning: Citation `Patachini2010' on page 65 undefined on input line 242.
+LaTeX Warning: Citation `Patachini2010' on page 64 undefined on input line 242.
 
 
-[65]
+[64] [65]
 
 LaTeX Warning: Reference `Patacchini2007' on page 66 undefined on input line 25
 7.
 
-[66] [67]pdfTeX warning (ext4): destination with the same identifier (name{ALC@
-rem.1}) has been already used, duplicate ignored
+[66]pdfTeX warning (ext4): destination with the same identifier (name{ALC@rem.1
+}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.294 		\STATE
@@ -2461,32 +2430,37 @@ r (name{ALC@line.20}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.313 		\STATE
-               return [68] (./implementation/reinject_collide.tex
+               return [67]
+Underfull \vbox (badness 3942) has occurred while \output is active []
+
+ [68]
+(./implementation/reinject_collide.tex
 \c@prim@a=\count171
 \c@prim@b=\count172
 \c@prim@c=\count173
 \c@prim@d=\count174
-) [69pdfTeX warning (ext4): destination with the same identifier (name{figure.3
-.3}) has been already used, duplicate ignored
-
-\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
-                                                  
-l.331 
-      ] <implementation/stream_compact.jpg, id=949, 301.125pt x 152.06813pt>
+)
+<implementation/stream_compact.jpg, id=954, 301.125pt x 152.06813pt>
 File: implementation/stream_compact.jpg Graphic file (type jpg)
 
-<use implementation/stream_compact.jpg> [70pdfTeX warning (ext4): destination w
-ith the same identifier (name{figure.3.4}) has been already used, duplicate ign
+<use implementation/stream_compact.jpg> [69pdfTeX warning (ext4): destination w
+ith the same identifier (name{figure.3.3}) has been already used, duplicate ign
 ored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.352 \item T
-             otal momentum lost to particles leaving the system. <./implementat
-ion/stream_compact.jpg>]) [71]
+l.343 
+      ] [70pdfTeX warning (ext4): destination with the same identifier (name{fi
+gure.3.4}) has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.359 \end{itemize}
+                    <./implementation/stream_compact.jpg>]) [71]
 \openout2 = `ch_performance.aux'.
 
- (./ch_performance.tex [72
+
+(./ch_performance.tex [72
 
 
 
@@ -2496,14 +2470,14 @@ Chapter 4.
 
 pdfTeX warning: pdflatex (file ./performance/architecture_compare.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_compare.pdf, id=966, 361.35pt x 198.7425pt>
+<performance/architecture_compare.pdf, id=976, 361.35pt x 198.7425pt>
 File: performance/architecture_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_compare.pdf>
 
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_speedup_compare.pdf, id=967, 361.35pt x 198.7425pt>
+<performance/architecture_speedup_compare.pdf, id=977, 361.35pt x 198.7425pt>
 File: performance/architecture_speedup_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_speedup_compare.pdf> [73] [74pdfTeX warning (ext4
@@ -2528,14 +2502,14 @@ lusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 >]
-<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1001, 513.92pt x 313.17pt>
+<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1011, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan128x64x64ons8bins.pdf Graphic file (type pdf)
 <use performance/nptclsize_scan128x64x64ons8bins.pdf>
-<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1002, 513.92pt x 313.17pt>
+<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1012, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan64x32x32ons8bins.pdf Graphic file (type pdf)
 
 <use performance/nptclsize_scan64x32x32ons8bins.pdf>
-<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1003, 516.93124pt x 311
+<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1013, 516.93124pt x 311
 .1625pt>
 File: performance/nptclspeedup_scan128x64x64ons8bins.pdf Graphic file (type pdf
 )
@@ -2563,23 +2537,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
                                                   
 l.74 
       <./performance/nptclspeedup_scan128x64x64ons8bins.pdf>]
-<performance/gridsize_scan16ptcls8bins.pdf, id=1038, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls8bins.pdf, id=1048, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls8bins.pdf>
-<performance/gridsize_scan16ptcls16bins.pdf, id=1039, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls16bins.pdf, id=1049, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls16bins.pdf>
-<performance/gridsize_scan34ptcls8bins.pdf, id=1040, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls8bins.pdf, id=1050, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls8bins.pdf>
-<performance/gridsize_scan34ptcls16bins.pdf, id=1041, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls16bins.pdf, id=1051, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls16bins.pdf>
-<performance/gridsize_speedup_scan.pdf, id=1042, 513.92pt x 313.17pt>
+<performance/gridsize_speedup_scan.pdf, id=1052, 513.92pt x 313.17pt>
 File: performance/gridsize_speedup_scan.pdf Graphic file (type pdf)
 
 <use performance/gridsize_speedup_scan.pdf> [78] [79pdfTeX warning (ext4): dest
@@ -2616,7 +2590,7 @@ ifier (name{figure.4.10}) has been already used, duplicate ignored
                                                   
 l.146 
        <./performance/gridsize_speedup_scan.pdf>]
-<performance/gridshape_scan.pdf, id=1093, 513.92pt x 313.17pt>
+<performance/gridshape_scan.pdf, id=1103, 513.92pt x 313.17pt>
 File: performance/gridshape_scan.pdf Graphic file (type pdf)
 
 <use performance/gridshape_scan.pdf> [82pdfTeX warning (ext4): destination with
@@ -2630,7 +2604,7 @@ l.158
 
 pdfTeX warning: pdflatex (file ./performance/kernel_param.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<performance/kernel_param.pdf, id=1105, 361.35pt x 198.7425pt>
+<performance/kernel_param.pdf, id=1115, 361.35pt x 198.7425pt>
 File: performance/kernel_param.pdf Graphic file (type pdf)
 
 <use performance/kernel_param.pdf> [83pdfTeX warning (ext4): destination with t
@@ -2648,29 +2622,31 @@ Page Group detected which pdfTeX can't handle. Ignoring it.
 
 pdfTeX warning: pdflatex (file ./performance/texture_tests64.pdf): PDF inclusio
 n: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/texture_tests64.pdf, id=1121, 361.35pt x 198.7425pt>
+<performance/texture_tests64.pdf, id=1131, 361.35pt x 198.7425pt>
 File: performance/texture_tests64.pdf Graphic file (type pdf)
 
 <use performance/texture_tests64.pdf>
 
 pdfTeX warning: pdflatex (file ./performance/texture_tests128.pdf): PDF inclusi
 on: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/texture_tests128.pdf, id=1122, 361.35pt x 198.7425pt>
+<performance/texture_tests128.pdf, id=1132, 361.35pt x 198.7425pt>
 File: performance/texture_tests128.pdf Graphic file (type pdf)
 
-<use performance/texture_tests128.pdf>) [84pdfTeX warning (ext4): destination w
-ith the same identifier (name{figure.4.13}) has been already used, duplicate ig
-nored
+<use performance/texture_tests128.pdf>
+Underfull \vbox (badness 2512) has occurred while \output is active []
+
+ [84pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+13}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.134 \include{ch_performance}
-                               <./performance/texture_tests64.pdf
+l.194 
+       <./performance/texture_tests64.pdf
 
 pdfTeX warning: pdflatex (file ./performance/texture_tests64.pdf): PDF inclusio
 n: Page Group detected which pdfTeX can't handle. Ignoring it.
->] [85pdfTeX warning (ext4): destination with the same identifier (name{figure.
-4.14}) has been already used, duplicate ignored
+>]) [85pdfTeX warning (ext4): destination with the same identifier (name{figure
+.4.14}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
@@ -2688,14 +2664,14 @@ on: Page Group detected which pdfTeX can't handle. Ignoring it.
 
 ]
 Chapter 5.
-) [87]
+[87] [88]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [89])
+[90]
 \openout2 = `appa.aux'.
 
- (./appa.tex [88
-
-
-
-]
+ (./appa.tex
 Appendix A.
 
 Underfull \hbox (badness 10000) in paragraph at lines 8--8
@@ -2746,13 +2722,17 @@ Overfull \hbox (14.71854pt too wide) in paragraph at lines 63--73
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[89pdfTeX warning (ext4): destination with the same identifier (name{table.A.1}
-) has been already used, duplicate ignored
+[91
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.A.1}) h
+as been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.80 \clearpage
-               ] [90pdfTeX warning (ext4): destination with the same identifier
+               ] [92pdfTeX warning (ext4): destination with the same identifier
  (name{table.A.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2770,7 +2750,7 @@ e{table.A.4}) has been already used, duplicate ignored
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.80 \clearpage
-               ] [91pdfTeX warning (ext4): destination with the same identifier
+               ] [93pdfTeX warning (ext4): destination with the same identifier
  (name{table.A.5}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2779,16 +2759,16 @@ l.80 \clearpage
                ])
 \openout2 = `biblio.aux'.
 
- (./biblio.tex (./main.bbl [92
+ (./biblio.tex (./main.bbl [94
 
 
 
 
-] [93]
+] [95]
 Missing character: There is no â in font cmr12!
 Missing character: There is no ˜ in font cmr12!
 Missing character: There is no † in font cmr12!
-)) [94] (./main.aux
+)) [96] (./main.aux
 (./cover.aux) (./contents.aux) (./ch_introduction.aux) (./ch_design.aux)
 (./ch_implementation.aux) (./ch_performance.aux) (./ch_conclusion.aux)
 (./appa.aux) (./biblio.aux))
@@ -2800,10 +2780,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19695 strings out of 256216
- 371362 string characters out of 1917072
- 471678 words of memory out of 1500000
- 22170 multiletter control sequences out of 10000+200000
+ 19703 strings out of 256216
+ 371365 string characters out of 1917072
+ 471620 words of memory out of 1500000
+ 22173 multiletter control sequences out of 10000+200000
  12080 words of font info for 43 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
  56i,19n,64p,1547b,1662s stack positions out of 5000i,500n,6000p,200000b,15000s
@@ -2811,6 +2791,9 @@ pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.2.10} has been referenced but does not exist
 , replaced by a fixed one
 
 </usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/typ
@@ -2826,9 +2809,9 @@ mf/fonts/type1/bluesky/cm/cmr6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr
 /type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy7.pfb
 ></usr/share/texmf/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf/fonts/typ
 e1/bluesky/cm/cmti12.pfb>
-Output written on main.pdf (94 pages, 3995668 bytes).
+Output written on main.pdf (96 pages, 4000365 bytes).
 PDF statistics:
- 1321 PDF objects out of 1440 (max. 8388607)
- 304 named destinations out of 1000 (max. 131072)
- 517 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1342 PDF objects out of 1440 (max. 8388607)
+ 310 named destinations out of 1000 (max. 131072)
+ 544 words of extra memory for PDF output out of 10000 (max. 10000000)
 
