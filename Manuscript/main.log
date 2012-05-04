@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  4 MAY 2012 07:57
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2012.4.15)  4 MAY 2012 08:26
 entering extended mode
  %&-line parsing enabled.
 **main
@@ -778,9 +778,6 @@ LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
 
 LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
 
-
-LaTeX Warning: Label `fig:pic_flowchart_parallel' multiply defined.
-
 ) (./ch_implementation.aux) (./ch_performance.aux
 
 LaTeX Warning: Label `fig:grid_scan34ptcls16bins' multiply defined.
@@ -948,7 +945,7 @@ Overfull \hbox (1.60368pt too wide) in paragraph at lines 8--78
                                                   
 l.29 		\subsection
                   {GPUs vs CPUs}]
-<introduction/gpu_vs_cpu.png, id=506, 498.86375pt x 401.5pt>
+<introduction/gpu_vs_cpu.png, id=504, 498.86375pt x 401.5pt>
 File: introduction/gpu_vs_cpu.png Graphic file (type png)
 
 <use introduction/gpu_vs_cpu.png>
@@ -961,7 +958,7 @@ re.1.2}) has been already used, duplicate ignored
                                                   
 l.65 
       <./introduction/gpu_vs_cpu.png>]
-<introduction/multi_parallel.png, id=516, 735.548pt x 838.332pt>
+<introduction/multi_parallel.png, id=514, 735.548pt x 838.332pt>
 File: introduction/multi_parallel.png Graphic file (type png)
 
 <use introduction/multi_parallel.png>
@@ -1026,7 +1023,7 @@ Chapter 2.
 
 pdfTeX warning: pdflatex (file ./design/sandbox_run_histo.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<design/sandbox_run_histo.pdf, id=602, 361.35pt x 216.81pt>
+<design/sandbox_run_histo.pdf, id=600, 361.35pt x 216.81pt>
 File: design/sandbox_run_histo.pdf Graphic file (type pdf)
 
 <use design/sandbox_run_histo.pdf>
@@ -1201,7 +1198,7 @@ l.156
 
 pdfTeX warning: pdflatex (file ./design/atomic_vs_sorted.pdf): PDF inclusion: f
 ound PDF version <1.5>, but at most version <1.4> allowed
-<design/atomic_vs_sorted.pdf, id=662, 361.35pt x 216.81pt>
+<design/atomic_vs_sorted.pdf, id=660, 361.35pt x 216.81pt>
 File: design/atomic_vs_sorted.pdf Graphic file (type pdf)
 
 <use design/atomic_vs_sorted.pdf>
@@ -1217,7 +1214,7 @@ l.175
 
 pdfTeX warning: pdflatex (file ./design/atomic_vs_sorted.pdf): PDF inclusion: P
 age Group detected which pdfTeX can't handle. Ignoring it.
->] [41] [42] [43] <design/kong_sort.png, id=713, 3417.76875pt x 3766.07pt>
+>] [41] [42] [43] <design/kong_sort.png, id=711, 3417.76875pt x 3766.07pt>
 File: design/kong_sort.png Graphic file (type png)
 
 <use design/kong_sort.png> [44] [45pdfTeX warning (ext4): destination with the 
@@ -1497,7 +1494,7 @@ l.284 		\STATE
 
 pdfTeX warning: pdflatex (file ./design/sort_compare.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<design/sort_compare.pdf, id=776, 361.35pt x 198.7425pt>
+<design/sort_compare.pdf, id=774, 361.35pt x 198.7425pt>
 File: design/sort_compare.pdf Graphic file (type pdf)
 
 <use design/sort_compare.pdf>
@@ -1523,7 +1520,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 
 pdfTeX warning: pdflatex (file ./design/soa_vs_aos.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<design/soa_vs_aos.pdf, id=805, 361.35pt x 216.81pt>
+<design/soa_vs_aos.pdf, id=803, 361.35pt x 216.81pt>
 File: design/soa_vs_aos.pdf Graphic file (type pdf)
 
 <use design/soa_vs_aos.pdf>
@@ -1658,7 +1655,7 @@ ine 36.
 
 pdfTeX warning: pdflatex (file ./implementation/zorder_sceptic.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<implementation/zorder_sceptic.pdf, id=854, 361.35pt x 216.81pt>
+<implementation/zorder_sceptic.pdf, id=852, 361.35pt x 216.81pt>
 File: implementation/zorder_sceptic.pdf Graphic file (type pdf)
 
 <use implementation/zorder_sceptic.pdf> [57]pdfTeX warning (ext4): destination 
@@ -2440,7 +2437,7 @@ Underfull \vbox (badness 3942) has occurred while \output is active []
 \c@prim@c=\count173
 \c@prim@d=\count174
 )
-<implementation/stream_compact.jpg, id=954, 301.125pt x 152.06813pt>
+<implementation/stream_compact.jpg, id=952, 301.125pt x 152.06813pt>
 File: implementation/stream_compact.jpg Graphic file (type jpg)
 
 <use implementation/stream_compact.jpg> [69pdfTeX warning (ext4): destination w
@@ -2470,14 +2467,14 @@ Chapter 4.
 
 pdfTeX warning: pdflatex (file ./performance/architecture_compare.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_compare.pdf, id=976, 361.35pt x 198.7425pt>
+<performance/architecture_compare.pdf, id=974, 361.35pt x 198.7425pt>
 File: performance/architecture_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_compare.pdf>
 
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/architecture_speedup_compare.pdf, id=977, 361.35pt x 198.7425pt>
+<performance/architecture_speedup_compare.pdf, id=975, 361.35pt x 198.7425pt>
 File: performance/architecture_speedup_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_speedup_compare.pdf> [73] [74pdfTeX warning (ext4
@@ -2502,14 +2499,14 @@ lusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 pdfTeX warning: pdflatex (file ./performance/architecture_speedup_compare.pdf):
  PDF inclusion: Page Group detected which pdfTeX can't handle. Ignoring it.
 >]
-<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1011, 513.92pt x 313.17pt>
+<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1009, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan128x64x64ons8bins.pdf Graphic file (type pdf)
 <use performance/nptclsize_scan128x64x64ons8bins.pdf>
-<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1012, 513.92pt x 313.17pt>
+<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1010, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan64x32x32ons8bins.pdf Graphic file (type pdf)
 
 <use performance/nptclsize_scan64x32x32ons8bins.pdf>
-<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1013, 516.93124pt x 311
+<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1011, 516.93124pt x 311
 .1625pt>
 File: performance/nptclspeedup_scan128x64x64ons8bins.pdf Graphic file (type pdf
 )
@@ -2537,23 +2534,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
                                                   
 l.74 
       <./performance/nptclspeedup_scan128x64x64ons8bins.pdf>]
-<performance/gridsize_scan16ptcls8bins.pdf, id=1048, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls8bins.pdf, id=1046, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls8bins.pdf>
-<performance/gridsize_scan16ptcls16bins.pdf, id=1049, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls16bins.pdf, id=1047, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls16bins.pdf>
-<performance/gridsize_scan34ptcls8bins.pdf, id=1050, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls8bins.pdf, id=1048, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls8bins.pdf>
-<performance/gridsize_scan34ptcls16bins.pdf, id=1051, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls16bins.pdf, id=1049, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls16bins.pdf>
-<performance/gridsize_speedup_scan.pdf, id=1052, 513.92pt x 313.17pt>
+<performance/gridsize_speedup_scan.pdf, id=1050, 513.92pt x 313.17pt>
 File: performance/gridsize_speedup_scan.pdf Graphic file (type pdf)
 
 <use performance/gridsize_speedup_scan.pdf> [78] [79pdfTeX warning (ext4): dest
@@ -2590,7 +2587,7 @@ ifier (name{figure.4.10}) has been already used, duplicate ignored
                                                   
 l.146 
        <./performance/gridsize_speedup_scan.pdf>]
-<performance/gridshape_scan.pdf, id=1103, 513.92pt x 313.17pt>
+<performance/gridshape_scan.pdf, id=1101, 513.92pt x 313.17pt>
 File: performance/gridshape_scan.pdf Graphic file (type pdf)
 
 <use performance/gridshape_scan.pdf> [82pdfTeX warning (ext4): destination with
@@ -2604,7 +2601,7 @@ l.158
 
 pdfTeX warning: pdflatex (file ./performance/kernel_param.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<performance/kernel_param.pdf, id=1115, 361.35pt x 198.7425pt>
+<performance/kernel_param.pdf, id=1113, 361.35pt x 198.7425pt>
 File: performance/kernel_param.pdf Graphic file (type pdf)
 
 <use performance/kernel_param.pdf> [83pdfTeX warning (ext4): destination with t
@@ -2622,14 +2619,14 @@ Page Group detected which pdfTeX can't handle. Ignoring it.
 
 pdfTeX warning: pdflatex (file ./performance/texture_tests64.pdf): PDF inclusio
 n: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/texture_tests64.pdf, id=1131, 361.35pt x 198.7425pt>
+<performance/texture_tests64.pdf, id=1129, 361.35pt x 198.7425pt>
 File: performance/texture_tests64.pdf Graphic file (type pdf)
 
 <use performance/texture_tests64.pdf>
 
 pdfTeX warning: pdflatex (file ./performance/texture_tests128.pdf): PDF inclusi
 on: found PDF version <1.5>, but at most version <1.4> allowed
-<performance/texture_tests128.pdf, id=1132, 361.35pt x 198.7425pt>
+<performance/texture_tests128.pdf, id=1130, 361.35pt x 198.7425pt>
 File: performance/texture_tests128.pdf Graphic file (type pdf)
 
 <use performance/texture_tests128.pdf>
@@ -2780,9 +2777,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19703 strings out of 256216
- 371365 string characters out of 1917072
- 471620 words of memory out of 1500000
+ 19702 strings out of 256216
+ 371354 string characters out of 1917072
+ 471594 words of memory out of 1500000
  22173 multiletter control sequences out of 10000+200000
  12080 words of font info for 43 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
@@ -2793,7 +2790,7 @@ st, replaced by a fixed one
 pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
 , replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.2.10} has been referenced but does not exist
+pdfTeX warning (dest): name{section.4.5} has been referenced but does not exist
 , replaced by a fixed one
 
 </usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/typ
@@ -2809,9 +2806,9 @@ mf/fonts/type1/bluesky/cm/cmr6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr
 /type1/bluesky/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsy7.pfb
 ></usr/share/texmf/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf/fonts/typ
 e1/bluesky/cm/cmti12.pfb>
-Output written on main.pdf (96 pages, 4000365 bytes).
+Output written on main.pdf (96 pages, 3999859 bytes).
 PDF statistics:
- 1342 PDF objects out of 1440 (max. 8388607)
- 310 named destinations out of 1000 (max. 131072)
+ 1340 PDF objects out of 1440 (max. 8388607)
+ 309 named destinations out of 1000 (max. 131072)
  544 words of extra memory for PDF output out of 10000 (max. 10000000)
 

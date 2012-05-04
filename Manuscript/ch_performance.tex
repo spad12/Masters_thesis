@@ -193,11 +193,11 @@ As you can see from figures \ref{fig:texture_tests64} and \ref{fig:texture_tests
 It is likely that more data structures could be changed to textures, or surfaces for read/write data structures. The Poisson solve in particular could benefit from additional texture/surface memory usage. The primary barrier to this is not performance, but implementation difficulty. Textures are not easy to incorporate into code due to the fact that they cannot be passed as function arguments, and must be declared within the same file scope as they are used. Another downside to textures is the process of ``binding" global memory to the texture reference, which can be expensive.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Resource Utilization}
+	%\section{Resource Utilization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 64^3 mesh, 40 million ptcls = 63% of time spent running kernels 200 steps
 
-One of the metrics used to measure the performance of GPU codes is the effective bandwidth utilization. The effective bandwidth is simply 
+%One of the metrics used to measure the performance of GPU codes is the effective bandwidth utilization. The effective bandwidth is simply 
 
 
 
