@@ -1,0 +1,148 @@
+\makeglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newacronym{ac:ecc}{ECC}{Error-Correction Coding}
+
+\newacronym{ac:mpi}{MPI}{Message Passing Interface}
+
+\newacronym{ac:pic}{PIC}{Particle-In-Cell}
+
+\newacronym{ac:gpu}{GPU}{Graphical Processing Unit}
+
+\newacronym{ac:cpu}{CPU}{Central Processing Unit}
+
+\newacronym{ac:cudpp}{CUDPP}{Cuda data parallel primitives}
+
+\newacronym{ac:sm}{SM}{Streaming Multiprocessor}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other Terms
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newglossaryentry{gls:CUDA}
+{
+  name=CUDA,
+  description={NVIDIA's Compute Unified Architecture,
+				 a general purpose computing architecture for NVIDIA GPUs that uses C as a high-level programming language}
+}
+
+\newglossaryentry{gls:atomicmemoryoperation}
+{
+  name=atomic memory operation,
+  description={Memory access that to a device DRAM or shared memory that is guaranteed to be seen by all threads. Atomic operations lock down a memory address, delaying accesses by any other threads until the operation is complete.},
+	plural=atomic memory operations
+}
+
+\newglossaryentry{gls:warp}
+{
+  name=warp,
+  description={Grouping of threads on the GPU. One warp consists of 32 threads that execute simultaneously on a single \gls{gls:streamingmultiprocessor}. A warp executes one common instruction at a time, although not all threads in the warp need act on the issued instruction.},
+	plural=warps
+}
+
+\newglossaryentry{gls:streamingmultiprocessor}
+{
+  name=streaming multiprocessor,
+  description={SIMD processing unit on an NVIDIA GPU. Each streaming multiprocessor (SM) contains a number of streaming processors, also known as ``CUDA cores". The SM creates, manages, schedules and executes multiple \glspl{gls:warp} at a time. Many GPUs contain multiple SMs.\cite{NVIDIACorporation2011} }
+}
+
+\newglossaryentry{gls:threadblock}
+{
+  name=thread block,
+  description={Grouping of threads on the GPU. Threads within the same block can communicate using the \_\_shared\_\_ memory space, and can be synchronized within a kernel using the \_\_syncthreads(); function. Thread blocks exist on a single SM, and can contain anywhere from 1 to 1024 threads, which are divided up into warps for execution. For additional information please see the \emph{NVIDA CUDA-C Programming Guide}\cite{NVIDIACorporation2011} }
+}
+
+\newglossaryentry{gls:kernel}
+{
+  name=kernel,
+  description={CUDA function that is called by the CPU and executes on the GPU. When a kernel is launched multiple thread blocks are created and executed on the GPU. Kernels execute asynchronously with respect to the CPU code. Multiple kernels can exist simultaneously on the same GPU, and can be called asynchronously with memory transfers between CPU and GPU memory spaces. Kernels are also known as \_\_global\_\_ functions.}
+}
+
+\newglossaryentry{gls:host}
+{
+  name=host,
+  description={A system consisting of the CPU and its memory space.}
+}
+
+\newglossaryentry{gls:device}
+{
+  name=device,
+  description={A system consisting of a single GPU.}
+}
+
+\newglossaryentry{gls:sharedmemory}
+{
+  name=shared memory,
+  description={User managed cache on a streaming multiprocessor. Shared memory can be nearly as fast as registers and can be used to facilitate communication between threads in the same thread block.}
+}
+
+\newglossaryentry{gls:globalmemory}
+{
+  name=global memory,
+  description={GPU DRAM. Large memory space on the GPU, facilitates communication between threads in different thread blocks, and can be accessed by the CPU using cudaMemcpy() operations.}
+}
+
+
+
+
+
+
+\newglossaryentry{gls:thrust}
+{
+  name=THRUST,
+  description={Parallel algorithm template library for GPUs and multi-core CPUs.\cite{NVIDIACorporation2011a} }
+}
+
+
+\newglossaryentry{gls:CUBLAS}
+{
+  name=CUBLAS,
+  description={Fully GPU accelerated BLAS package provided with the CUDA toolkit.\cite{NVIDIACorporation2012} }
+}
+
+\newglossaryentry{gls:CUFFT}
+{
+  name=CUFFT,
+  description={Fully GPU accelerated fast Fourier transform package provided with the CUDA toolkit.\cite{NVIDIACorporation2012a}}
+}
+
+\newglossaryentry{gls:CUSPARSE}
+{
+  name=CUSPARSE,
+  description={Fully GPU accelerated sparse matrix linear algebra package provided with the CUDA toolkit.\cite{NVIDIACorporation2012c}}
+}
+
+\newglossaryentry{gls:CURAND}
+{
+  name=CURAND,
+  description={Fully GPU accelerated, high quality pseudo-random and quasi-random number generation library provided with the CUDA toolkit.\cite{NVIDIACorporation2012b}}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

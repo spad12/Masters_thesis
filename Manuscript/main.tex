@@ -16,9 +16,12 @@
 %% Page Intentionally Left Blank'', use the ``leftblank'' option, as
 %% above. 
 
-\documentclass[12pt,twoside]{mitthesis}
+\documentclass[12pt,vi,twoside]{mitthesis}
 \usepackage{lgrind}
 \pagestyle{plain}
+\usepackage[acronym,nonumberlist]{glossaries}
+\usepackage{hyperref}
+
 
 \usepackage{graphicx} % support the \includegraphics command and options
 \usepackage[usenames,dvipsnames]{xcolor}
@@ -35,10 +38,11 @@
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
-\usepackage{hyperref}
+
 \usepackage{algorithmic}
 \usepackage[chapter]{algorithm}
 \usepackage{ifthen}
+
 
 
 \usepackage{float}
@@ -114,6 +118,7 @@
 %\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
 
 
+
 %% This bit allows you to either specify only the files which you wish to
 %% process, or `all' to process all files which you \include.
 %% Krishna Sethuraman (1990).
@@ -123,11 +128,20 @@
 %\def\all{all}
 %\ifx\files\all \typeout{Including all files.} \else \typeout{Including only \files.} \includeonly{\files} \fi
 
+
+\include{glossary}
+
+\renewcommand*{\glossaryname}{Frequently Used Terms}
+
+
+
 \begin{document}
 
 \include{cover}
 \pagestyle{plain}
 \include{contents}
+\glsaddall
+\printglossaries
 \include{ch_introduction}
 \include{ch_design}
 \include{ch_implementation}

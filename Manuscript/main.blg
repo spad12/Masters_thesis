@@ -11,48 +11,46 @@ A level-1 auxiliary file: appa.aux
 A level-1 auxiliary file: biblio.aux
 The style file: plain.bst
 Database file #1: main.bib
-Warning--I didn't find a database entry for "NVIDIACorporation2009"
-Warning--empty institution in NVIDIACorporation2011a
 Warning--there's a number but no volume in Satish2009
-You've used 18 entries,
+You've used 26 entries,
             2118 wiz_defined-function locations,
-            626 strings with 7511 characters,
-and the built_in function-call counts, 5839 in all, are:
-= -- 578
-> -- 295
-< -- 3
-+ -- 117
-- -- 99
-* -- 446
-:= -- 1024
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 102
+            655 strings with 8241 characters,
+and the built_in function-call counts, 7553 in all, are:
+= -- 760
+> -- 351
+< -- 7
++ -- 141
+- -- 115
+* -- 529
+:= -- 1356
+add.period$ -- 79
+call.type$ -- 26
+change.case$ -- 136
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 202
-empty$ -- 420
-format.name$ -- 99
-if$ -- 1166
+cite$ -- 27
+duplicate$ -- 274
+empty$ -- 553
+format.name$ -- 115
+if$ -- 1508
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 15
-newline$ -- 93
-num.names$ -- 38
-pop$ -- 84
+int.to.str$ -- 26
+missing$ -- 16
+newline$ -- 133
+num.names$ -- 54
+pop$ -- 107
 preamble$ -- 1
-purify$ -- 85
+purify$ -- 109
 quote$ -- 0
-skip$ -- 130
+skip$ -- 172
 stack$ -- 0
-substring$ -- 350
-swap$ -- 27
-text.length$ -- 3
+substring$ -- 421
+swap$ -- 33
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
-warning$ -- 2
-while$ -- 58
-width$ -- 20
-write$ -- 201
-(There were 3 warnings)
+type$ -- 102
+warning$ -- 1
+while$ -- 76
+width$ -- 28
+write$ -- 290
+(There was 1 warning)

@@ -1,0 +1,185 @@
+% Turing Machine
+% Author: Sebastian Sardina
+%\documentclass[a4paper,10pt]{article}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{ifthen}
+%\usepackage{tikz}
+%\usetikzlibrary{chains,fit,shapes}
+%\begin{document}
+
+\noindent
+\begin{tikzpicture}
+		\tikzstyle{every path}=[very thick]
+
+		\edef\sizetape{1.0cm}
+		\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+		\tikzstyle{tmtape1}=[draw,minimum size=0.4cm]
+		\tikzstyle{tmhead}=[arrow box,draw,minimum size=0.4cm,arrow box
+		arrows={east:.25cm}]
+		\tikzstyle{tmblock}=[arrow box,draw,minimum height=0.4cm,minimum width=2.4cm,arrow box
+		arrows={east:.25cm}]
+
+		\tikzstyle{cfill1}=[fill=Purple]
+		\tikzstyle{cfill2}=[fill=SkyBlue]
+		\tikzstyle{cfill3}=[fill=Maroon]
+		\tikzstyle{cfill4}=[fill=Emerald]
+
+
+\def\ji{}
+
+\node [shift={(-1.0cm,-2cm)}]
+	{
+		\begin{tikzpicture}[remember picture]
+
+
+
+
+					\begin{scope}[start chain=2 going below,start chain=1 going right,node distance=-0.15mm] at (current page.north west)
+						 \node [on chain=2,yshift=0.5cm] {Particle Stream};
+						 \node [on chain=1,tmtape1,draw=none,xshift=-5cm] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill1] (input) {};
+						 \node [on chain=1,tmtape1,cfill1] (i0) {};
+						 \node [on chain=1,tmtape1,cfill1] (i3) {};
+						 \node [on chain=1,tmtape1,cfill1] (i4) {};
+						 \node [on chain=1,tmtape1,cfill1] (i5) {};
+						 \node [on chain=1,tmtape1,cfill1] {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill2] (i6) {};
+						 \node [on chain=1,tmtape1,cfill2] (i7) {};
+						 \node [on chain=1,tmtape1,cfill2] (i8) {};
+						 \node [on chain=1,tmtape1,cfill2] (i9) {};
+						 \node [on chain=1,tmtape1,cfill2] (i10) {};
+						 \node [on chain=1,tmtape1,cfill2] (i11) {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 \node [on chain=1,tmtape1,cfill3] (i12) {};
+						 \node [on chain=1,tmtape1,cfill3] (i13) {};
+						 \node [on chain=1,tmtape1,cfill3] (i14) {};
+						 \node [on chain=1,tmtape1,cfill3] (i15) {};
+						 \node [on chain=1,tmtape1,cfill3] (i16) {};
+						 \node [on chain=1,tmtape1,cfill3] (i17) {};
+						 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+						 
+					\end{scope}
+					\begin{scope}[yshift=-0.48cm,start chain=2 going below,start chain=1 going right,node distance=-0.15mm] at (current page.north west)
+						 \node [on chain=1,tmtape1,draw=none,xshift=-4.88cm] (nodestare) {};
+						 \node [on chain=1,tmtape1,draw=none] (i20) {};
+						 \node [on chain=1,tmtape1,draw=none] (i21) {};
+						 \node [on chain=1,tmtape1,draw=none] (i22) {};
+						 \node [on chain=1,tmtape1,draw=none] (i23) {};
+						 \node [on chain=1,tmtape1,draw=none] (i24) {};
+						 \node [on chain=1,tmtape1,draw=none] (i25) {};
+						 \node [on chain=1,tmtape,draw=none] {};
+						 \node [on chain=1,tmtape1,draw=none] (i26) {};
+						 \node [on chain=1,tmtape1,draw=none] (i27) {};
+						 \node [on chain=1,tmtape1,draw=none] (i28) {};
+						 \node [on chain=1,tmtape1,draw=none] (i29) {};
+						 \node [on chain=1,tmtape1,draw=none] (i210) {};
+						 \node [on chain=1,tmtape1,draw=none] (i211) {};
+						 \node [on chain=1,tmtape,draw=none] {};
+						 \node [on chain=1,tmtape1,draw=none] (i212) {};
+						 \node [on chain=1,tmtape1,draw=none] (i213) {};
+						 \node [on chain=1,tmtape1,draw=none] (i214) {};
+						 \node [on chain=1,tmtape1,draw=none] (i215) {};
+						 \node [on chain=1,tmtape1,draw=none] (i216) {};
+						 \node [on chain=1,tmtape1,draw=none] (i217) {};
+						 \node [on chain=1,tmtape,draw=none] {};
+						 
+					\end{scope}
+
+
+		\node [tmblock,yshift=-0.25cm,anchor=west] at (input.south west) (head1) {Thread Block 1};
+		\node [tmblock,yshift=-0.25cm,anchor=west] at (i6.south west) (head2) {Thread Block 2};
+		\node [tmblock,yshift=-0.25cm,anchor=west] at (i12.south west) (head3) {Thread Block 3};
+		
+\def\reduceArray{{3,2,1}}
+\def\shiftArray{{0.6cm,0.2cm,0.2cm}}
+			\foreach \j in {3,...,5} {
+				\pgfmathtruncatemacro{\k}{\j - 1}
+				\pgfmathtruncatemacro{\d}{\j - 3}
+				\pgfmathsetmacro{\shift}{\shiftArray[\d]}
+
+				\foreach \l in {1,...,3}{
+
+					\pgfmathtruncatemacro{\a}{6*\l - 5}
+					\pgfmathtruncatemacro{\c}{\l}
+
+					\foreach \i in {0,...,5}{
+
+						\pgfmathtruncatemacro{\b}{\a + \i - 1}
+						\pgfmathtruncatemacro{\bc}{\reduceArray[\d]}
+						\ifthenelse{\i < \bc}{
+						
+						\node [tmtape1,cfill\l,yshift=-1.0cm,xshift=\shift] at (i\k\b) (i\j\b) {};}{}
+					}
+				}
+
+			}
+
+		\foreach \k in {0,6,12}{
+			\foreach \i in {0,1,2} {
+
+
+					\pgfmathtruncatemacro{\a}{\i + \k}
+					\pgfmathtruncatemacro{\b}{2*\i + \k}
+					\pgfmathtruncatemacro{\c}{\b + 1}
+					\path[->] (i2\b) edge[in=90,out=-90] (i3\a);
+					\path[->] (i2\c) edge[in=90,out=-90] (i3\a);
+			}
+		}
+		\foreach \k in {0,6,12}{
+
+
+
+			\foreach \i in {0} {
+
+
+					\pgfmathtruncatemacro{\a}{\i + \k}
+					\pgfmathtruncatemacro{\b}{2*\i + \k}
+					\pgfmathtruncatemacro{\c}{\b + 1}
+					\path[->] (i3\b) edge[in=90,out=-90] (i4\a);
+					\path[->] (i3\c) edge[in=90,out=-90] (i4\a);
+			}
+			\pgfmathtruncatemacro{\a}{\k + 1}
+			\pgfmathtruncatemacro{\b}{2 + \k}
+
+			\path[->] (i3\b) edge[in=90,out=-90] (i4\a);
+		}
+		\foreach \k in {0,6,12}{
+
+
+
+			\foreach \i in {0} {
+
+
+					\pgfmathtruncatemacro{\a}{\i + \k}
+					\pgfmathtruncatemacro{\b}{2*\i + \k}
+					\pgfmathtruncatemacro{\c}{\b + 1}
+					\path[->] (i4\b) edge[in=90,out=-90] (i5\a);
+					\path[->] (i4\c) edge[in=90,out=-90] (i5\a);
+			}
+
+		}
+
+		%% Draw Density Array
+		\begin{scope}[start chain=1 going right,node distance=-0.15mm]
+			 \node [on chain=1,tmtape,draw=none,yshift=-5cm,xshift=1.92cm] at (nodestare) {$\ldots$};
+			 \node [on chain=1,tmtape,fill=Gray] (input) {};
+			 \node [on chain=1,tmtape,cfill1] (j1) {j};
+			 \node [on chain=1,tmtape,cfill2] (j2) {j+1};
+			 \node [on chain=1,tmtape,cfill3] (j3) {j+2};
+			 \node [on chain=1,tmtape,fill=Gray] {};
+			 \node [on chain=1,tmtape,draw=none] {$\ldots$};
+			 \node [on chain=1] {\textbf{Density Array}};
+		\end{scope}
+
+		\path[->] (i50) edge[in=90,out=-90] (j1);
+		\path[->] (i56) edge[in=90,out=-90] (j2);
+		\path[->] (i512) edge[in=90,out=-90] (j3);
+
+
+
+			\end{tikzpicture}
+	};
+\end{tikzpicture}
+%\end{document}
+

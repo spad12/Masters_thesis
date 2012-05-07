@@ -3,18 +3,19 @@
 \BOOKMARK [2][-]{subsection.1.1.1}{GPUs vs CPUs}{section.1.1}
 \BOOKMARK [1][-]{section.1.2}{Multiple Levels of Parallelism}{chapter.1}
 \BOOKMARK [2][-]{subsection.1.2.1}{Parallelization Opportunities in PIC Codes}{section.1.2}
-\BOOKMARK [1][-]{section.1.3}{Current Status of GPU PIC codes}{chapter.1}
-\BOOKMARK [1][-]{section.1.4}{Sceptic3D}{chapter.1}
-\BOOKMARK [2][-]{subsection.1.4.1}{CPU Code Profiling}{section.1.4}
+\BOOKMARK [1][-]{section.1.3}{GPU PIC Code Development}{chapter.1}
+\BOOKMARK [1][-]{section.1.4}{Current Status of GPU PIC codes}{chapter.1}
+\BOOKMARK [1][-]{section.1.5}{SCEPTIC3D}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.5.1}{CPU Code Profiling}{section.1.5}
 \BOOKMARK [0][-]{chapter.2}{Design Options}{}
-\BOOKMARK [1][-]{section.2.1}{GPUPIC Sandbox and the big questions}{chapter.2}
+\BOOKMARK [1][-]{section.2.1}{GPUPIC Sandbox}{chapter.2}
 \BOOKMARK [1][-]{section.2.2}{Charge Assign}{chapter.2}
 \BOOKMARK [2][-]{subsection.2.2.1}{Other Codes}{section.2.2}
 \BOOKMARK [1][-]{section.2.3}{Particle List Sort}{chapter.2}
 \BOOKMARK [2][-]{subsection.2.3.1}{Message Passing Sort}{section.2.3}
 \BOOKMARK [2][-]{subsection.2.3.2}{In Place Particle-Quicksort}{section.2.3}
 \BOOKMARK [2][-]{subsection.2.3.3}{Linked List Ordering}{section.2.3}
-\BOOKMARK [2][-]{subsection.2.3.4}{Full Sort using Sort from Thrust Library}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.4}{Full Sort using Sort from the THRUST Library}{section.2.3}
 \BOOKMARK [2][-]{subsection.2.3.5}{Spatial Indexing}{section.2.3}
 \BOOKMARK [1][-]{section.2.4}{Particle List Structure}{chapter.2}
 \BOOKMARK [1][-]{section.2.5}{Particle Advancing}{chapter.2}
@@ -37,7 +38,7 @@
 \BOOKMARK [0][-]{chapter.4}{Performance}{}
 \BOOKMARK [1][-]{section.4.1}{Particle list size scan}{chapter.4}
 \BOOKMARK [1][-]{section.4.2}{Grid Size scan}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.2.1}{Absolue Size}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.1}{Absolute Size}{section.4.2}
 \BOOKMARK [2][-]{subsection.4.2.2}{Threadblock Sub-Domain Size}{section.4.2}
 \BOOKMARK [1][-]{section.4.3}{Kernel Parameters Scan}{chapter.4}
 \BOOKMARK [1][-]{section.4.4}{Texture Performance}{chapter.4}
@@ -46,4 +47,4 @@
 \BOOKMARK [1][-]{section.5.2}{Implications}{chapter.5}
 \BOOKMARK [1][-]{section.5.3}{Future Work}{chapter.5}
 \BOOKMARK [0][-]{appendix.A}{Tables}{}
-\BOOKMARK [0][-]{section*.8}{Bibliography}{}
+\BOOKMARK [0][-]{section*.12}{Bibliography}{}

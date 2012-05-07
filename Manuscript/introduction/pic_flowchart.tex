@@ -15,10 +15,10 @@
            rectangle,
            rounded corners,
            draw=none, very thick,
-           text width=2.5cm,
+           text width=2.93cm,
 			  minimum width=2.6cm,
            minimum height=1.5cm,
-			  },
+			  align=left,},
     % Define arrow style
     pil/.style={
            ->,
@@ -29,7 +29,7 @@
            rectangle,
            rounded corners,
            draw=black, very thick,
-			  minimum width=2.65cm,
+			  minimum width=3.2cm,
            minimum height=1.35cm,
 			  anchor=west},
     punkt3/.style={
@@ -52,11 +52,11 @@
 
 	\node[punkt,shift={(7.0cm,0)}] (collide2) at (dtcenter) {Monte Carlo collisions\newline $\mathbf{v}_i' \rightarrow \mathbf{v}_i$};
 
-	\node[punkt,shift={(2.5cm,-2.5)}] (c2mesh2) at (dtcenter) {Interpolate particles to mesh\newline $(\mathbf{x}_i,\mathbf{v}_i) \rightarrow \rho_j$};
+	\node[punkt,shift={(2.5cm,-2.5)}] (c2mesh2) at (dtcenter) {Interpolate particles to mesh\newline $(\mathbf{x}_i,\mathbf{v}_i) \rightarrow (\rho_j,J_j)$};
 
-	\node[punkt,shift={(-2.5cm,-2.5)}] (psolve2) at (dtcenter) {Integrate field equations\newline $\rho_j \rightarrow \mathbf{E}_j$};
+	\node[punkt,shift={(-2.5cm,-2.5)}] (psolve2) at (dtcenter) {Integrate field equations\newline $(\rho_j,J_j) \rightarrow (\mathbf{E}_j,\mathbf{B}_j)$};
 
-	\node[punkt,shift={(-5.5cm,0)}] (mesh2p2) at (dtcenter) {Interpolate field to particles\newline $\mathbf{E}_j \rightarrow \mathbf{F}_i$};
+	\node[punkt,shift={(-5.5cm,0)}] (mesh2p2) at (dtcenter) {Interpolate field to particles\newline $(\mathbf{E}_j,\mathbf{B}_j) \rightarrow \mathbf{F}_i$};
 
 	\node[punkt2] (padvnc) at (padvnc2.west) {};
 	\node[punkt2] (ploss) at (ploss2.west) {};

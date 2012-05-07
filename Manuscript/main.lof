@@ -1,38 +1,39 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1-1}{\ignorespaces Flow schematic for the PIC method.}}{20}{figure.1.1}
-\contentsline {figure}{\numberline {1-2}{\ignorespaces Performance comparison of GPUs vs CPUs.}}{22}{figure.1.2}
-\contentsline {figure}{\numberline {1-3}{\ignorespaces Multiple levels of parallelism. (1) Cluster of systems communicating through a LAN. (2) Multiple GPUs per system communicating through system DRAM. (3) Multiple streaming multiprocessors per GPU execute thread-blocks and communicate through GPU global memory. (4) Multiple cuda cores per multiprocessor execute thread-warps and communicate through on chip shared memory. }}{24}{figure.1.3}
-\contentsline {figure}{\numberline {1-4}{\ignorespaces Flow schematic for the PIC method with parallelizable steps highlighted. Need to make figure}}{25}{figure.1.4}
-\contentsline {figure}{\numberline {1-5}{\ignorespaces Breakdown of SCEPTIC3D runtime costs by subroutine. This is for 12.5 million particles on a $64^3$ grid. Times are in ns per particle step.}}{31}{figure.1.5}
+\contentsline {figure}{\numberline {1-1}{\ignorespaces Flow schematic for the PIC method.}}{22}{figure.1.1}
+\contentsline {figure}{\numberline {1-2}{\ignorespaces Performance comparison of GPUs vs CPUs.}}{24}{figure.1.2}
+\contentsline {figure}{\numberline {1-3}{\ignorespaces Multiple levels of parallelism.}}{26}{figure.1.3}
+\contentsline {figure}{\numberline {1-4}{\ignorespaces Parallization opportunities in the PIC method}}{27}{figure.1.4}
+\contentsline {figure}{\numberline {1-5}{\ignorespaces Breakdown of SCEPTIC3D runtime costs}}{34}{figure.1.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2-1}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at three different optimizations.}}{35}{figure.2.1}
-\contentsline {figure}{\numberline {2-2}{\ignorespaces Atomic Memory collisions}}{37}{figure.2.2}
-\contentsline {figure}{\numberline {2-3}{\ignorespaces One thread per cell}}{38}{figure.2.3}
-\contentsline {figure}{\numberline {2-4}{\ignorespaces MPI and One thread per cell}}{39}{figure.2.4}
-\contentsline {figure}{\numberline {2-5}{\ignorespaces Total Execution times for 100 iterations of the key steps of the move kernel at two different optimizations.}}{40}{figure.2.5}
-\contentsline {figure}{\numberline {2-6}{\ignorespaces Kong particle sort. (a) Bi-cluster of cells. (b) Data structure of the bi-cluster particle array. (c.1) Particle 3 and 5 move to the right. Particle 3 is moved first to slot 12 which frees up slot 3. Slot 3, now empty, copies the last particle in the data region, which is particle 5. Particle 5 is also moving to the right so slot 3 copies it to slot 13 and replaces the contents of slot 3 with particle 4. Image taken from \cite {Kong2011}.}}{45}{figure.2.6}
-\contentsline {figure}{\numberline {2-7}{\ignorespaces Comparison of Stantchev Sort and the thrust radix sort.}}{50}{figure.2.7}
-\contentsline {figure}{\numberline {2-8}{\ignorespaces Array of Structures and Structure of Arrays}}{52}{figure.2.8}
-\contentsline {figure}{\numberline {2-9}{\ignorespaces Execution times of main steps for Array of Structures and Structure of Arrays. Count Particles and Data Reorder are steps used for a sorted particle list. Count Particles counts the number of particles in each sub-domain. Data Reorder reorders the particle list data after the binindex / particle ID pair have been sorted by the radix sort.}}{53}{figure.2.9}
+\contentsline {figure}{\numberline {2-1}{\ignorespaces Sandbox GPUPIC Code Profile}}{39}{figure.2.1}
+\contentsline {figure}{\numberline {2-2}{\ignorespaces Charge Assign using MPI}}{42}{figure.2.2}
+\contentsline {figure}{\numberline {2-3}{\ignorespaces Density Accumulation Memory Collisions}}{42}{figure.2.3}
+\contentsline {figure}{\numberline {2-4}{\ignorespaces One thread per cell}}{43}{figure.2.4}
+\contentsline {figure}{\numberline {2-5}{\ignorespaces One thread block per cell}}{44}{figure.2.5}
+\contentsline {figure}{\numberline {2-6}{\ignorespaces Sandbox GPUPIC Charge Assign Comparison}}{45}{figure.2.6}
+\contentsline {figure}{\numberline {2-7}{\ignorespaces Message Passing Particle Sort}}{50}{figure.2.7}
+\contentsline {figure}{\numberline {2-8}{\ignorespaces Comparison of Particle QuickSort and the \gls {gls:thrust} radix sort.}}{55}{figure.2.8}
+\contentsline {figure}{\numberline {2-9}{\ignorespaces Array of Structures and Structure of Arrays}}{57}{figure.2.9}
+\contentsline {figure}{\numberline {2-10}{\ignorespaces Particle List Structure Comparison}}{58}{figure.2.10}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3-1}{\ignorespaces Graphical Representation of domain decomposition and ParticleBin organization. Need to make figure}}{58}{figure.3.1}
-\contentsline {figure}{\numberline {3-2}{\ignorespaces Thrust Sort Setup and Call}}{63}{figure.3.2}
-\contentsline {figure}{\numberline {3-3}{\ignorespaces Illustration of GPU particle advancing algorithm with handling of reinjections and collisions.}}{69}{figure.3.3}
-\contentsline {figure}{\numberline {3-4}{\ignorespaces Stream Compaction from GPU Gems 3 \cite {Harris2007}}}{70}{figure.3.4}
+\contentsline {figure}{\numberline {3-1}{\ignorespaces ParticleBin Organization}}{64}{figure.3.1}
+\contentsline {figure}{\numberline {3-2}{\ignorespaces Thrust Sort Setup and Call}}{68}{figure.3.2}
+\contentsline {figure}{\numberline {3-3}{\ignorespaces Illustration of GPU particle advancing algorithm}}{76}{figure.3.3}
+\contentsline {figure}{\numberline {3-4}{\ignorespaces Stream Compaction}}{77}{figure.3.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4-1}{\ignorespaces CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{74}{figure.4.1}
-\contentsline {figure}{\numberline {4-2}{\ignorespaces CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}}{74}{figure.4.2}
-\contentsline {figure}{\numberline {4-3}{\ignorespaces Number of Particles Scan on a 128x64x64 grid}}{76}{figure.4.3}
-\contentsline {figure}{\numberline {4-4}{\ignorespaces Number of Particles Scan on a 64x32x32 grid}}{76}{figure.4.4}
-\contentsline {figure}{\numberline {4-5}{\ignorespaces Speedup factor Number of Particles Scan on a 128x64x64 grid}}{77}{figure.4.5}
-\contentsline {figure}{\numberline {4-6}{\ignorespaces Gridsize Scan with 16 million ptcls, and $8^3$ bins}}{79}{figure.4.6}
-\contentsline {figure}{\numberline {4-7}{\ignorespaces Gridsize Scan with 16 million ptcls, and $16^3$ bins}}{79}{figure.4.7}
-\contentsline {figure}{\numberline {4-8}{\ignorespaces Gridsize Scan with 34 million ptcls, and $8^3$ bins. Note how when the contribution from the poisson solve is removed there is a clear minimum at about $10^5$ elements. }}{80}{figure.4.8}
-\contentsline {figure}{\numberline {4-9}{\ignorespaces Gridsize Scan with 34 million ptcls, and $16^3$ bins}}{80}{figure.4.9}
-\contentsline {figure}{\numberline {4-10}{\ignorespaces Gridsize Speedup Scan with 34 million ptcls, and $8^3$ bins}}{81}{figure.4.10}
-\contentsline {figure}{\numberline {4-11}{\ignorespaces Sub Domain Size scan, also known as bin size, for 34 million particles. Note the minimum in the total - psolve run time.}}{82}{figure.4.11}
-\contentsline {figure}{\numberline {4-12}{\ignorespaces Adjusting the amount of work per thread for the advancing kernel.}}{83}{figure.4.12}
-\contentsline {figure}{\numberline {4-13}{\ignorespaces Comparison between texture enabled kernels at various bin sizes. Tests used 42 million particles with 200 time steps on a $64^3$ grid.}}{84}{figure.4.13}
-\contentsline {figure}{\numberline {4-14}{\ignorespaces Comparison between texture enabled kernels at various bin sizes. Tests used 42 million particles with 200 time steps on a $128^3$ grid.}}{85}{figure.4.14}
+\contentsline {figure}{\numberline {4-1}{\ignorespaces CPU and GPU Runtime comparison}}{80}{figure.4.1}
+\contentsline {figure}{\numberline {4-2}{\ignorespaces CPU and GPU Speedup comparison}}{81}{figure.4.2}
+\contentsline {figure}{\numberline {4-3}{\ignorespaces Number of Particles Scan on a 128x64x64 grid}}{82}{figure.4.3}
+\contentsline {figure}{\numberline {4-4}{\ignorespaces Number of Particles Scan on a 64x32x32 grid}}{83}{figure.4.4}
+\contentsline {figure}{\numberline {4-5}{\ignorespaces Speedup factor Number of Particles Scan on a 128x64x64 grid}}{84}{figure.4.5}
+\contentsline {figure}{\numberline {4-6}{\ignorespaces Gridsize Scan with 16 million particles and $8^3$ bins}}{86}{figure.4.6}
+\contentsline {figure}{\numberline {4-7}{\ignorespaces Gridsize Scan with 16 million particles and $16^3$ bins}}{86}{figure.4.7}
+\contentsline {figure}{\numberline {4-8}{\ignorespaces Gridsize Scan with 34 million particles and $8^3$ bins.}}{87}{figure.4.8}
+\contentsline {figure}{\numberline {4-9}{\ignorespaces Gridsize Scan with 34 million particles and $16^3$ bins.}}{87}{figure.4.9}
+\contentsline {figure}{\numberline {4-10}{\ignorespaces Gridsize Speedup Scan with 34 million particles and $8^3$ bins}}{88}{figure.4.10}
+\contentsline {figure}{\numberline {4-11}{\ignorespaces Sub Domain Size scan}}{89}{figure.4.11}
+\contentsline {figure}{\numberline {4-12}{\ignorespaces Adjusting the amount of work per thread for the advancing kernel.}}{90}{figure.4.12}
+\contentsline {figure}{\numberline {4-13}{\ignorespaces Comparison between texture enabled kernels on a $64^3$ grid}}{91}{figure.4.13}
+\contentsline {figure}{\numberline {4-14}{\ignorespaces Comparison between texture enabled kernels on a $128^3$ grid}}{92}{figure.4.14}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

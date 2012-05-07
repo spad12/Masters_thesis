@@ -26,9 +26,15 @@ Viktor~K. Decyk and Tajendra~V. Singh.
   units}.
 \newblock {\em Computer Physics Communications}, 182(3):641--648, March 2011.
 
+\bibitem{Haakonsen2011}
+CB~Haakonsen.
+\newblock {\em {Ion Collection by a Conducting Sphere in a Magnetized or
+  Drifting Collisional Plasma}}.
+\newblock Masters of science, Massachusetts Institute of Technology, 2011.
+
 \bibitem{Harris2007}
-Mark (NVIDIA~Corporation) Harris, Davis) {Sengupta, Shubhabrata (University of
-  California}, and Davis) {Owens, John D. (University of California}.
+Mark. (NVIDIA~Corporation) Harris, Davis) {Sengupta, Shubhabrata. (University
+  of California}, and Davis) {Owens, John D. (University of California}.
 \newblock {Parallel Prefix Sum (Scan) with CUDA}.
 \newblock In Hubert Nguyen, editor, {\em GPU Gems 3}, chapter~39.
   Addison-Wesley Professional, 2007.
@@ -71,6 +77,11 @@ Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
 \newblock {\em Journal of Computational Physics}, 230(4):1676--1685, February
   2011.
 
+\bibitem{NVIDIACorporation2009}
+{NVIDIA Corporation}.
+\newblock {NVIDIA's Next Generation CUDA Compute Architecture: FERMI}.
+\newblock Technical report, NVIDIA, 2009.
+
 \bibitem{NVIDIACorporation2011}
 {NVIDIA Corporation}.
 \newblock {NVIDIA CUDA C Programming Guide Version 4.1}.
@@ -79,7 +90,32 @@ Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
 \bibitem{NVIDIACorporation2011a}
 {NVIDIA Corporation}.
 \newblock {Thrust Quick Start Guide}.
-\newblock Technical Report January, 2011.
+\newblock Technical Report January, NVIDIA, 2011.
+
+\bibitem{NVIDIACorporation2012}
+{NVIDIA Corporation}.
+\newblock {CUDA Toolkit 4.1 CUBLAS Library}.
+\newblock Technical Report January, NVIDIA, 2012.
+
+\bibitem{NVIDIACorporation2012a}
+{NVIDIA Corporation}.
+\newblock {CUDA Toolkit 4.1 CUFFT Library}.
+\newblock Technical Report January, NVIDIA, 2012.
+
+\bibitem{NVIDIACorporation2012b}
+{NVIDIA Corporation}.
+\newblock {CUDA Toolkit 4.1 CURAND Guide}.
+\newblock Technical Report January, NVIDIA, 2012.
+
+\bibitem{NVIDIACorporation2012c}
+{NVIDIA Corporation}.
+\newblock {CUDA Toolkit 4.1 CUSPARSE Library}.
+\newblock Technical Report January, NVIDIA, 2012.
+
+\bibitem{NVIDIACorporation2012d}
+{NVIDIA Corporation}.
+\newblock {OpenCL ™ Programming Guide for the CUDA ™ Architecture}.
+\newblock Technical report, NVIDIA, 2012.
 
 \bibitem{Patacchini2007}
 L.~Patacchini.
@@ -108,8 +144,14 @@ Nadathur Satish, Mark Harris, and Michael Garland.
 \bibitem{Stantchev2008}
 G~Stantchev, W~Dorland, and N~Gumerov.
 \newblock {Fast parallel Particle-To-Grid interpolation for plasma PIC
-  simulations on the GPU☆}.
+  simulations on the GPU}.
 \newblock {\em Journal of Parallel and Distributed Computing},
   68(10):1339--1349, October 2008.
+
+\bibitem{Verboncoeur2005}
+J~P Verboncoeur.
+\newblock {Particle simulation of plasmas: review and advances}.
+\newblock {\em Plasma Physics and Controlled Fusion}, 47(5A):A231--A260, May
+  2005.
 
 \end{thebibliography}
