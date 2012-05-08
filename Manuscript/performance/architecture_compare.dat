@@ -1,0 +1,6 @@
+Component	"Intel i7 930"	"GTX 470" "Intel E5420" "GTX 590"
+Sort	0	1.247	0	1.166
+"Charge Assign"	192.055	0.597	312.210	0.669
+"Poisson Solve"	38.398	1.803	637.349	3.5
+"Particle Advance"	185.245	1.517	391.335	1.426
+"Other"	1.821	0.657	11.567	2.057

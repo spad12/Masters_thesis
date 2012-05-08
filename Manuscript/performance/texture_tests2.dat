@@ -1,0 +1,5 @@
+"Component" "Texture 4^3 cpb" "No Texture 4^3 cpb" "Texture 8^3 cpb" "No Texture 8^3 cpb" "Texture 16^3 cpb" "No Texture 16^3 cpb"
+"ChargeToMesh" 2.243227 2.232182 1.84678 1.84983 1.787397 1.784477
+"PAdvance" 1.445629 1.77719 1.524929 2.237208 2.461824 2.956189
+"PoissonSolve" 1.811391 2.435561 1.813488 2.445395 1.809028 2.431386
+"Total" 6.220511 7.158404 5.910028 7.253939 6.801413 7.889689

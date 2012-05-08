@@ -18,7 +18,7 @@ Typical total\footnote[1]{Total run time includes \gls{ac:mpi} reduces and vario
 \begin{center}
 \includegraphics[width=6in]{performance/architecture_compare.pdf}
 \end{center}
-\caption[CPU and GPU Runtime comparison]{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 \gls{ac:mpi} threads handling 17 million particles each on a $64^3$ grid.}
+\caption[CPU and GPU Runtime comparison]{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 \gls{ac:mpi} threads handling 42 million particles each on a $64^3$ grid.}
 \label{fig:speedup} 
 \end{figure} 
 
@@ -26,7 +26,7 @@ Typical total\footnote[1]{Total run time includes \gls{ac:mpi} reduces and vario
 \begin{center}
 \includegraphics[width=6in]{performance/architecture_speedup_compare.pdf}
 \end{center}
-\caption[CPU and GPU Speedup comparison]{CPU and GPU Speedup comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 \gls{ac:mpi} threads handling 17 million particles each on a $64^3$ grid. The difference in results is due primarily to the different hardware present on the two systems. The system with the GTX 590 is older than that used with the 2x GTX 470's}
+\caption[CPU and GPU Speedup comparison]{CPU and GPU Speedup comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 \gls{ac:mpi} threads handling 42 million particles each on a $64^3$ grid. The difference in results is due primarily to the different hardware present on the two systems. The system with the GTX 590 is older than that used with the 2x GTX 470's}
 \label{fig:speedup2} 
 \end{figure} 
 
@@ -132,10 +132,10 @@ The primary routine of interest here is the Poisson solve, which takes roughly $
 \includegraphics[width=6in]{performance/gridsize_speedup_scan.pdf}
 \end{center}
 \caption[Gridsize Speedup Scan with 34 million particles and $8^3$ bins]{Gridsize Speedup Scan with 34 million particles and $8^3$ bins. The total runtime is entirely dominated by the Poisson solve.}
-\label{fig:grid_scan34ptcls16bins}
+\label{fig:grid_speedupscan}
 \end{figure}
 
-The more subtle scalings of the particle advance and charge assign can be seen in figures \ref{fig:grid_scan16ptcls8bins} through \ref{fig:grid_scan34ptcls16bins} in the cases where there are only $8^3$ bins, but do not continue their trends for $16^3$ bins. This behavior is due to the fact that these are not scalings with the absolute grid size, but rather scalings with sub-domain size.
+The more subtle scalings of the particle advance and charge assign can be seen in figures \ref{fig:grid_scan16ptcls8bins} through \ref{fig:grid_scan34ptcls16bins} in the cases where there are only $8^3$ bins, but do not continue their trends for $16^3$ bins. This behavior is due to the fact that these are not scalings with the absolute grid size, but rather scalings with sub-domain size. Figure \ref{fig:grid_speedupscan} shows the how much faster the GPU code is than the CPU code for various grid sizes. The GPU versions of the Poisson solve and the charge assign scale better than their CPU counterparts. However, the total runtime speedup decreases with increasing grid size. This is a result of the increased run time of the Poisson solve.
 
 Another point of interest is the scaling of the particle sort, note that it only scales with the number of particles and is completely independent of grid size. One might expect to find some small scaling based on the distance that particles have to be moved during the sort stage, or that with fewer sub-domains the radix sort would have fewer digits to process, but this is not the case. This means that some improvement can be made to the sort, namely using the number of bins as the upper limit on the bits for the radix sort to process. Hopefully this kind of feature will be available in future releases of the \gls{gls:thrust} library.
 

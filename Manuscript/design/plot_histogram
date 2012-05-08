@@ -1,0 +1,35 @@
+set style line 1 lw 2 lc rgbcolor "#008000"
+set style line 2 lw 2 lc rgbcolor "#4B0082"
+set style line 3 lw 2 lc rgbcolor "#20B2AA"
+set style line 4 lw 2 lc rgbcolor "blue"
+set style line 5 lw 2 lc rgbcolor "#1E90FF"
+set style increment user
+
+
+set term pdf size 5.00in, 2.75in
+
+set boxwidth 0.5 relative
+set style data histogram
+set style fill solid 1.0 border lt -1
+set ylabel "Time (ms)"
+set term pdf
+
+set yrange [0:4500]
+set style histogram columnstacked
+set output "soa_vs_aos.pdf"
+plot "soa_vs_aos.dat" using 2:key(1) title columnhead, '' u 3 title columnhead
+
+
+set yrange [0:13000]
+set style histogram columnstacked
+set output "atomic_vs_sorted.pdf"
+plot "atomic_vs_sorted.dat" using 2:key(1) title columnhead, '' u 3 title columnhead
+
+
+set boxwidth 0.9 relative
+set xtics offset 1
+set output "sandbox_run_histo.pdf"
+set style histogram cluster gap 1
+set yrange [0:12000]
+plot "sandbox_run.dat" using 2:xticlabels(1) notitle
+

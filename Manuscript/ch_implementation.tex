@@ -214,7 +214,7 @@ The field solve used in SCEPTIC3D involves solving the electrostatic Poisson equ
 \label{eqn:poisson_eqn1}
 \end{equation}
 
-Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge densities normalized to the background charge density $N_\infty$, and $\Lambda_{De}$ is the unperturbed electron Debye length $\Lambda_{De} = \sqrt{\varepsilon_0T_e/N_\infty e^2}$. Using the SCEPTIC3D approximation that the electron density can be taken to be a Boltzmann distribution, and normalizing $\nabla$ to $1/R_p$ the probe radius, the Poisson equation can be rewritten as 
+Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge densities normalized to the background charge density $N_\infty$, and $\Lambda_{De}$ is the unperturbed electron Debye length $\Lambda_{De} = \sqrt{\varepsilon_0T_e/N_\infty e^2} = R_p\lambda_{De}$. Using the SCEPTIC3D approximation that the electron density can be taken to be a Boltzmann distribution, and normalizing $\nabla$ and $\Lambda_{De}$ to $1/R_p$ the probe radius, the Poisson equation can be rewritten as 
 
 \begin{equation}
 \nabla^2\phi=\frac{exp(\phi)-n}{\lambda_{De}^2}
@@ -224,24 +224,37 @@ Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge 
 We are changing $n_i$ to $n$ in order to avoid confusion with the use of $i$ as a spatial index. Assuming that the potential varies little from one time step to the next we can expand equation \ref{eqn:poisson_eqn2} about the known potential $\phi^*$ yielding
    
 \begin{equation}
-\nabla^2\phi_{i+1}=\frac{exp(\phi^*)[1+(\phi_{i+1}-\phi^*)]-n}{\lambda_{De}^2}
+\nabla^2\phi=\frac{exp(\phi^*)[1+(\phi-\phi^*)]-n}{\lambda_{De}^2}
 \label{eqn:poisson_eqn3}
 \end{equation}
 
-Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = \sigma$ using finite volumes. Following the derivation for the linear operator $A$ from \cite{Patacchini2010} we get:
+Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = \sigma$ using finite volumes.\cite{Patacchini2010} Following the derivation for the linear operator $A$ from Haakonsen \cite{Haakonsen2011} we get:
 
 
 \begin{align}
-(A\phi)_{i,j,k} &= a_i\phi_{i+1,j,k}
-		  -b_i\phi_{i-1,j,k}
+(A\phi)_{i,j,k} &= a_{i}\phi_{i+1,j,k}
+		  +b_{i}\phi_{i-1,j,k}
 		  +c_{i,j}\phi{i,j+1,k}
-		  -d_{i,j}\phi_{i,j-1,k} \nonumber \\
-		  &\qquad{} +e_{i,j}(\phi_{i,j,k+1}-\phi_{i,j,k-1})
+		  +d_{i,j}\phi_{i,j-1,k} \nonumber \\
+		  &\qquad{} +e_{i,j}(\phi_{i,j,k+1}+\phi_{i,j,k-1})
 		  -[f_{i,j} + exp(\phi_{i,j,k}^*)]\phi_{i,j,k}
 \label{eqn:psolve}
 \end{align}
 
-The full derivation of equation \ref{eqn:psolve} along with the definitions of the vectors $a$ through $f$ can be found in \cite{Haakonsen2011}.
+The Neumann part of the boundary condition, $\omega$
+\begin{align}
+\omega_{2,j,k} &= b_2\phi_{1,j,k},\nonumber \\
+\omega_{n_r,j,k} &= a_{n_r}g_{j,k,4}
+\label{eqn:psolve_omega}
+\end{align}
+
+The Dirichlet part of the boundary condition $\sigma$
+\begin{align}
+\sigma_{i,j,k} = exp(\phi_{i,j,k}^*)[1-\phi_{i,j,k}^*]-n_{i,j,k}
+\label{eqn:psolve_sigma}
+\end{align}
+
+The full derivation of equation \ref{eqn:psolve}, \ref{eqn:psolve_omega}, and \ref{eqn:psolve_sigma}, along with the definitions of the vectors $a$ through $f$ can be found in Haakonsen \cite{Haakonsen2011}.
 
 Now that we have our linear operator defined, along with the vectors $\omega$ and $\sigma$ we can see that this is a simple sparse linear system. These system is fairly easy to solve using any sparse linear system solving scheme. One of the easier schemes to implement on the GPU is the preconditioned biconjugate gradient method \emph{PBCG}. This method is easy to parallelize due to the simplicity of the operations involved, namely \emph{PBCG} consists solely of sparse matrix-vector products, vector dot products, and multiplication of vectors by a scalar. All of these operations can be implemented efficiently on the GPU. 
 

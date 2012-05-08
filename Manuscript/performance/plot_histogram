@@ -1,0 +1,60 @@
+set style line 1 lw 2 lc rgbcolor "#008000"
+set style line 2 lw 2 lc rgbcolor "#4B0082"
+set style line 3 lw 2 lc rgbcolor "#20B2AA"
+set style line 4 lw 2 lc rgbcolor "blue"
+set style line 5 lw 2 lc rgbcolor "#1E90FF"
+set style increment user
+
+
+set boxwidth 0.9 relative
+set style data histogram
+set style fill solid 1.0 border -1
+set ylabel "Time per step per particle (ns)"
+
+
+set term pdf size 5.00in, 2.75in enhanced
+
+set output "architecture_compare.pdf"
+set style histogram cluster gap 1
+set xtics offset 2
+set yrange [0.1:700]
+set xrange [-0.25:4.5]
+set logscale y
+plot for [COL=2:5] 'architecture_compare.dat' using COL:xticlabels(1) title columnhead
+
+unset logscale y
+set output "architecture_speedup_compare.pdf"
+set ylabel "Speedup factor"
+set style histogram cluster gap 1
+set xtics offset 2
+set yrange [0:300]
+set xrange [-0.5:3.5]
+plot for [COL=2:3] 'architecture_compare_speedup.dat' using COL:xticlabels(1) title columnhead
+
+set output "texture_tests128.pdf"
+set ylabel "Time per step per particle (ns)"
+set style histogram cluster gap 2
+set key left
+set boxwidth 0.9 relative
+set xtics offset 2
+set yrange [0:30]
+set xrange [-0.5:3.75]
+plot for [COL=2:7] 'texture_tests.dat' using COL:xticlabels(1) title columnhead
+
+set output "texture_tests64.pdf"
+set ylabel "Time per step per particle (ns)"
+set style histogram cluster gap 2
+set key left
+set boxwidth 0.9 relative
+set xtics offset 2
+set yrange [0:9]
+set xrange [-0.5:3.75]
+plot for [COL=2:7] 'texture_tests2.dat' using COL:xticlabels(1) title columnhead
+
+unset style data
+set yrange [2:2.14]
+set xrange [2:17]
+set xlabel 'Number of Particles per Thread'
+set ylabel 'Run Time Per Particle Step (ns)'
+set output "kernel_param.pdf"
+plot 'kernel_param.dat' with points notitle ps 2 pt 13 lc rgb 'blue'

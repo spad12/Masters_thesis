@@ -1,4 +1,5 @@
-This is BibTeX, Version 0.99c (Web2C 7.5.6)
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: cover.aux
 A level-1 auxiliary file: contents.aux
@@ -8,49 +9,51 @@ A level-1 auxiliary file: ch_implementation.aux
 A level-1 auxiliary file: ch_performance.aux
 A level-1 auxiliary file: ch_conclusion.aux
 A level-1 auxiliary file: appa.aux
+A level-1 auxiliary file: appb.aux
+A level-1 auxiliary file: appc.aux
 A level-1 auxiliary file: biblio.aux
 The style file: plain.bst
 Database file #1: main.bib
 Warning--there's a number but no volume in Satish2009
-You've used 26 entries,
+You've used 27 entries,
             2118 wiz_defined-function locations,
-            655 strings with 8241 characters,
-and the built_in function-call counts, 7553 in all, are:
-= -- 760
-> -- 351
-< -- 7
-+ -- 141
-- -- 115
-* -- 529
-:= -- 1356
-add.period$ -- 79
-call.type$ -- 26
-change.case$ -- 136
+            664 strings with 8430 characters,
+and the built_in function-call counts, 8002 in all, are:
+= -- 808
+> -- 364
+< -- 8
++ -- 146
+- -- 119
+* -- 563
+:= -- 1420
+add.period$ -- 82
+call.type$ -- 27
+change.case$ -- 140
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 274
-empty$ -- 553
-format.name$ -- 115
-if$ -- 1508
+cite$ -- 28
+duplicate$ -- 293
+empty$ -- 591
+format.name$ -- 119
+if$ -- 1607
 int.to.chr$ -- 0
-int.to.str$ -- 26
-missing$ -- 16
-newline$ -- 133
-num.names$ -- 54
-pop$ -- 107
+int.to.str$ -- 27
+missing$ -- 18
+newline$ -- 138
+num.names$ -- 56
+pop$ -- 111
 preamble$ -- 1
-purify$ -- 109
+purify$ -- 113
 quote$ -- 0
-skip$ -- 172
+skip$ -- 188
 stack$ -- 0
-substring$ -- 421
-swap$ -- 33
-text.length$ -- 7
+substring$ -- 467
+swap$ -- 40
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 102
+type$ -- 106
 warning$ -- 1
-while$ -- 76
-width$ -- 28
-write$ -- 290
+while$ -- 83
+width$ -- 29
+write$ -- 301
 (There was 1 warning)

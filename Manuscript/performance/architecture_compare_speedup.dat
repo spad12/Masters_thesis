@@ -1,0 +1,5 @@
+Component	"2x GTX 470"	"GTX 590"
+"Charge Assign+Sort"	104	170
+"Poisson Solve"	21	182
+"Particle Advance"	122	274
+"Total"	71	153

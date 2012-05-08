@@ -32,19 +32,21 @@
 \contentsline {subsection}{\numberline {3.4.3}Payload Move}{69}{subsection.3.4.3}
 \contentsline {section}{\numberline {3.5}Poisson Solve}{70}{section.3.5}
 \contentsline {section}{\numberline {3.6}Particle List Advance}{72}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Checking Domain Boundaries}{72}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Handling Reinjections}{73}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.1}Checking Domain Boundaries}{73}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Handling Reinjections}{74}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Diagnostic Outputs}{77}{subsection.3.6.3}
 \contentsline {chapter}{\numberline {4}Performance}{79}{chapter.4}
-\contentsline {section}{\numberline {4.1}Particle list size scan}{82}{section.4.1}
-\contentsline {section}{\numberline {4.2}Grid Size scan}{85}{section.4.2}
+\contentsline {section}{\numberline {4.1}Particle list size scan}{81}{section.4.1}
+\contentsline {section}{\numberline {4.2}Grid Size scan}{84}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Absolute Size}{85}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Threadblock Sub-Domain Size}{89}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Kernel Parameters Scan}{90}{section.4.3}
-\contentsline {section}{\numberline {4.4}Texture Performance}{91}{section.4.4}
+\contentsline {subsection}{\numberline {4.2.2}Threadblock Sub-Domain Size}{88}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Kernel Parameters Scan}{89}{section.4.3}
+\contentsline {section}{\numberline {4.4}Texture Performance}{90}{section.4.4}
 \contentsline {chapter}{\numberline {5}Conclusion}{93}{chapter.5}
 \contentsline {section}{\numberline {5.1}Review}{93}{section.5.1}
 \contentsline {section}{\numberline {5.2}Implications}{94}{section.5.2}
 \contentsline {section}{\numberline {5.3}Future Work}{96}{section.5.3}
-\contentsline {chapter}{\numberline {A}Tables}{97}{appendix.A}
-\contentsline {chapter}{Bibliography}{99}{section*.12}
+\contentsline {chapter}{\numberline {A}SCEPTIC3DGPU Validation}{97}{appendix.A}
+\contentsline {chapter}{\numberline {B}System Bandwidth Comparison}{101}{appendix.B}
+\contentsline {chapter}{\numberline {C}Tables for histograms}{103}{appendix.C}
+\contentsline {chapter}{Bibliography}{105}{appendix*.55}

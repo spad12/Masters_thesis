@@ -80,7 +80,7 @@ Xianglong Kong, Michael~C. Huang, Chuang Ren, and Viktor~K. Decyk.
 \bibitem{NVIDIACorporation2009}
 {NVIDIA Corporation}.
 \newblock {NVIDIA's Next Generation CUDA Compute Architecture: FERMI}.
-\newblock Technical report, NVIDIA, 2009.
+\newblock {\em NVIDIA white paper}, pages 1--22, 2009.
 
 \bibitem{NVIDIACorporation2011}
 {NVIDIA Corporation}.
@@ -153,5 +153,11 @@ J~P Verboncoeur.
 \newblock {Particle simulation of plasmas: review and advances}.
 \newblock {\em Plasma Physics and Controlled Fusion}, 47(5A):A231--A260, May
   2005.
+
+\bibitem{Whitehead2011}
+Nathan Whitehead and Alex Fit-Florea.
+\newblock {Precision \& Performance: Floating point and ieee 754 compliance for
+  nvidia gpus}.
+\newblock {\em NVIDIA white paper}, 21(10):767--75, 2011.
 
 \end{thebibliography}

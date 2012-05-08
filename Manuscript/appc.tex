@@ -1,0 +1,77 @@
+\chapter{Tables for histograms}
+
+
+\begin{table}[ht]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} |}
+\hline
+Component & Runtime (ms) \\ \hline
+Particle data read, move, and write & 375 \\ \hline
+Potential Grid Read & 467 \\ \hline
+Charge Assign & 1.143e4  \\ \hline
+Total & 1.227e4  \\ \hline
+\end{tabular}
+\caption[Sandbox GPUPIC Run Time Profile]{Run Time breakdown for different steps of the sandbox GPUPIC code}
+\label{tab:GPUPIC_basetime} 
+\end{table}
+
+
+\begin{table}[ht]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{3.5cm} |}
+\hline
+Component & Atomic-Updates (ms) & Sorted+Reduction (ms) \\ \hline
+Particle data read, move, and write & 375 & 468 \\ \hline
+Potential Grid Read & 467 & 285 \\ \hline
+Charge Assign & 1.143e4 & 542 \\ \hline
+Particle List Sort & 0 & 2.305e3 \\ \hline
+Total & 1.227e4 & 3600 \\ \hline
+\end{tabular}
+\caption[Sandbox GPUPIC Move Kernel Optimization]{Total Execution times for 100 iterations of the key steps of the sandbox GPUPIC code at two different optimizations.}
+\label{tab:GPUPIC_comparison}
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
+\hline
+Component & SoA (ms) & AoS (ms) & Speedup (SoA vs AoS) \\ \hline
+Particle data read, move, and write & 758 & 955 & 1.26x \\ \hline
+Count Particles & 32.7 & 109 & 3.35x \\ \hline
+Data Reorder & 346 & 480 & 1.38x \\ \hline
+Total CPU run time & 2491 & 3284 & 1.31x \\ \hline
+\end{tabular}
+\caption[CPU and GPU Runtime comparison]{Execution times of main steps for Array of Structures and Structure of Arrays. Count Particles and Data Reorder are steps used for a sorted particle list. Count Particles counts the number of particles in each sub-domain. Data Reorder reorders the particle list data after the binindex / particle ID pair have been sorted by the radix sort.}
+\label{tab:struct_compare} 
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
+\hline
+Component & CPU (ns) & GPU (ns) & Speedup \\ \hline
+Sort & 0 & 1.247 & - \\ \hline
+Charge Assign & 192.055 & 0.597 & 321x \\ \hline
+Charge Assign \& Sort & 192.055 & 1.843 & 104x \\ \hline
+Poisson Solve & 38.398 & 1.803 & 21x \\ \hline
+Particle Advance & 185.245 & 1.517 & 122x \\ \hline
+Total\footnote[1] & 417.519 & 5.820 & 71x \\ \hline
+\end{tabular}
+\caption[CPU and GPU Runtime comparison 1]{CPU and GPU Runtime comparison for 2 GTX 470's vs an Intel(R) Core i7 930 Test was performed using 2 MPI threads handling 21 million particles each on a $64^3$ grid.}
+\label{tab:speedup} 
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{| p{4.0cm} | p{3.5cm} | p{2.5cm} | p{4.0cm} |}
+\hline
+Component & CPU (ns) & GPU (ns) & Speedup \\ \hline
+Sort & 0 & 1.166 & - \\ \hline
+Charge Assign & 312.210 & 0.669 & 389x \\ \hline
+Charge Assign \& Sort & 312.210 & 1.835 & 170x \\ \hline
+Poisson Solve & 637.349 & 3.500 & 182x \\ \hline
+Particle Advance & 391.335 & 1.426 & 274x \\ \hline
+Total\footnote[1] & 1352.461 & 8.818 & 153x \\ \hline
+\end{tabular}
+\caption[CPU and GPU Runtime comparison 2]{CPU and GPU Runtime comparison for a GTX 590 vs an Intel(R) Xeon(R) CPU E5420. Test was performed using 2 MPI threads handling 17 million particles each on a $64^3$ grid.}
+\label{tab:speedup2} 
+\end{table} 
+
+
+\clearpage
+\newpage

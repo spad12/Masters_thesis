@@ -1,0 +1,22 @@
+set style line 1 lw 2 lc rgbcolor "#008000"
+set style line 2 lw 2 lc rgbcolor "#4B0082"
+set style line 3 lw 2 lc rgbcolor "#20B2AA"
+set style line 4 lw 2 lc rgbcolor "blue"
+set style line 5 lw 2 lc rgbcolor "#1E90FF"
+set style increment user
+
+
+set boxwidth 0.9 relative
+set style data histogram
+set style fill solid 1.0 border -1
+set ylabel "Memory Bandwidth (GB/s)"
+
+
+set term pdf size 5.00in, 2.75in enhanced
+
+set output "bandwidth_test.pdf"
+set style histogram cluster gap 1
+set xtics offset 2
+set yrange [0:25]
+set xrange [-0.5:3.5]
+plot for [COL=2:3] 'bandwidth_test.dat' using COL:xticlabels(1) title columnhead
