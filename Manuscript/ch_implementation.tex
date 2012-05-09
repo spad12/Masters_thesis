@@ -11,7 +11,7 @@
 	\section{Constraining Grid Dimensions}
 	\label{sec:grid_constraints}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-There are two constraints that the grid dimensions must conform to. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip shared memory. We define $n_{virtual}$ the ratio of a grid dimension and a bin dimension. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the bin sub-domain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$. As shown in equation \ref{eqn:constraints}, the ratio in each direction must be equivalent and be a power of 2.
+There are two constraints for the grid dimensions. The first is set by the requirements of a simple z-order curve, the second is set by the size of the on chip \emph{\_\_shared\_\_} memory. We define $n_{virtual}$ the ratio of a grid dimension and a bin dimension. These constraints are expressed mathematically through the grid dimensions, $n_r, n_{\theta}, n_{\psi}$, and the bin sub-domain dimensions, $nb_r, nb_{\theta}, nb_{\psi}$. As shown in equation \ref{eqn:constraints}, the ratio in each direction must be equivalent and be a power of 2.
 		
 \begin{equation}
 \frac{n_r}{nb_r} = \frac{n_{\theta}}{nb_{\theta}} = \frac{n_{\psi}}{nb_{\psi}} = n_{virtual}
@@ -20,7 +20,7 @@ There are two constraints that the grid dimensions must conform to. The first is
 
 
 
-The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the shared-multiprocessor occupancy for the charge assign stage of the code. Given that each thread block has the maximum number of threads, 512, and each thread requires roughly 25 registers, the maximum number of thread blocks that can exist simultaneously on a single SM is 2. This means that each thread block can be allocated half of the total amount of shared memory on the SM. Compute capability 2.0 GPUs have 49152 bytes of shared memory per SM. Running two thread blocks per SM provides each block with 24576 bytes of shared memory each, or 6144 floats per block. The maximum that all three bin dimensions can be is 18. For the sake of simplicity these hardware constraints set $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. For now none of the bin dimensions are allowed to exceed 18, even if another is smaller. 
+The second constraint on the grid dimensions is set by the hardware. The goal is to maximize the streaming-multiprocessor occupancy for the charge assign. Given that each thread block has the maximum number of threads, 512, and each thread requires roughly 25 registers, the maximum number of thread blocks that can exist simultaneously on a single SM is 2. This means that each thread block can be allocated half of the total amount of \emph{\_\_shared\_\_} memory on the SM. Compute capability 2.0 (FERMI) GPUs, have 49152 bytes of \emph{\_\_shared\_\_} memory per SM. Running two thread blocks per SM provides each block with 24576 bytes of \emph{\_\_shared\_\_} memory each, or 6144 floats per block. The maximum that all three bin dimensions can be is $18 = \sqrt[3]{6144}$. For the sake of simplicity these hardware constraints set $nb_r, nb_{\theta}$, and $nb_{\psi} \le 18$. For now none of the bin dimensions are allowed to exceed 18, even if another is smaller. 
 
 A third, loose constraint can be set in order to force a minimum number of thread blocks for the charge assign. The command line option ``--minbins\#'' sets the parameter $n_{virtual} = \#$. This is useful in ensuring that enough thread blocks are launched to populate all of the SMs on the GPU. To populate all of the SMs on a GTX 470 the code would need to launch at least 28 thread blocks. For a GTX 580 with 16 SMs 32 thread blocks are required to fill all of the processors.  
 		%\section{Holding to Grid Constraints}
@@ -28,11 +28,11 @@ A third, loose constraint can be set in order to force a minimum number of threa
 	\section{Particle List Transpose}
 As previously mentioned the particle list structure on the GPU is different than the structure on the CPU. On the GPU particles are stored in a structure of arrays, while on the CPU they are stored in a 6x$n$ array. This means that in order to copy a particle list generated on the CPU to the GPU, or vice versa, the particle list must be transposed. The two main places in the code where this matters is when the particle list is initially populated at the start of the code, and when copying a list of pre-calculated reinjection particles from the CPU to the GPU at every time step during the advancing phase.
 
-The particle list transpose was implemented on the CPU in two different ways depending on the compiler used and the available libraries. A GPU based particle list transpose is significantly faster than a CPU based transpose. However, the GPU has a very limited amount of DRAM compared to the CPU, and it is preferable to use as much of the available GPU memory as possible for the main particle list. In any case transposing the entire particle list only occurs once, but a smaller transpose is performed every time step for reinjected particles. This means that while a faster transpose is preferable, it represents so little of the total computation time that it is not worth developing a complicated in place GPU transpose.  
+The particle list transpose was implemented on the CPU in two different ways depending on the compiler and the available libraries. A GPU based particle list transpose is significantly faster than a CPU based transpose. However, the GPU has a very limited amount of DRAM compared to the CPU, and it is preferable to use as much of the available GPU memory as possible for the main particle list. In any case, transposing the entire particle list only occurs once, but a smaller transpose is performed every time step for reinjected particles. This means that while a faster transpose is preferable, it represents so little of the total computation time that it is not worth developing a complicated GPU transpose.  
 
 	\section{Charge Assign}
 	\label{sec:charge_assign}
-	As previously mentioned, the charge assign is one of the most difficult functions to parallelize. The naive approach of applying a thread to every particle and atomically adding each particles contribution to an array in global memory is very slow. Grouping the particles spatially allows the majority of the atomic operations to be done in the context of shared memory which is much faster than global memory. The resulting algorithm resembles basic domain decomposition where each thread block represents a separate sub-domain. The actual charge deposition method in this scheme is very similar to the naive approach, with a key difference being that all the threads in the thread block are operating on shared memory. Once all particles in the sub-domain have contributed to the grid in shared memory it takes only a small number of global memory accesses to write the contributions of a large number of particles to the main array. 
+	As previously mentioned, the charge assign is one of the most difficult functions to parallelize. The naive approach of applying a thread to every particle and atomically adding each particle's contribution to an array in global memory is very slow. Grouping the particles spatially allows the majority of the atomic operations to be done in the context of \emph{\_\_shared\_\_} memory which is much faster than global memory. The resulting algorithm resembles basic domain decomposition where each thread block represents a separate sub-domain. The actual charge deposition method in this scheme is very similar to the naive approach, with a key difference being that all the threads in the thread block are operating on \emph{\_\_shared\_\_} memory. Once all particles in the sub-domain have contributed to the grid in \emph{\_\_shared\_\_} memory it takes only a small number of global memory accesses to write the contributions of a large number of particles to the main array. 
 
 	\subsection{Domain Decomposition}
 		The primary grid is decomposed into sub-domains of size $nb_r, nb_{\theta}, nb_{\psi}$. The methods for determining the size of the sub-domains is outlined in section \ref{sec:grid_constraints}. The indexing of the sub-domains is done using a z-order curve in order to preserve spatial locality of the sub-domains in memory. This is done in an attempt to reduce the mean distance that particles must be moved in memory during the sort phase. A graphical representation of this is shown in figure \ref{fig:domain_decomp}.
@@ -52,7 +52,7 @@ In addition to representing a sub-section of the computational mesh, each sub-do
 	\subsection{Particle Bins}
 The \emph{ParticleBin} object keeps track of all of the particles that reside in the region of space that the \emph{ParticleBin} represents. For the sake of simplicity all of the particle bins are the same size spatially, which means that the \emph{ParticleBin} object only has to keep track of the section of the main particle list that the bin represents and the spatial origin of the bin. 
 
-In the context of the particle list each bin represents a pair of bookmarks that bound a section of the particle list. The bookmarks for each bin are calculated after the particle list is sorted by algorithm \ref{alg:count_bins}.
+In the context of the particle list, each bin represents a pair of bookmarks that bound a section of the particle list. The bookmarks for each bin are calculated after the particle list is sorted by algorithm \ref{alg:count_bins}.
 
 \begin{algorithm}
 	\caption{ParticleBin Bookmark Calculation}
@@ -79,10 +79,10 @@ In the context of the particle list each bin represents a pair of bookmarks that
 \end{algorithm}
 
 
-The spatial origin of the bin is hashed using a z-order curve and stored as a 16-bit unsigned-integer. This 16-bit integer is refered to as the binID and is used for determining the region of the domain that a bin is responsible for as well as a sorting key for the particle list. Calculating the binID will be discussed in more detail in section \ref{sec:plist_sort}. A 16-bit unsigned integer is used for several reasons. First the sorting method detailed in section \ref{sec:plist_sort} is dependent on the number of bits of the sorting key. Second, the upper bound on the grid size set by using a 16-bit integer to store the z-order hash is much larger than the largest grid size that would need to be run. For a 16-bit integer this upper bound is $512^3$ grid points. The third reason for using a 16-bit integer is that it also reduces the memory requirements of the particle list by about 5\%, which does help when trying to run as many particles on the GPU as possible. 
+The spatial origin of the bin is hashed using a z-order curve and stored as a 16-bit unsigned-integer. This 16-bit integer is refered to as the binID and is used for determining the region of the domain that a bin is responsible for as well as a sorting key for the particle list. Calculating the binID will be discussed in more detail in section \ref{sec:plist_sort}. A 16-bit unsigned integer is used for several reasons. First the sorting method detailed in section \ref{sec:plist_sort} is dependent on the number of bits of the sorting key. Second, the upper bound on the grid size set by using a 16-bit integer is much larger than the largest grid size that would need to be run. For a 16-bit integer this upper bound is $512^3$ grid points. The third reason is it reduces the memory requirements of the particle list by about 5\%, which is useful for maximizing the number of particles resident on the GPU. 
 
 	\subsection{Particle Push}
-Now that the particles are organized spatially in memory, it is trivial to assign a single thread block to a region of space and corresponding particle bin in order to perform the particle push. This process is rather simple and is outlined in psuedo code in algorithm \ref{alg:gpu_c2mesh}. 
+Now that the particles are organized spatially in memory, it is trivial to assign a single thread block to a region of space and corresponding particle bin in order to perform the particle push. This process is outlined in algorithm \ref{alg:gpu_c2mesh}. 
 
 \begin{algorithm}
 	\caption{GPU Charge Assign}
@@ -117,9 +117,9 @@ Now that the particles are organized spatially in memory, it is trivial to assig
 	\end{algorithmic}
 \end{algorithm}
 
-Each thread block reads in 512 particles at a time, although only 32 particles, a warp, are processed in parallel within the block. Each thread within this warp loops over the 8 nodes that bound the cell that contains the particle being processed. The nodes reside in a shared memory array, and are updated with the weighted particle data atomically. Once all of the nodes for a given particle have been updated the thread will retrieve a new particle from global memory. This process is repeated by all of the threads in the block until every particle in the particle bin has been processed. Once all of the particles have been processed the block then atomically updates the nodes in global memory with the values stored in shared memory.  
+Each thread block reads in 512 particles at a time, although only 32 particles, a warp, are processed in parallel within the block. Each thread within this warp loops over the 8 nodes that bound the cell that contains the particle being processed. The nodes reside in a \emph{\_\_shared\_\_} memory array, and are updated with the weighted particle data atomically. Once all nodes for a given particle have been updated the thread retrieves a new particle from global memory. This process is repeated by all threads in the block until every particle in the particle bin has been processed. Once all particles have been processed the block then atomically updates the nodes in global memory with the values stored in \emph{\_\_shared\_\_} memory.  
 
-The atomic operations in this algorithm lead to some very interesting time complexity behavior. In essence this algorithm is being executed on a machine with 32 processors. The time complexity of this scenario is $\mathcal{O}(\frac{c}{p})$, where $c$ is constant and $p$ is the number of available processors. When two processors attempt to atomically update the same memory address, one of the processors must wait until the other is finished. This means that one processor is effectively lost for a 1-way conflict. 
+The atomic operations in this algorithm lead to interesting time complexity behaviour. In essence this algorithm is being executed on a machine with 32 processors. The time complexity of this scenario is $\mathcal{O}(\frac{c}{p})$, where $c$ is constant and $p$ is the number of available processors. When two processors attempt to atomically update the same memory address, one of the processors must wait until the other is finished. This means that one processor is effectively lost for a 1-way conflict. 
 
 The mean number of n-way atomic conflicts $N$ in a warp over a sub domain of size $G$, and the execution time $T$ is given by:
 \begin{equation}
@@ -132,7 +132,7 @@ This means that the total time complexity of this algorithm with respect to the 
 T(G) \propto c \cdot \sum_{n=1}^{31} \frac{1}{32-n} \frac{31!}{(31-n)! G^n}
 \end{equation}
 
-This behavior can be seen roughly in \ref{fig:subdomain_size_scan}. This algorithm on the GPU can perform the particle push up to 200x faster than the CPU version of the charge assign. However, this algorithm relies on the particle data being ordered spatially, which contributes to the run time. The method used to maintain an ordered particle list on the gpu will be discussed in the following section.
+Falling $T$ with $G$ is observed in our results as will be shown in sec \ref{sec:subdomain_size}. This algorithm on the GPU can perform the particle push up to 200x faster than the CPU version of the charge assign. However, this algorithm relies on the particle data being ordered spatially, which contributes to the run time. The method used to maintain an ordered particle list on the gpu will be discussed in the following section.
 
 
 	\section{Particle List Sort}
@@ -156,9 +156,9 @@ This behavior can be seen roughly in \ref{fig:subdomain_size_scan}. This algorit
 This method of maintaining particle list order was chosen because it is a good balance between simplicity and performance. An additional benefit of this routine is that it uses the sort from the \gls{gls:thrust} library, which is maintained by NVIDIA. 
 
 		\subsection{Populating Key/Value Pairs}
-The first step in sorting the particle list is ensuring that the key/value pairs needed by the sorting routine are populated. The sorting key for a particle is the index of the particle bin that the particle belongs to. Sorting values are simply the position of the particle in the unsorted list. 
+The first step in sorting the particle list is ensuring that the key/value pairs needed by the sorting routine are populated. The sorting key for a particle is the index of the particle bin the particle belongs. Sorting values are simply the position of the particle in the unsorted list. 
 
-Calculating the particle bin index, or binid, begins with calculating the mesh cell that the particle resides in. This cell described by coordinates $i_r, i_{\theta}, i_{\phi}$. The coordinates of the particle bin that a given cell resides in is given by:
+Calculating the particle bin index, or binid, begins with calculating the mesh cell in which the particle resides. This cell described by coordinates $i_r, i_{\theta}, i_{\phi}$. The coordinates of the particle bin that a given cell resides in is given by:
 
 \begin{equation}
 ib_r = \frac{i_r}{nb_r} \mathrm{;}\hspace{0.5in} ib_{\theta} = \frac{i_{\theta}}{nb_{\theta}} \mathrm{;} \hspace{0.5in} ib_{\phi} = \frac{i_{\phi}}{nb_{\phi}}
@@ -186,7 +186,7 @@ ib_r = \frac{i_r}{nb_r} \mathrm{;}\hspace{0.5in} ib_{\theta} = \frac{i_{\theta}}
 
 
 		\subsection{Payload Move}
-		The payload move is responsible for moving all of the particles from their old locations in memory to the new sorted locations. The idea is simple, each thread represents a slot on the sorted particle list. Threads read in an integer, the particleID, from the values array that was sorted using the binid's. This integer is the location of a given threads particle data in the unsorted list. Data at index particleID is read in, and stored in the new list at index threadID. While the idea is simple, this algorithm would require a completely separate copy of the particle list, a lot of wasted memory. However, since the particle list is set up as a structure of arrays, there is something that can be done to significantly reduce the memory requirements. The method, outlined in algorithm \ref{alg:payload_move} reorders only a single element of the particle list structure at a time. 
+		The payload move is responsible for moving all of the particles from their old locations in memory to the new sorted locations. The idea is simple, each thread represents a slot on the sorted particle list. Threads read in an integer, the particleID, from the values array that was sorted using the binid's. This integer is the location of a thread's particle data in the unsorted list. Data at index particleID is read in, and stored in the new list at index threadID. While the idea is simple, this algorithm would require a completely separate copy of the particle list, a lot of wasted memory. However, since the particle list is set up as a structure of arrays, there is something that can be done to significantly reduce the memory requirements. The method, outlined in algorithm \ref{alg:payload_move} reorders only a single element of the particle list structure at a time. 
 
 \begin{algorithm}
 	\caption{GPU Payload Move}
@@ -214,21 +214,21 @@ The field solve used in SCEPTIC3D involves solving the electrostatic Poisson equ
 \label{eqn:poisson_eqn1}
 \end{equation}
 
-Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge densities normalized to the background charge density $N_\infty$, and $\Lambda_{De}$ is the unperturbed electron Debye length $\Lambda_{De} = \sqrt{\varepsilon_0T_e/N_\infty e^2} = R_p\lambda_{De}$. Using the SCEPTIC3D approximation that the electron density can be taken to be a Boltzmann distribution, and normalizing $\nabla$ and $\Lambda_{De}$ to $1/R_p$ the probe radius, the Poisson equation can be rewritten as 
+Where $\phi$ is the electrostatic potential, $n_{e,i}$ the electron, ion charge densities normalized to the background charge density $N_\infty$, and $\Lambda_{De}$ is the unperturbed electron Debye length $\Lambda_{De} = \sqrt{\varepsilon_0T_e/N_\infty e^2} = R_p\lambda_{De}$. Using Patacchini's approximation\cite{Patacchini2010} for SCEPTIC3D that the electron density can be taken to be a Boltzmann distribution, and normalizing $\nabla$ and $\Lambda_{De}$ to $1/R_p$ the probe radius, the Poisson equation can be rewritten as 
 
 \begin{equation}
-\nabla^2\phi=\frac{exp(\phi)-n}{\lambda_{De}^2}
+\nabla^2\phi=\frac{\exp{(\phi)}-n}{\lambda_{De}^2}
 \label{eqn:poisson_eqn2}
 \end{equation}
 
 We are changing $n_i$ to $n$ in order to avoid confusion with the use of $i$ as a spatial index. Assuming that the potential varies little from one time step to the next we can expand equation \ref{eqn:poisson_eqn2} about the known potential $\phi^*$ yielding
    
 \begin{equation}
-\nabla^2\phi=\frac{exp(\phi^*)[1+(\phi-\phi^*)]-n}{\lambda_{De}^2}
+\nabla^2\phi=\frac{\exp{(\phi^*)}[1+(\phi-\phi^*)]-n}{\lambda_{De}^2}
 \label{eqn:poisson_eqn3}
 \end{equation}
 
-Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = \sigma$ using finite volumes.\cite{Patacchini2010} Following the derivation for the linear operator $A$ from Haakonsen \cite{Haakonsen2011} we get:
+Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = \sigma$ using finite volumes where
 
 
 \begin{align}
@@ -237,29 +237,32 @@ Equation \ref{eqn:poisson_eqn3} can be linearized into the form $A\phi+\omega = 
 		  +c_{i,j}\phi{i,j+1,k}
 		  +d_{i,j}\phi_{i,j-1,k} \nonumber \\
 		  &\qquad{} +e_{i,j}(\phi_{i,j,k+1}+\phi_{i,j,k-1})
-		  -[f_{i,j} + exp(\phi_{i,j,k}^*)]\phi_{i,j,k}
+		  -[f_{i,j} + \exp{(\phi_{i,j,k}^*)}]\phi_{i,j,k}
 \label{eqn:psolve}
 \end{align}
 
-The Neumann part of the boundary condition, $\omega$
-\begin{align}
-\omega_{2,j,k} &= b_2\phi_{1,j,k},\nonumber \\
-\omega_{n_r,j,k} &= a_{n_r}g_{j,k,4}
-\label{eqn:psolve_omega}
-\end{align}
+%The Neumann part of the boundary condition, $\omega$
+%\begin{align}
+%\omega_{2,j,k} &= b_2\phi_{1,j,k},\nonumber \\
+%\omega_{n_r,j,k} &= a_{n_r}g_{j,k,4}
+%\label{eqn:psolve_omega}
+%\end{align}
 
-The Dirichlet part of the boundary condition $\sigma$
+%The Dirichlet part of the boundary condition $\sigma$
+\vspace{-1.5cm}
 \begin{align}
-\sigma_{i,j,k} = exp(\phi_{i,j,k}^*)[1-\phi_{i,j,k}^*]-n_{i,j,k}
+\sigma_{i,j,k} = \exp{(\phi_{i,j,k}^*)}[1-\phi_{i,j,k}^*]-n_{i,j,k}
 \label{eqn:psolve_sigma}
 \end{align}
 
-The full derivation of equation \ref{eqn:psolve}, \ref{eqn:psolve_omega}, and \ref{eqn:psolve_sigma}, along with the definitions of the vectors $a$ through $f$ can be found in Haakonsen \cite{Haakonsen2011}.
+and $\omega$ embodies the boundary conditions. 
 
-Now that we have our linear operator defined, along with the vectors $\omega$ and $\sigma$ we can see that this is a simple sparse linear system. These system is fairly easy to solve using any sparse linear system solving scheme. One of the easier schemes to implement on the GPU is the preconditioned biconjugate gradient method \emph{PBCG}. This method is easy to parallelize due to the simplicity of the operations involved, namely \emph{PBCG} consists solely of sparse matrix-vector products, vector dot products, and multiplication of vectors by a scalar. All of these operations can be implemented efficiently on the GPU. 
+The full derivation of equation \ref{eqn:psolve} and \ref{eqn:psolve_sigma}, along with the definitions of the vectors $a$ through $f$ can be found in Haakonsen \cite{Haakonsen2011}.
+
+Now that the linear operator is defined, along with the vectors $\omega$ and $\sigma$ we can see that this is a simple sparse linear system. These system is fairly easy to solve using any sparse linear system solving scheme. One of the easier schemes to implement on the GPU is the preconditioned biconjugate gradient method \emph{PBCG}. This method is easy to parallelize due to the simplicity of the operations involved, namely \emph{PBCG} consists solely of sparse matrix-vector products, vector dot products, and multiplication of vectors by a scalar. All of these operations can be implemented efficiently on the GPU. 
 
 We can make an additional optimization of the PBCG solver by recognizing that only one element of our linear operator $A$ changes every time step. This means that we can make use of some of the read-only memory spaces on the GPU, such as texture memory. Since texture memory is cached spatially in its own on-chip cache, we hope that we can significantly reduce the number of global memory transactions for all of the matrix multiplications. We ended up implementing two versions of the Poisson solve, one that stores both $A$ and $\phi^*$ as textures, and one that stores them in global memory. The version to be used is determined at compile time with the use of pre-processor macros. 
-The only concern with the texture implementation would be the cost of calling cudaBindTextureToArray(). However, since only one diagonal of $A$ and and $\phi^*$ change over the course of the time step, the binding cost should not be an issue. Using textures for arrays in other parts of the code is also possible. Since we are using textures for the potential in the field solve it is very simple to also use a texture based potential for the particle advancing. The actual gain of using textures will be discussed in chapter \ref{ch:performance}.
+The only concern with the texture implementation would be the cost of calling \textbf{cudaBindTextureToArray()}. However, since only one diagonal of $A$ and and $\phi^*$ change over the course of the time step, the binding cost should not be an issue. Using textures for arrays in other parts of the code is also possible. Since we are using textures for the potential in the field solve it is very simple to also use a texture based potential for the particle advancing. The actual gain of using textures will be discussed in chapter \ref{ch:performance}.
 
 We will not develop GPU implementations of the pre-processing steps required to prepare the ion density $n$ from the particle-density interpolation since those steps do not represent a significant computational cost. Additionally, the particle-density array already exists in host memory due to the fact that an \gls{ac:mpi} reduce must be performed to gather this array from multiple GPUs. Since this data is already in host memory, and the computational time is low, there is very little reason to rewrite these routines for the GPU.  
 
@@ -282,36 +285,40 @@ Moving the particles on the grid starts with determining the acceleration of the
 While the implementation of the basic physics of the particle advance remains the same, there were several issues. Quickly determining whether a particle has crossed one of the domain boundaries, contributing to diagnostic outputs, and handling reinjections were the main issues. 
 
 		\subsection{Checking Domain Boundaries}
-In order to correctly contribute to the diagnostic outputs, the location where a particle left the domain must be known. This means that the process of checking whether or not a particle has left the grid must also calculate the position of the particle when it crossed the boundary. Since the boundaries are both spheres, we can apply a very common ray tracing technique used to calculate a line-sphere intersection. 
+In order to correctly contribute to the diagnostic outputs, the location where a particle left the domain must be known. This means that the process of checking whether or not a particle has left the grid must also calculate the position of the particle when it crossed the boundary. Since the boundaries are both spheres, a very common ray tracing technique can be used to calculate a line-sphere intersection. 
 
 The equation for the path of a particle with initial position $\mathbf{p}_i$ and final position $\mathbf{p}_{i+1}$ is given by;
 
 \begin{equation}
- \mathbf{l} = \frac{\mathbf{p}_{i+1} - \mathbf{p}_{i}}{\|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|}
-\mathbf{x} = d\mathbf{l}
+\begin{aligned}
+\mathbf{l} &= \frac{\mathbf{p}_{i+1} - \mathbf{p}_{i}}{\|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|} \\
+\mathbf{x} &= d\mathbf{l}+\mathbf{p}_{i}
+\end{aligned}
 \label{eqn:p_direction}
 \end{equation}
 
-Combining equation \ref{eqn:p_direction} to the equation of a sphere with radius $r$ centered at the origin, and expanding we get:
+Combining equation \ref{eqn:p_direction} to the equation of a sphere with radius $r$ centered at the origin, $\|\mathbf{x}\|^2  = r^2 $ and expanding yields:
 
-\begin{equation}
-\begin{aligned}
-\|d\mathbf{l} - (-\mathbf{p}_i)) \|^2  &= r^2 \\
+
+\begin{align}
+\|d\mathbf{l} + \mathbf{p}_i\|^2  &= r^2 \label{eqn:circle1} \\
 d^2\mathbf{l}^2 + 2d(\mathbf{l}\cdot \mathbf{p}_i) + \mathbf{p}_i^2 &= r^2
-		\end{aligned}
-\end{equation}
+\label{eqn:circle2}
+\end{align}
 
-We can then use the quadratic equation to solve for $d$. There are a few qualifiers, namely, $(\mathbf{l}\cdot \mathbf{p}_i)^2 - \mathbf{p}_i^2 + r^2 \geq 0$. The distance to the nearest intersection is simply the smallest positive solution of $d$. A particle leaves the domain if $d^2 \le \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. If this condition is true, then the particle's new position $p_{i+1}$ is changed such that $d^2 = \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. The particle's position is changed in order to accommodate some of the diagnostic outputs discussed in section \ref{sec:diagnostic_outputs}. 
+
+The quadratic equation can be used to solve equation \ref{eqn:circle2} for $d$. In order for a real solution to exist we require $(\mathbf{l}\cdot \mathbf{p}_i)^2 - \mathbf{p}_i^2 + r^2 \geq 0$. The distance to the nearest intersection is simply the smallest positive solution of $d$. A particle leaves the domain if $d^2 \le \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. If this condition is true, then the particle's new position $p_{i+1}$ is changed such that $d^2 = \|\mathbf{p}_{i+1} - \mathbf{p}_{i}\|^2$. The particle's position is changed in order to accommodate some of the diagnostic outputs discussed in section \ref{sec:diagnostic_outputs}. 
 
 
 
 		\subsection{Handling Reinjections}
-Once it has been determined that particles have left the grid, new particles must be reinjected to replace them. In the serial version of the code this is handled by simply calling a reinjection subroutine that determines the new particle's position and velocity. Once the new position and velocity has been found, the particle is moved for the remainder of the time step, and replaced by a new particle if the reinjected particle leaves the domain.  
+		\label{sec:handling_reinjections}
+Once it has been determined that particles have left the grid, new particles must be reinjected to replace them. In the serial version of the code, this is handled by simply calling a reinjection subroutine that determines the new particle's position and velocity. Once the new position and velocity has been found, the particle is moved for the remainder of the time step, and replaced by a new particle if the reinjected particle leaves the domain.  
 
-Performing reinjections in this manner on the GPU would introduce very large divergences in warp execution as well as very uncoalesced memory accesses. Eliminating the warp divergences would require that all of the threads in a warp be operating on reinjected particles. Reducing the uncoalesced memory accesses would require that all of the reinjected particles be adjacent in memory.  Since we already have an object with methods that can move a list of particles and handle reinjections, all we really need is some method by which we can efficiently and reversibly ``pop" a subset of the particles in the main list to a secondary list. From there we can perform the particle advance on the secondary list, and place the results back in the empty particle slots in the main list. The resulting advancing algorithm is as follows:
+Performing reinjections in this manner on the GPU would introduce very large divergences in warp execution as well as very uncoalesced memory accesses. Eliminating the warp divergences would require that all of the threads in a warp be operating on reinjected particles. Reducing the uncoalesced memory accesses would require that all of the reinjected particles be adjacent in memory.  Since we already have an object with methods that can move a list of particles and handle reinjections, all we really need is some method by which we can efficiently and reversibly ``pop" a subset of the particles in the main list to a secondary list. From there the secondary list can be advanced in the same way as the main list, and place the results in the empty particle slots in the main list. The resulting particle list object advancing method is as follows:
 
 \begin{algorithm}
-	\caption{Particle Advancing Algorithm}
+	\caption{Particle List Object Recursive Advancing Method}
 	\label{alg:advancing}
 	\begin{algorithmic}
 		\STATE // Update The particle positions and check domain boundaries
@@ -350,7 +357,7 @@ Since the collision and reinjection operators are completely independent, we cou
 \label{fig:padvnc}
 \end{figure}
 
-Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. 
+Compacting some subset of a parent list is a fairly easy parallel operation called stream compaction. Stream compaction, shown in figure \ref{fig:stream_compact} is a process by which a random subset of a list can be quickly copied to a new list in parallel. It only works for some binary condition, such as an array of length nptcls, where each element is 1 for particles that have left the domain, and 0 for all others. For each `true' element taking the cumulative sum of all preceding elements yields a unique number that can be used as an index in a new array. The exact details for implementing stream compaction on a GPU can be found in GPU Gems 3 section 39.3.1.\cite{Harris2007} 
 
 \begin{figure}
 \begin{center}
@@ -362,7 +369,7 @@ Compacting some subset of a parent list is a fairly easy parallel operation call
 
 
 
-The new positions and velocities for reinjected particles are taken from a precalculate pool of new particles. This pool is approximately 1/10\textsuperscript{th} the size of the main particle list, and is repopulated prior to every advance step. Prior to the first advance step the entire pool is populated, but subsequent steps only refill slots that have been used in reinjections. This ``pool" method was chosen over implementing the reinjection calculations on the GPU for reasons of code maintenance. There are currently several different reinjection schemes that SCEPTIC3D can call. Maintaining versions of those routines in both fortran and \gls{gls:CUDA} would be more cumbersome than the small benefit that calculating them on the GPU would provide. 
+The new positions and velocities for reinjected particles are taken from a precalculated pool of new particles. This pool is approximately 1/10\textsuperscript{th} the size of the main particle list, and is repopulated prior to every advance step. Prior to the first advance step the entire pool is populated, but subsequent steps only refill slots that have been used in reinjections. This ``pool" method was chosen over implementing the reinjection calculations on the GPU for reasons of code maintenance. There are currently several different reinjection schemes that SCEPTIC3D can call. Maintaining versions of those routines in both fortran and \gls{gls:CUDA} would be more cumbersome than the small benefit that calculating them on the GPU would provide. 
 
 		\subsection{Diagnostic Outputs}
 		\label{sec:diagnostic_outputs}
@@ -382,7 +389,7 @@ The new positions and velocities for reinjected particles are taken from a preca
 \end{itemize}
 
 
-	For the single value quantities, such as the quantities of total momentum, energy, and particle count are tallied using atomic operations in shared memory. Since the fraction of particles that leave the domain during a timestep is small, $\leq 7\%$, we can just use conditional statements within the primary move kernel to perform the tallies. While this is not strictly optimal, it does not have a very large impact on the overall performance of the move kernel. 
+	The single value quantities, such as the quantities of total momentum, energy, and particle count are tallied using atomic operations in \emph{\_\_shared\_\_} memory. Since the fraction of particles that leave the domain during a timestep is small, $\leq 7\%$, we can just use conditional statements within the primary move kernel to perform the tallies. While this is not strictly optimal, it does not have a very large impact on the overall performance of the move kernel. 
 
 
 

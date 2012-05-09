@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.5.8)  8 MAY 2012 13:32
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.5.8)  9 MAY 2012 18:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1104,7 +1104,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 File: introduction/multi_parallel.png Graphic file (type png)
 
 <use introduction/multi_parallel.png>
-Package pdftex.def Info: introduction/multi_parallel.png used on input line 74.
+Package pdftex.def Info: introduction/multi_parallel.png used on input line 73.
 
 (pdftex.def)             Requested size: 361.34999pt x 411.848pt.
  [25] [26 <./introduction/multi_parallel.png>] (./introduction/parallel_pic_flo
@@ -1121,14 +1121,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 5189) has occurred while \output is active []
 
  [32]
-[33] (./introduction/sceptic3D_profile.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33]
+(./introduction/sceptic3D_profile.tex
 \c@a=\count185
 \c@b=\count186
 ) [34]) [35]
 \openout2 = `ch_design.aux'.
 
- (./ch_design.tex
-[36
+ (./ch_design.tex [36
 
 
 
@@ -1178,7 +1180,7 @@ Overfull \hbox (52.37643pt too wide) in paragraph at lines 77--79
  []
 
 )
-Underfull \vbox (badness 4168) has occurred while \output is active []
+Underfull \vbox (badness 5189) has occurred while \output is active []
 
  [43]
 (./design/one_cell_per_block.tex
@@ -1233,38 +1235,38 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no ) in font nullfont!
 )
-<design/atomic_vs_sorted.pdf, id=698, 361.35pt x 216.81pt>
+<design/atomic_vs_sorted.pdf, id=699, 361.35pt x 216.81pt>
 File: design/atomic_vs_sorted.pdf Graphic file (type pdf)
 
 <use design/atomic_vs_sorted.pdf>
 Package pdftex.def Info: design/atomic_vs_sorted.pdf used on input line 190.
 (pdftex.def)             Requested size: 361.34999pt x 216.81276pt.
  [44] [45 <./design/atomic_vs_sorted.pdf>]
-[46] [47] [48] <design/kong_sort.png, id=752, 3417.76875pt x 3766.07pt>
+[46] [47] [48] <design/kong_sort.png, id=754, 3417.76875pt x 3766.07pt>
 File: design/kong_sort.png Graphic file (type png)
 
 <use design/kong_sort.png>
-Package pdftex.def Info: design/kong_sort.png used on input line 255.
+Package pdftex.def Info: design/kong_sort.png used on input line 256.
 (pdftex.def)             Requested size: 361.34999pt x 398.12117pt.
  [49] [50 <./design/kong_sort.png>] [51] [52]
-[53] <design/sort_compare.pdf, id=831, 361.35pt x 198.7425pt>
+[53] <design/sort_compare.pdf, id=834, 361.35pt x 198.7425pt>
 File: design/sort_compare.pdf Graphic file (type pdf)
 
 <use design/sort_compare.pdf>
-Package pdftex.def Info: design/sort_compare.pdf used on input line 345.
+Package pdftex.def Info: design/sort_compare.pdf used on input line 346.
 (pdftex.def)             Requested size: 361.34999pt x 198.74503pt.
  [54]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [55 <./design/sort_compare.pdf>] [56]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 368.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 369.
 
-<design/soa_vs_aos.pdf, id=858, 361.35pt x 216.81pt>
+<design/soa_vs_aos.pdf, id=861, 361.35pt x 216.81pt>
 File: design/soa_vs_aos.pdf Graphic file (type pdf)
 
 <use design/soa_vs_aos.pdf>
-Package pdftex.def Info: design/soa_vs_aos.pdf used on input line 386.
+Package pdftex.def Info: design/soa_vs_aos.pdf used on input line 387.
 (pdftex.def)             Requested size: 361.34999pt x 216.81276pt.
 
 
@@ -1273,16 +1275,16 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [57]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [58 <./design/soa_vs_aos.pdf>]) [59]
+ [58 <./design/soa_vs_aos.pdf>] [59]) [60]
 \openout2 = `ch_implementation.aux'.
 
- (./ch_implementation.tex [60
-
-
-
-]
+ (./ch_implementation.tex
 Chapter 3.
-[61] [62] <implementation/zorder_sceptic.pdf, id=922, 361.35pt x 216.81pt>
+[61
+
+
+
+] [62] <implementation/zorder_sceptic.pdf, id=927, 361.35pt x 216.81pt>
 File: implementation/zorder_sceptic.pdf Graphic file (type pdf)
 
 <use implementation/zorder_sceptic.pdf>
@@ -1290,7 +1292,7 @@ Package pdftex.def Info: implementation/zorder_sceptic.pdf used on input line 4
 2.
 (pdftex.def)             Requested size: 361.34999pt x 216.81276pt.
  [63] [64 <./implementation/zorder_sceptic.pdf>] [65]
-Underfull \vbox (badness 2961) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [66]
 [67]
@@ -1301,15 +1303,17 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 175.
-
-Underfull \vbox (badness 3138) has occurred while \output is active []
-
  [68]
-[69]
-Underfull \vbox (badness 1371) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [70]
-[71] [72] [73]
+ [69]
+[70] [71]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [72]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [73]
 Underfull \vbox (badness 2922) has occurred while \output is active []
 
  [74]
@@ -1322,12 +1326,12 @@ Underfull \vbox (badness 2922) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75]
-[76] <implementation/stream_compact.jpg, id=1107, 301.125pt x 152.06813pt>
+[76] <implementation/stream_compact.jpg, id=1112, 301.125pt x 152.06813pt>
 File: implementation/stream_compact.jpg Graphic file (type jpg)
 
 <use implementation/stream_compact.jpg>
 Package pdftex.def Info: implementation/stream_compact.jpg used on input line 3
-57.
+64.
 (pdftex.def)             Requested size: 289.07999pt x 145.99997pt.
  [77 <./implementation/stream_compact.jpg>]) [78]
 \openout2 = `ch_performance.aux'.
@@ -1338,44 +1342,44 @@ Chapter 4.
 
 
 
-] <performance/architecture_compare.pdf, id=1128, 361.35pt x 198.7425pt>
+] <performance/architecture_compare.pdf, id=1134, 361.35pt x 198.7425pt>
 File: performance/architecture_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_compare.pdf>
 Package pdftex.def Info: performance/architecture_compare.pdf used on input lin
-e 19.
+e 28.
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
 
-<performance/architecture_speedup_compare.pdf, id=1129, 361.35pt x 198.7425pt>
+<performance/architecture_speedup_compare.pdf, id=1135, 361.35pt x 198.7425pt>
 File: performance/architecture_speedup_compare.pdf Graphic file (type pdf)
 
 <use performance/architecture_speedup_compare.pdf>
 Package pdftex.def Info: performance/architecture_speedup_compare.pdf used on i
-nput line 27.
+nput line 36.
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
  [80 <./performance/architecture_compare.pdf>]
-<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1147, 513.92pt x 313.17pt>
+<performance/nptclsize_scan128x64x64ons8bins.pdf, id=1153, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan128x64x64ons8bins.pdf Graphic file (type pdf)
 <use performance/nptclsize_scan128x64x64ons8bins.pdf>
 Package pdftex.def Info: performance/nptclsize_scan128x64x64ons8bins.pdf used o
-n input line 45.
+n input line 54.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1148, 513.92pt x 313.17pt>
+<performance/nptclsize_scan64x32x32ons8bins.pdf, id=1154, 513.92pt x 313.17pt>
 File: performance/nptclsize_scan64x32x32ons8bins.pdf Graphic file (type pdf)
 
 <use performance/nptclsize_scan64x32x32ons8bins.pdf>
 Package pdftex.def Info: performance/nptclsize_scan64x32x32ons8bins.pdf used on
- input line 53.
+ input line 62.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1149, 516.93124pt x 311
+<performance/nptclspeedup_scan128x64x64ons8bins.pdf, id=1155, 516.93124pt x 311
 .1625pt>
 File: performance/nptclspeedup_scan128x64x64ons8bins.pdf Graphic file (type pdf
 )
  <use performance/nptclspeedup_scan128x64x64ons8bins.pdf>
 Package pdftex.def Info: performance/nptclspeedup_scan128x64x64ons8bins.pdf use
-d on input line 61.
+d on input line 70.
 (pdftex.def)             Requested size: 433.62pt x 261.02336pt.
  [81 <./performance/architecture_speedup_compare.pdf>] [82 <./performance/nptcl
 size_scan128x64x64ons8bins.pdf> <./performance/nptclsize_scan64x32x32ons8bins.p
@@ -1383,83 +1387,80 @@ df>] [83 <./performance/nptclspeedup_scan128x64x64ons8bins.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [84]
-<performance/gridsize_scan16ptcls8bins.pdf, id=1197, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls8bins.pdf, id=1215, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls8bins.pdf>
 Package pdftex.def Info: performance/gridsize_scan16ptcls8bins.pdf used on inpu
-t line 100.
+t line 109.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/gridsize_scan16ptcls16bins.pdf, id=1198, 513.92pt x 313.17pt>
+<performance/gridsize_scan16ptcls16bins.pdf, id=1216, 513.92pt x 313.17pt>
 File: performance/gridsize_scan16ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan16ptcls16bins.pdf>
 Package pdftex.def Info: performance/gridsize_scan16ptcls16bins.pdf used on inp
-ut line 108.
+ut line 117.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/gridsize_scan34ptcls8bins.pdf, id=1199, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls8bins.pdf, id=1217, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls8bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls8bins.pdf>
 Package pdftex.def Info: performance/gridsize_scan34ptcls8bins.pdf used on inpu
-t line 116.
+t line 125.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/gridsize_scan34ptcls16bins.pdf, id=1200, 513.92pt x 313.17pt>
+<performance/gridsize_scan34ptcls16bins.pdf, id=1218, 513.92pt x 313.17pt>
 File: performance/gridsize_scan34ptcls16bins.pdf Graphic file (type pdf)
 
 <use performance/gridsize_scan34ptcls16bins.pdf>
 Package pdftex.def Info: performance/gridsize_scan34ptcls16bins.pdf used on inp
-ut line 124.
+ut line 133.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
 
-<performance/gridsize_speedup_scan.pdf, id=1201, 513.92pt x 313.17pt>
+<performance/gridsize_speedup_scan.pdf, id=1219, 513.92pt x 313.17pt>
 File: performance/gridsize_speedup_scan.pdf Graphic file (type pdf)
 
 <use performance/gridsize_speedup_scan.pdf>
 Package pdftex.def Info: performance/gridsize_speedup_scan.pdf used on input li
-ne 132.
+ne 141.
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
  [85 <./performance/gridsize_scan16ptcls8bins.pdf>] [86 <./performance/gridsize
 _scan16ptcls16bins.pdf> <./performance/gridsize_scan34ptcls8bins.pdf>] [87 <./p
 erformance/gridsize_scan34ptcls16bins.pdf> <./performance/gridsize_speedup_scan
 .pdf>]
-<performance/gridshape_scan.pdf, id=1248, 513.92pt x 313.17pt>
+<performance/gridshape_scan.pdf, id=1286, 513.92pt x 313.17pt>
 File: performance/gridshape_scan.pdf Graphic file (type pdf)
 
 <use performance/gridshape_scan.pdf>
-Package pdftex.def Info: performance/gridshape_scan.pdf used on input line 149.
+Package pdftex.def Info: performance/gridshape_scan.pdf used on input line 159.
 
 (pdftex.def)             Requested size: 433.62pt x 264.2413pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [88]
-<performance/kernel_param.pdf, id=1254, 361.35pt x 198.7425pt>
+<performance/kernel_param.pdf, id=1292, 361.35pt x 198.7425pt>
 File: performance/kernel_param.pdf Graphic file (type pdf)
 
 <use performance/kernel_param.pdf>
-Package pdftex.def Info: performance/kernel_param.pdf used on input line 161.
+Package pdftex.def Info: performance/kernel_param.pdf used on input line 171.
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [89 <./performance/gridshape_scan.pdf>]
-<performance/texture_tests64.pdf, id=1267, 361.35pt x 198.7425pt>
+<performance/texture_tests64.pdf, id=1309, 361.35pt x 198.7425pt>
 File: performance/texture_tests64.pdf Graphic file (type pdf)
 
 <use performance/texture_tests64.pdf>
-Package pdftex.def Info: performance/texture_tests64.pdf used on input line 177
+Package pdftex.def Info: performance/texture_tests64.pdf used on input line 187
 .
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
 
-<performance/texture_tests128.pdf, id=1268, 361.35pt x 198.7425pt>
+<performance/texture_tests128.pdf, id=1310, 361.35pt x 198.7425pt>
 File: performance/texture_tests128.pdf Graphic file (type pdf)
 
 <use performance/texture_tests128.pdf>
-Package pdftex.def Info: performance/texture_tests128.pdf used on input line 18
+Package pdftex.def Info: performance/texture_tests128.pdf used on input line 19
 5.
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
  [90 <./performance/kernel_param.pdf>]
@@ -1486,14 +1487,14 @@ Appendix A.
 
 
 
-] <./appa/plot0001_cpu.pdf, id=1343, 592.2125pt x 451.6875pt>
+] <./appa/plot0001_cpu.pdf, id=1385, 592.2125pt x 451.6875pt>
 File: ./appa/plot0001_cpu.pdf Graphic file (type pdf)
 
 <use ./appa/plot0001_cpu.pdf>
 Package pdftex.def Info: ./appa/plot0001_cpu.pdf used on input line 44.
 (pdftex.def)             Requested size: 216.81pt x 210.41847pt.
 
-<./appa/plot0001_gpu.pdf, id=1345, 592.2125pt x 451.6875pt>
+<./appa/plot0001_gpu.pdf, id=1387, 592.2125pt x 451.6875pt>
 File: ./appa/plot0001_gpu.pdf Graphic file (type pdf)
 
 <use ./appa/plot0001_gpu.pdf>
@@ -1504,14 +1505,14 @@ Overfull \hbox (7.83325pt too wide) in paragraph at lines 42--47
  [][][][] 
  []
 
-<./appa/plot0002_cpu.pdf, id=1347, 592.2125pt x 451.6875pt>
+<./appa/plot0002_cpu.pdf, id=1389, 592.2125pt x 451.6875pt>
 File: ./appa/plot0002_cpu.pdf Graphic file (type pdf)
 
 <use ./appa/plot0002_cpu.pdf>
 Package pdftex.def Info: ./appa/plot0002_cpu.pdf used on input line 55.
 (pdftex.def)             Requested size: 216.81pt x 165.36424pt.
 
-<./appa/plot0002_gpu.pdf, id=1348, 592.2125pt x 451.6875pt>
+<./appa/plot0002_gpu.pdf, id=1390, 592.2125pt x 451.6875pt>
 File: ./appa/plot0002_gpu.pdf Graphic file (type pdf)
 
 <use ./appa/plot0002_gpu.pdf>
@@ -1543,11 +1544,11 @@ pu.pdf> <./appa/plot0002_gpu.pdf>] [100])
 
  (./appb.tex
 Appendix B.
-<appb/bandwidth_test.pdf, id=1402, 361.35pt x 198.7425pt>
+<appb/bandwidth_test.pdf, id=1445, 361.35pt x 198.7425pt>
 File: appb/bandwidth_test.pdf Graphic file (type pdf)
 
 <use appb/bandwidth_test.pdf>
-Package pdftex.def Info: appb/bandwidth_test.pdf used on input line 8.
+Package pdftex.def Info: appb/bandwidth_test.pdf used on input line 9.
 (pdftex.def)             Requested size: 433.62pt x 238.49283pt.
  [101
 
@@ -1633,13 +1634,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 686F84F6C9A4F517C52A8048729DE473;3461.
  ) 
 Here is how much of TeX's memory you used:
- 25847 strings out of 493723
- 470835 string characters out of 3149525
- 798445 words of memory out of 3000000
- 28068 multiletter control sequences out of 15000+200000
+ 25852 strings out of 493723
+ 470935 string characters out of 3149525
+ 798976 words of memory out of 3000000
+ 28073 multiletter control sequences out of 15000+200000
  12080 words of font info for 43 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 61i,18n,96p,1526b,1689s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 61i,18n,96p,1548b,1689s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1694,10 +1695,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (107 pages, 4282886 bytes).
+Output written on main.pdf (107 pages, 4319609 bytes).
 PDF statistics:
- 1611 PDF objects out of 1728 (max. 8388607)
- 1396 compressed objects within 14 object streams
+ 1654 PDF objects out of 1728 (max. 8388607)
+ 1420 compressed objects within 15 object streams
  453 named destinations out of 1000 (max. 500000)
  581 words of extra memory for PDF output out of 10000 (max. 10000000)
 
