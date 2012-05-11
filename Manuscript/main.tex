@@ -128,6 +128,7 @@
 %process all files:}
 %\def\all{all}
 %\ifx\files\all \typeout{Including all files.} \else \typeout{Including only \files.} \includeonly{\files} \fi
+\renewcommand*{\glspostdescription}{}
 
 
 \include{glossary}
@@ -140,6 +141,7 @@
 
 \include{cover}
 \pagestyle{plain}
+\normalsize
 \include{contents}
 \glsaddall
 \printglossaries
